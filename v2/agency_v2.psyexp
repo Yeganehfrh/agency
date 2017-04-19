@@ -226,7 +226,7 @@
   <Flow>
     <Routine name="introduction"/>
     <LoopInitiator loopType="TrialHandler" name="trials_loop">
-      <Param name="conditionsFile" updates="None" val="conditions_v1.xlsx" valType="str"/>
+      <Param name="conditionsFile" updates="None" val="conditions_v2.xlsx" valType="str"/>
       <Param name="name" updates="None" val="trials_loop" valType="code"/>
       <Param name="isTrials" updates="None" val="True" valType="bool"/>
       <Param name="random seed" updates="None" val="" valType="code"/>
