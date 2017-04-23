@@ -71,7 +71,7 @@
       <CodeComponent name="calc_delay">
         <Param name="Begin Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="name" updates="None" val="calc_delay" valType="code"/>
-        <Param name="Begin Routine" updates="constant" val="if agency_level==&quot;low&quot;:&amp;#10;  delay = 2.0&amp;#10;else:&amp;#10;  delay = 0.0" valType="extendedCode"/>
+        <Param name="Begin Routine" updates="constant" val="if agency_level==&quot;low&quot;:&amp;#10;  delay = 2.0&amp;#10;else:&amp;#10;  delay = 0.0&amp;#10;" valType="extendedCode"/>
         <Param name="End Routine" updates="constant" val="" valType="extendedCode"/>
         <Param name="End Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Each Frame" updates="constant" val="" valType="extendedCode"/>
@@ -96,16 +96,36 @@
         <Param name="font" updates="constant" val="Samim" valType="str"/>
         <Param name="letterHeight" updates="constant" val="0.2" valType="code"/>
       </TextComponent>
-      <TextComponent name="stimulus_text">
+      <TextComponent name="stimulus_right">
         <Param name="opacity" updates="constant" val="1" valType="code"/>
         <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
-        <Param name="name" updates="None" val="stimulus_text" valType="code"/>
+        <Param name="name" updates="None" val="stimulus_right" valType="code"/>
+        <Param name="color" updates="set every repeat" val="$char_color_2" valType="str"/>
         <Param name="wrapWidth" updates="constant" val="" valType="code"/>
-        <Param name="color" updates="constant" val="white" valType="str"/>
-        <Param name="text" updates="set every repeat" val="$char_1 + &quot;   &quot; + $char_2" valType="str"/>
         <Param name="stopVal" updates="constant" val="0.2" valType="code"/>
         <Param name="durationEstim" updates="None" val="" valType="code"/>
-        <Param name="pos" updates="constant" val="(0, 0)" valType="code"/>
+        <Param name="pos" updates="constant" val="(+0.26, 0)" valType="code"/>
+        <Param name="flip" updates="constant" val="" valType="str"/>
+        <Param name="startEstim" updates="None" val="" valType="code"/>
+        <Param name="units" updates="None" val="from exp settings" valType="str"/>
+        <Param name="text" updates="set every repeat" val="$char_2" valType="str"/>
+        <Param name="startType" updates="None" val="time (s)" valType="str"/>
+        <Param name="ori" updates="constant" val="0" valType="code"/>
+        <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
+        <Param name="startVal" updates="None" val="2.0" valType="code"/>
+        <Param name="font" updates="constant" val="Samim" valType="str"/>
+        <Param name="letterHeight" updates="constant" val="0.2" valType="code"/>
+      </TextComponent>
+      <TextComponent name="stimulus_left">
+        <Param name="opacity" updates="constant" val="1" valType="code"/>
+        <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="name" updates="None" val="stimulus_left" valType="code"/>
+        <Param name="wrapWidth" updates="constant" val="" valType="code"/>
+        <Param name="color" updates="set every repeat" val="$char_color_1" valType="str"/>
+        <Param name="text" updates="set every repeat" val="$char_1" valType="str"/>
+        <Param name="stopVal" updates="constant" val="0.2" valType="code"/>
+        <Param name="durationEstim" updates="None" val="" valType="code"/>
+        <Param name="pos" updates="constant" val="(-0.26, 0)" valType="code"/>
         <Param name="flip" updates="constant" val="" valType="str"/>
         <Param name="startEstim" updates="None" val="" valType="code"/>
         <Param name="units" updates="None" val="from exp settings" valType="str"/>
@@ -113,8 +133,8 @@
         <Param name="ori" updates="constant" val="0" valType="code"/>
         <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
         <Param name="startVal" updates="None" val="2.0" valType="code"/>
-        <Param name="font" updates="constant" val="Arial" valType="str"/>
-        <Param name="letterHeight" updates="constant" val="0.1" valType="code"/>
+        <Param name="font" updates="constant" val="Samim" valType="str"/>
+        <Param name="letterHeight" updates="constant" val="0.2" valType="code"/>
       </TextComponent>
       <SoundComponent name="respond_sound">
         <Param name="sound" updates="constant" val="B" valType="str"/>
@@ -290,7 +310,7 @@
       <Param name="loopType" updates="None" val="random" valType="str"/>
       <Param name="nReps" updates="None" val="1" valType="code"/>
       <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
-      <Param name="conditions" updates="None" val="[{'color_2': u'blue', 'color_1': u'red', 'group': 1, 'condition': 1, 'agency_level': u'high', 'char_2': u'B', 'char_1': u'A', 'group_name': u'explicit'}, {'color_2': u'green', 'color_1': u'red', 'group': 2, 'condition': 2, 'agency_level': u'high', 'char_2': u'C', 'char_1': u'A', 'group_name': u'implicit'}, {'color_2': u'grey', 'color_1': u'yellow', 'group': 3, 'condition': 3, 'agency_level': u'high', 'char_2': u'D', 'char_1': u'A', 'group_name': u'free'}, {'color_2': u'purple', 'color_1': u'yellow', 'group': 3, 'condition': 4, 'agency_level': u'low', 'char_2': u'D', 'char_1': u'A', 'group_name': u'free'}, {'color_2': u'green', 'color_1': u'red', 'group': 2, 'condition': 5, 'agency_level': u'low', 'char_2': u'C', 'char_1': u'A', 'group_name': u'implicit'}, {'color_2': u'blue', 'color_1': u'red', 'group': 1, 'condition': 6, 'agency_level': u'low', 'char_2': u'B', 'char_1': u'A', 'group_name': u'explicit'}, {'color_2': u'white', 'color_1': u'blue', 'group': 0, 'condition': 7, 'agency_level': u'high', 'char_2': u'L', 'char_1': u'F', 'group_name': u'invalid'}, {'color_2': u'blue', 'color_1': u'green', 'group': 0, 'condition': 8, 'agency_level': u'low', 'char_2': u'W', 'char_1': u'D', 'group_name': u'invalid'}, {'color_2': u'blue', 'color_1': u'red', 'group': 1, 'condition': 9, 'agency_level': u'high', 'char_2': u'B', 'char_1': u'A', 'group_name': u'explicit'}, {'color_2': u'white', 'color_1': u'white', 'group': 0, 'condition': 10, 'agency_level': u'high', 'char_2': u'X', 'char_1': u'E', 'group_name': u'invalid'}, {'color_2': u'blue', 'color_1': u'blue', 'group': 0, 'condition': 11, 'agency_level': u'low', 'char_2': u'O', 'char_1': u'D', 'group_name': u'invalid'}, {'color_2': u'white', 'color_1': u'yellow', 'group': 3, 'condition': 12, 'agency_level': u'high', 'char_2': u'D', 'char_1': u'A', 'group_name': u'free'}, {'color_2': u'green', 'color_1': u'red', 'group': 2, 'condition': 13, 'agency_level': u'low', 'char_2': u'C', 'char_1': u'A', 'group_name': u'implicit'}, {'color_2': u'green', 'color_1': u'red', 'group': 2, 'condition': 14, 'agency_level': u'high', 'char_2': u'C', 'char_1': u'A', 'group_name': u'implicit'}, {'color_2': u'green', 'color_1': u'red', 'group': 2, 'condition': 15, 'agency_level': u'low', 'char_2': u'C', 'char_1': u'A', 'group_name': u'implicit'}, {'color_2': u'blue', 'color_1': u'red', 'group': 1, 'condition': 16, 'agency_level': u'low', 'char_2': u'B', 'char_1': u'A', 'group_name': u'explicit'}]" valType="str"/>
+      <Param name="conditions" updates="None" val="[{'color_2': u'blue', 'color_1': u'red', 'char_color_1': u'yellow', 'agency_level': u'high', 'char_color_2': u'red', 'group_name': u'explicit', 'condition': 1, 'group': 1, 'char_2': u'B', 'char_1': u'A'}, {'color_2': u'green', 'color_1': u'red', 'char_color_1': u'yellow', 'agency_level': u'high', 'char_color_2': u'blue', 'group_name': u'implicit', 'condition': 2, 'group': 2, 'char_2': u'C', 'char_1': u'A'}, {'color_2': u'grey', 'color_1': u'yellow', 'char_color_1': u'yellow', 'agency_level': u'high', 'char_color_2': u'white', 'group_name': u'free', 'condition': 3, 'group': 3, 'char_2': u'D', 'char_1': u'A'}, {'color_2': u'purple', 'color_1': u'yellow', 'char_color_1': u'yellow', 'agency_level': u'low', 'char_color_2': u'green', 'group_name': u'free', 'condition': 4, 'group': 3, 'char_2': u'D', 'char_1': u'A'}, {'color_2': u'green', 'color_1': u'red', 'char_color_1': u'yellow', 'agency_level': u'low', 'char_color_2': u'blue', 'group_name': u'implicit', 'condition': 5, 'group': 2, 'char_2': u'C', 'char_1': u'A'}, {'color_2': u'blue', 'color_1': u'red', 'char_color_1': u'yellow', 'agency_level': u'low', 'char_color_2': u'red', 'group_name': u'explicit', 'condition': 6, 'group': 1, 'char_2': u'B', 'char_1': u'A'}, {'color_2': u'white', 'color_1': u'blue', 'char_color_1': u'white', 'agency_level': u'high', 'char_color_2': u'white', 'group_name': u'invalid', 'condition': 7, 'group': 0, 'char_2': u'L', 'char_1': u'F'}, {'color_2': u'blue', 'color_1': u'green', 'char_color_1': u'purple', 'agency_level': u'low', 'char_color_2': u'grey', 'group_name': u'invalid', 'condition': 8, 'group': 0, 'char_2': u'W', 'char_1': u'D'}, {'color_2': u'blue', 'color_1': u'red', 'char_color_1': u'yellow', 'agency_level': u'high', 'char_color_2': u'white', 'group_name': u'explicit', 'condition': 9, 'group': 1, 'char_2': u'B', 'char_1': u'A'}, {'color_2': u'white', 'color_1': u'white', 'char_color_1': u'white', 'agency_level': u'high', 'char_color_2': u'green', 'group_name': u'invalid', 'condition': 10, 'group': 0, 'char_2': u'X', 'char_1': u'E'}, {'color_2': u'blue', 'color_1': u'blue', 'char_color_1': u'white', 'agency_level': u'low', 'char_color_2': u'white', 'group_name': u'invalid', 'condition': 11, 'group': 0, 'char_2': u'O', 'char_1': u'D'}, {'color_2': u'white', 'color_1': u'yellow', 'char_color_1': u'yellow', 'agency_level': u'high', 'char_color_2': u'purple', 'group_name': u'free', 'condition': 12, 'group': 3, 'char_2': u'D', 'char_1': u'A'}, {'color_2': u'green', 'color_1': u'red', 'char_color_1': u'yellow', 'agency_level': u'low', 'char_color_2': u'blue', 'group_name': u'implicit', 'condition': 13, 'group': 2, 'char_2': u'C', 'char_1': u'A'}, {'color_2': u'green', 'color_1': u'red', 'char_color_1': u'yellow', 'agency_level': u'high', 'char_color_2': u'blue', 'group_name': u'implicit', 'condition': 14, 'group': 2, 'char_2': u'C', 'char_1': u'A'}, {'color_2': u'green', 'color_1': u'red', 'char_color_1': u'yellow', 'agency_level': u'low', 'char_color_2': u'blue', 'group_name': u'implicit', 'condition': 15, 'group': 2, 'char_2': u'C', 'char_1': u'A'}, {'color_2': u'blue', 'color_1': u'red', 'char_color_1': u'yellow', 'agency_level': u'low', 'char_color_2': u'red', 'group_name': u'explicit', 'condition': 16, 'group': 1, 'char_2': u'B', 'char_1': u'A'}]" valType="str"/>
       <Param name="Selected rows" updates="None" val="" valType="str"/>
     </LoopInitiator>
     <Routine name="trials"/>
