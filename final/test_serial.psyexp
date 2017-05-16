@@ -4,14 +4,14 @@
     <Param name="Monitor" updates="None" val="testMonitor" valType="str"/>
     <Param name="color" updates="None" val="$[0,0,0]" valType="str"/>
     <Param name="colorSpace" updates="None" val="rgb" valType="str"/>
-    <Param name="Experiment info" updates="None" val="{'participant':'', 'session':'001'}" valType="code"/>
+    <Param name="Experiment info" updates="None" val="{u'session': u'001', u'participant': u''}" valType="code"/>
     <Param name="JS libs" updates="None" val="packaged" valType="str"/>
     <Param name="Units" updates="None" val="use prefs" valType="str"/>
     <Param name="Save excel file" updates="None" val="False" valType="bool"/>
     <Param name="Enable Escape" updates="None" val="True" valType="bool"/>
     <Param name="Save psydat file" updates="None" val="True" valType="bool"/>
-    <Param name="Window size (pixels)" updates="None" val="(1024, 768)" valType="code"/>
-    <Param name="Full-screen window" updates="None" val="True" valType="bool"/>
+    <Param name="Window size (pixels)" updates="None" val="[800, 600]" valType="code"/>
+    <Param name="Full-screen window" updates="None" val="False" valType="bool"/>
     <Param name="blendMode" updates="None" val="avg" valType="str"/>
     <Param name="Use version" updates="None" val="" valType="str"/>
     <Param name="HTML path" updates="None" val="html" valType="str"/>
@@ -19,7 +19,7 @@
     <Param name="OSF Project ID" updates="None" val="" valType="str"/>
     <Param name="Save log file" updates="None" val="True" valType="bool"/>
     <Param name="Save wide csv file" updates="None" val="True" valType="bool"/>
-    <Param name="Show mouse" updates="None" val="False" valType="bool"/>
+    <Param name="Show mouse" updates="None" val="True" valType="bool"/>
     <Param name="Data filename" updates="None" val="u'data/%s_%s_%s' % (expInfo['participant'], expName, expInfo['date'])" valType="code"/>
     <Param name="Show info dlg" updates="None" val="True" valType="bool"/>
     <Param name="expName" updates="None" val="untitled" valType="str"/>
@@ -27,13 +27,13 @@
     <Param name="Screen" updates="None" val="1" valType="num"/>
   </Settings>
   <Routines>
-    <Routine name="trial">
+    <Routine name="send_char">
       <CodeComponent name="code">
-        <Param name="Begin Experiment" updates="constant" val="# First run 'socat -d -d pty,raw,echo=0 pty,raw,echo=0' to simulate ports&amp;#10;&amp;#10;import serial&amp;#10;&amp;#10;# TODO Chnage device id to something that works&amp;#10;ser = serial.Serial('/dev/ttys002', 9600, rtscts=True, dsrdtr=True)&amp;#10;&amp;#10;ser.write('hello from psychopy')&amp;#10;ser.close()" valType="extendedCode"/>
+        <Param name="Begin Experiment" updates="constant" val="# First run 'socat -d -d pty,raw,echo=0 pty,raw,echo=0' to simulate ports&amp;#10;&amp;#10;import serial&amp;#10;&amp;#10;# TODO Chnage device id to something that works&amp;#10;#ser = serial.Serial('COM6', 57600, rtscts=True, dsrdtr=True)&amp;#10;ser = serial.Serial('/dev/ttys001', 57600, rtscts=True, dsrdtr=True)&amp;#10;" valType="extendedCode"/>
         <Param name="name" updates="None" val="code" valType="code"/>
-        <Param name="Begin Routine" updates="constant" val="" valType="extendedCode"/>
+        <Param name="Begin Routine" updates="constant" val="#for ch in range(0,256):&amp;#10;code = chars.thisN&amp;#10;&amp;#10;ser.write(chr(code))&amp;#10;" valType="extendedCode"/>
         <Param name="End Routine" updates="constant" val="" valType="extendedCode"/>
-        <Param name="End Experiment" updates="constant" val="" valType="extendedCode"/>
+        <Param name="End Experiment" updates="constant" val="ser.close()" valType="extendedCode"/>
         <Param name="Each Frame" updates="constant" val="" valType="extendedCode"/>
       </CodeComponent>
       <TextComponent name="text">
@@ -42,8 +42,8 @@
         <Param name="name" updates="None" val="text" valType="code"/>
         <Param name="wrapWidth" updates="constant" val="" valType="code"/>
         <Param name="color" updates="constant" val="white" valType="str"/>
-        <Param name="text" updates="set every repeat" val="line" valType="str"/>
-        <Param name="stopVal" updates="constant" val="1.0" valType="code"/>
+        <Param name="text" updates="set every repeat" val="$code" valType="str"/>
+        <Param name="stopVal" updates="constant" val="0.3" valType="code"/>
         <Param name="durationEstim" updates="None" val="" valType="code"/>
         <Param name="pos" updates="constant" val="(0, 0)" valType="code"/>
         <Param name="flip" updates="constant" val="" valType="str"/>
@@ -59,6 +59,18 @@
     </Routine>
   </Routines>
   <Flow>
-    <Routine name="trial"/>
+    <LoopInitiator loopType="TrialHandler" name="chars">
+      <Param name="conditionsFile" updates="None" val="" valType="str"/>
+      <Param name="name" updates="None" val="chars" valType="code"/>
+      <Param name="isTrials" updates="None" val="True" valType="bool"/>
+      <Param name="random seed" updates="None" val="" valType="code"/>
+      <Param name="loopType" updates="None" val="random" valType="str"/>
+      <Param name="nReps" updates="None" val="256" valType="code"/>
+      <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
+      <Param name="conditions" updates="None" val="None" valType="str"/>
+      <Param name="Selected rows" updates="None" val="" valType="code"/>
+    </LoopInitiator>
+    <Routine name="send_char"/>
+    <LoopTerminator name="chars"/>
   </Flow>
 </PsychoPy2experiment>
