@@ -13,9 +13,9 @@ for (ix in 1:length(allData$content$answers)) {
   total = 0.0
   qs = do.call(c, list(allData$content$answers[ix][[1]][4]))
   qs1 = strsplit(qs$rows[[4]], "")
-  qs2 <- list()
-  qs3 <- list()
-  qs4 <- list()
+  qs2 = list()
+  qs3 = list()
+  qs4 = list()
   for (iq in 1:10) {
     qs2[iq] = qs$rows[[5]][iq]
   }
@@ -36,7 +36,7 @@ for (ix in 1:length(allData$content$answers)) {
   total = total - 34
   if (!gtools::invalid(total))  {
     if (total>20) {
-      totals <- c(totals, total)
+      totals = c(totals, total)
     }
   } else {
     qsa_str = paste(c(code, gender, age, contact, unlist(qsa)), collapse = ',')
@@ -46,8 +46,10 @@ for (ix in 1:length(allData$content$answers)) {
   
 }
 
-totals = sort(totals)
+#totals = sort(totals)
 percentiles = ecdf(totals)(totals)*100
 ad.test(totals)
+kmeans(totals, 3)
+length(totals [totals>71])
 sink()
 print('Done!')
