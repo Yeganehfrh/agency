@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<PsychoPy2experiment encoding="utf-8" version="1.85.0">
+<PsychoPy2experiment encoding="utf-8" version="1.85.1">
   <Settings>
     <Param name="Monitor" updates="None" val="testMonitor" valType="str"/>
     <Param name="color" updates="None" val="black" valType="str"/>
@@ -10,8 +10,8 @@
     <Param name="Save excel file" updates="None" val="True" valType="bool"/>
     <Param name="Enable Escape" updates="None" val="True" valType="bool"/>
     <Param name="Save psydat file" updates="None" val="True" valType="bool"/>
-    <Param name="Window size (pixels)" updates="None" val="[1440, 900]" valType="code"/>
-    <Param name="Full-screen window" updates="None" val="False" valType="bool"/>
+    <Param name="Window size (pixels)" updates="None" val="[1366, 768]" valType="code"/>
+    <Param name="Full-screen window" updates="None" val="True" valType="bool"/>
     <Param name="blendMode" updates="None" val="avg" valType="str"/>
     <Param name="Use version" updates="None" val="latest" valType="str"/>
     <Param name="HTML path" updates="None" val="html" valType="str"/>
@@ -19,7 +19,7 @@
     <Param name="OSF Project ID" updates="None" val="" valType="str"/>
     <Param name="Save log file" updates="None" val="True" valType="bool"/>
     <Param name="Save wide csv file" updates="None" val="True" valType="bool"/>
-    <Param name="Show mouse" updates="None" val="True" valType="bool"/>
+    <Param name="Show mouse" updates="None" val="False" valType="bool"/>
     <Param name="Data filename" updates="None" val="u'data/%s_%s_%s' % (expInfo['Name'], expName, expInfo['date'])" valType="code"/>
     <Param name="Show info dlg" updates="None" val="True" valType="bool"/>
     <Param name="expName" updates="None" val="agency_v2" valType="str"/>
@@ -29,7 +29,7 @@
   <Routines>
     <Routine name="intro_1">
       <CodeComponent name="init_serial_port">
-        <Param name="Begin Experiment" updates="constant" val="# DEBUG: On macOS, first run 'socat -d -d pty,raw,echo=0 pty,raw,echo=0' to simulate ports&amp;#10;&amp;#10;# import serial module&amp;#10;import serial&amp;#10;&amp;#10;# This is for macOS&amp;#10;#serial = serial.Serial('/dev/ttys001', 57600, rtscts=True, dsrdtr=True)&amp;#10;&amp;#10;# This is for Windows. You must have a COM6 in your device manager&amp;#10;serial = serial.Serial('COM6', 57600, rtscts=True, dsrdtr=True)&amp;#10;&amp;#10;# Write start of experiment marker&amp;#10;serial.write(chr(0))" valType="extendedCode"/>
+        <Param name="Begin Experiment" updates="constant" val="# DEBUG: On macOS, first run 'socat -d -d pty,raw,echo=0 pty,raw,echo=0' to simulate ports&amp;#10;&amp;#10;# import serial module&amp;#10;import serial&amp;#10;&amp;#10;# This is for macOS&amp;#10;#serial = serial.Serial('/dev/ttys001', 57600, rtscts=True, dsrdtr=True)&amp;#10;&amp;#10;# This is for Windows. You must have a COM6 in your device manager&amp;#10;serial = serial.Serial('COM6', 57600, rtscts=True, dsrdtr=True)&amp;#10;&amp;#10;# Write start of experiment marker&amp;#10;serial.write(chr(1))" valType="extendedCode"/>
         <Param name="name" updates="None" val="init_serial_port" valType="code"/>
         <Param name="Begin Routine" updates="constant" val="# Write start of routine marker&amp;#10;serial.write(chr(1))" valType="extendedCode"/>
         <Param name="End Routine" updates="constant" val="" valType="extendedCode"/>
@@ -40,7 +40,6 @@
         <Param name="opacity" updates="constant" val="1" valType="code"/>
         <Param name="flipVert" updates="constant" val="False" valType="bool"/>
         <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
-        <Param name="flipHoriz" updates="constant" val="False" valType="bool"/>
         <Param name="name" updates="None" val="intro_image_1" valType="code"/>
         <Param name="color" updates="constant" val="$[1,1,1]" valType="str"/>
         <Param name="stopVal" updates="constant" val="" valType="code"/>
@@ -55,6 +54,7 @@
         <Param name="ori" updates="constant" val="0" valType="code"/>
         <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
         <Param name="startVal" updates="None" val="0.0" valType="code"/>
+        <Param name="flipHoriz" updates="constant" val="False" valType="bool"/>
         <Param name="image" updates="constant" val="images/1intro_1.png" valType="str"/>
         <Param name="size" updates="constant" val="(0.8, 0.8)" valType="code"/>
       </ImageComponent>
@@ -80,7 +80,6 @@
         <Param name="opacity" updates="constant" val="1" valType="code"/>
         <Param name="flipVert" updates="constant" val="False" valType="bool"/>
         <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
-        <Param name="flipHoriz" updates="constant" val="False" valType="bool"/>
         <Param name="name" updates="None" val="intro_image_2" valType="code"/>
         <Param name="color" updates="constant" val="$[1,1,1]" valType="str"/>
         <Param name="stopVal" updates="constant" val="" valType="code"/>
@@ -95,6 +94,7 @@
         <Param name="ori" updates="constant" val="0" valType="code"/>
         <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
         <Param name="startVal" updates="None" val="0.0" valType="code"/>
+        <Param name="flipHoriz" updates="constant" val="False" valType="bool"/>
         <Param name="image" updates="constant" val="images/2intro_2.png" valType="str"/>
         <Param name="size" updates="constant" val="(0.8, 0.8)" valType="code"/>
       </ImageComponent>
@@ -120,7 +120,6 @@
         <Param name="opacity" updates="constant" val="1" valType="code"/>
         <Param name="flipVert" updates="constant" val="False" valType="bool"/>
         <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
-        <Param name="flipHoriz" updates="constant" val="False" valType="bool"/>
         <Param name="name" updates="None" val="intro_image_3" valType="code"/>
         <Param name="color" updates="constant" val="$[1,1,1]" valType="str"/>
         <Param name="stopVal" updates="constant" val="" valType="code"/>
@@ -135,6 +134,7 @@
         <Param name="ori" updates="constant" val="0" valType="code"/>
         <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
         <Param name="startVal" updates="None" val="0.0" valType="code"/>
+        <Param name="flipHoriz" updates="constant" val="False" valType="bool"/>
         <Param name="image" updates="constant" val="images/3intro_3.png" valType="str"/>
         <Param name="size" updates="constant" val="(0.8, 0.8)" valType="code"/>
       </ImageComponent>
@@ -160,7 +160,6 @@
         <Param name="opacity" updates="constant" val="1" valType="code"/>
         <Param name="flipVert" updates="constant" val="False" valType="bool"/>
         <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
-        <Param name="flipHoriz" updates="constant" val="False" valType="bool"/>
         <Param name="name" updates="None" val="start_practice_image" valType="code"/>
         <Param name="color" updates="constant" val="$[1,1,1]" valType="str"/>
         <Param name="stopVal" updates="constant" val="" valType="code"/>
@@ -175,6 +174,7 @@
         <Param name="ori" updates="constant" val="0" valType="code"/>
         <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
         <Param name="startVal" updates="None" val="0" valType="code"/>
+        <Param name="flipHoriz" updates="constant" val="False" valType="bool"/>
         <Param name="image" updates="constant" val="images/4start_practice.png" valType="str"/>
         <Param name="size" updates="constant" val="(0.8, 0.8)" valType="code"/>
       </ImageComponent>
@@ -316,7 +316,6 @@
         <Param name="opacity" updates="constant" val="1" valType="code"/>
         <Param name="flipVert" updates="constant" val="False" valType="bool"/>
         <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
-        <Param name="flipHoriz" updates="constant" val="False" valType="bool"/>
         <Param name="name" updates="None" val="outcome_image" valType="code"/>
         <Param name="color" updates="constant" val="$[1,1,1]" valType="str"/>
         <Param name="stopVal" updates="constant" val="2.0" valType="code"/>
@@ -331,6 +330,7 @@
         <Param name="ori" updates="constant" val="0" valType="code"/>
         <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
         <Param name="startVal" updates="None" val="outcome_time" valType="code"/>
+        <Param name="flipHoriz" updates="constant" val="False" valType="bool"/>
         <Param name="image" updates="constant" val="images/8next_trial.png" valType="str"/>
         <Param name="size" updates="constant" val="(0.8, 0.8)" valType="code"/>
       </ImageComponent>
@@ -342,7 +342,7 @@
         <Param name="Begin Routine" updates="constant" val="practice_marker_sent = False&amp;#10;" valType="extendedCode"/>
         <Param name="End Routine" updates="constant" val="" valType="extendedCode"/>
         <Param name="End Experiment" updates="constant" val="" valType="extendedCode"/>
-        <Param name="Each Frame" updates="constant" val="if prac_fixation.status == STARTED and (not practice_marker_sent):&amp;#10;  # Mark start of practice (fixation is visible)&amp;#10;  practice_marker_sent = True&amp;#10;  serial.write(chr(practice_loop.thisN))&amp;#10;&amp;#10;#if practice_key.status == STARTED:&amp;#10;  #theseKeys_p = event.getKeys(keyList=['left','right'])&amp;#10;  # Check if any key pressed&amp;#10;  #if len(theseKeys_p) &gt; 0:&amp;#10;    # Pressed!&amp;#10;    #serial.write(chr(practice_loop.thisN))" valType="extendedCode"/>
+        <Param name="Each Frame" updates="constant" val="if prac_fixation.status == STARTED and (not practice_marker_sent):&amp;#10;  # Mark start of practice (fixation is visible)&amp;#10;  practice_marker_sent = True&amp;#10;  serial.write(chr(practice_loop.thisN+1))&amp;#10;&amp;#10;theseKeys_p = theseKeys #event.getKeys(keyList=['left','right'])&amp;#10;# Check if any key pressed&amp;#10;#if practice_key.rt != None:&amp;#10;  # Pressed!&amp;#10;#  serial.write(chr(practice_loop.thisN+1))" valType="extendedCode"/>
       </CodeComponent>
       <TextComponent name="prac_fixation">
         <Param name="opacity" updates="constant" val="1" valType="code"/>
@@ -361,8 +361,8 @@
         <Param name="ori" updates="constant" val="0" valType="code"/>
         <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
         <Param name="startVal" updates="None" val="0.0" valType="code"/>
-        <Param name="font" updates="constant" val="Samim" valType="str"/>
-        <Param name="letterHeight" updates="constant" val="0.2" valType="code"/>
+        <Param name="font" updates="constant" val="Arial" valType="str"/>
+        <Param name="letterHeight" updates="constant" val="0.1" valType="code"/>
       </TextComponent>
       <PolygonComponent name="left_circle">
         <Param name="opacity" updates="constant" val="1" valType="code"/>
@@ -458,7 +458,6 @@
         <Param name="opacity" updates="constant" val="1" valType="code"/>
         <Param name="flipVert" updates="constant" val="False" valType="bool"/>
         <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
-        <Param name="flipHoriz" updates="constant" val="False" valType="bool"/>
         <Param name="name" updates="None" val="image" valType="code"/>
         <Param name="color" updates="constant" val="$[1,1,1]" valType="str"/>
         <Param name="stopVal" updates="constant" val="" valType="code"/>
@@ -473,6 +472,7 @@
         <Param name="ori" updates="constant" val="0" valType="code"/>
         <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
         <Param name="startVal" updates="None" val="0.5" valType="code"/>
+        <Param name="flipHoriz" updates="constant" val="False" valType="bool"/>
         <Param name="image" updates="constant" val="images/8end_of_practice.png" valType="str"/>
         <Param name="size" updates="constant" val="(0.8, 0.8)" valType="code"/>
       </ImageComponent>
@@ -498,7 +498,6 @@
         <Param name="opacity" updates="constant" val="1" valType="code"/>
         <Param name="flipVert" updates="constant" val="False" valType="bool"/>
         <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
-        <Param name="flipHoriz" updates="constant" val="False" valType="bool"/>
         <Param name="name" updates="None" val="rest_image_1" valType="code"/>
         <Param name="color" updates="constant" val="$[1,1,1]" valType="str"/>
         <Param name="stopVal" updates="constant" val="" valType="code"/>
@@ -513,6 +512,7 @@
         <Param name="ori" updates="constant" val="0" valType="code"/>
         <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
         <Param name="startVal" updates="None" val="0.0" valType="code"/>
+        <Param name="flipHoriz" updates="constant" val="False" valType="bool"/>
         <Param name="image" updates="constant" val="images/9rest.png" valType="str"/>
         <Param name="size" updates="constant" val="(0.8, 0.8)" valType="code"/>
       </ImageComponent>
@@ -538,7 +538,6 @@
         <Param name="opacity" updates="constant" val="1" valType="code"/>
         <Param name="flipVert" updates="constant" val="False" valType="bool"/>
         <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
-        <Param name="flipHoriz" updates="constant" val="False" valType="bool"/>
         <Param name="name" updates="None" val="thank_you_image" valType="code"/>
         <Param name="color" updates="constant" val="$[1,1,1]" valType="str"/>
         <Param name="stopVal" updates="constant" val="" valType="code"/>
@@ -553,6 +552,7 @@
         <Param name="ori" updates="constant" val="0" valType="code"/>
         <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
         <Param name="startVal" updates="None" val="0.0" valType="code"/>
+        <Param name="flipHoriz" updates="constant" val="False" valType="bool"/>
         <Param name="image" updates="constant" val="images/10thank_you.png" valType="str"/>
         <Param name="size" updates="constant" val="(0.8, 0.8)" valType="code"/>
       </ImageComponent>
@@ -577,7 +577,7 @@
       <CodeComponent name="check_practice_code">
         <Param name="Begin Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="name" updates="None" val="check_practice_code" valType="code"/>
-        <Param name="Begin Routine" updates="constant" val="&amp;#10;# Mark start of showing feedback routine&amp;#10;serial.write(chr(practice_loop.thisN))&amp;#10;&amp;#10;timeout = False&amp;#10;failed = False&amp;#10;success = False&amp;#10;&amp;#10;# Extract correct keys from Excel file&amp;#10;correctKeys = correct.split(',')&amp;#10;&amp;#10;# Add empty responses if correct array contains empty string&amp;#10;if '' in correctKeys:&amp;#10;  correctKeys.extend([None,[]])&amp;#10;&amp;#10;# check success/failed&amp;#10;if practice_key.keys in correctKeys:&amp;#10;  success = True&amp;#10;elif not practice_key.keys in [None,'',[]]:&amp;#10;  if (not '' in correctKeys):&amp;#10;    failed = True&amp;#10;&amp;#10;# Update feedback image according to the success or failed conditions&amp;#10;if success:&amp;#10;  practice_feedback_image.image = 'images/6practice_success.png'&amp;#10;elif failed:&amp;#10;  practice_feedback_image.image = 'images/5practice_failed.png'&amp;#10;else:&amp;#10;  practice_feedback_image.image = 'images/7practice_timeout.png'&amp;#10;  timeout = True&amp;#10;" valType="extendedCode"/>
+        <Param name="Begin Routine" updates="constant" val="&amp;#10;# Mark start of showing feedback routine&amp;#10;serial.write(chr(practice_loop.thisN+1))&amp;#10;&amp;#10;timeout = False&amp;#10;failed = False&amp;#10;success = False&amp;#10;&amp;#10;# Extract correct keys from Excel file&amp;#10;correctKeys = correct.split(',')&amp;#10;&amp;#10;# Add empty responses if correct array contains empty string&amp;#10;if '' in correctKeys:&amp;#10;  correctKeys.extend([None,[]])&amp;#10;&amp;#10;# check success/failed&amp;#10;if practice_key.keys in correctKeys:&amp;#10;  success = True&amp;#10;elif not practice_key.keys in [None,'',[]]:&amp;#10;  if (not '' in correctKeys):&amp;#10;    failed = True&amp;#10;&amp;#10;# Update feedback image according to the success or failed conditions&amp;#10;if success:&amp;#10;  practice_feedback_image.image = 'images/6practice_success.png'&amp;#10;elif failed:&amp;#10;  practice_feedback_image.image = 'images/5practice_failed.png'&amp;#10;else:&amp;#10;  practice_feedback_image.image = 'images/7practice_timeout.png'&amp;#10;  timeout = True&amp;#10;" valType="extendedCode"/>
         <Param name="End Routine" updates="constant" val="" valType="extendedCode"/>
         <Param name="End Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Each Frame" updates="constant" val="" valType="extendedCode"/>
@@ -596,7 +596,6 @@
         <Param name="opacity" updates="constant" val="1" valType="code"/>
         <Param name="flipVert" updates="constant" val="False" valType="bool"/>
         <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
-        <Param name="flipHoriz" updates="constant" val="False" valType="bool"/>
         <Param name="name" updates="None" val="practice_feedback_image" valType="code"/>
         <Param name="color" updates="constant" val="$[1,1,1]" valType="str"/>
         <Param name="stopVal" updates="constant" val="2.0" valType="code"/>
@@ -611,6 +610,7 @@
         <Param name="ori" updates="constant" val="0" valType="code"/>
         <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
         <Param name="startVal" updates="None" val="0.5" valType="code"/>
+        <Param name="flipHoriz" updates="constant" val="False" valType="bool"/>
         <Param name="image" updates="constant" val="images/7practice_timeout.png" valType="str"/>
         <Param name="size" updates="constant" val="(0.8, 0.8)" valType="code"/>
       </ImageComponent>
@@ -736,7 +736,6 @@
         <Param name="opacity" updates="constant" val="1" valType="code"/>
         <Param name="flipVert" updates="constant" val="False" valType="bool"/>
         <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
-        <Param name="flipHoriz" updates="constant" val="False" valType="bool"/>
         <Param name="name" updates="None" val="outcome_image_2" valType="code"/>
         <Param name="color" updates="constant" val="$[1,1,1]" valType="str"/>
         <Param name="stopVal" updates="constant" val="2.0" valType="code"/>
@@ -751,6 +750,7 @@
         <Param name="ori" updates="constant" val="0" valType="code"/>
         <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
         <Param name="startVal" updates="None" val="outcome_time" valType="code"/>
+        <Param name="flipHoriz" updates="constant" val="False" valType="bool"/>
         <Param name="image" updates="constant" val="images/8next_trial.png" valType="str"/>
         <Param name="size" updates="constant" val="(0.8, 0.8)" valType="code"/>
       </ImageComponent>
@@ -760,7 +760,6 @@
         <Param name="opacity" updates="constant" val="1" valType="code"/>
         <Param name="flipVert" updates="constant" val="False" valType="bool"/>
         <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
-        <Param name="flipHoriz" updates="constant" val="False" valType="bool"/>
         <Param name="name" updates="None" val="rest_image_2" valType="code"/>
         <Param name="color" updates="constant" val="$[1,1,1]" valType="str"/>
         <Param name="stopVal" updates="constant" val="" valType="code"/>
@@ -775,6 +774,7 @@
         <Param name="ori" updates="constant" val="0" valType="code"/>
         <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
         <Param name="startVal" updates="None" val="0.0" valType="code"/>
+        <Param name="flipHoriz" updates="constant" val="False" valType="bool"/>
         <Param name="image" updates="constant" val="images/9rest.png" valType="str"/>
         <Param name="size" updates="constant" val="(0.8, 0.8)" valType="code"/>
       </ImageComponent>
@@ -989,7 +989,7 @@
       <Param name="loopType" updates="None" val="random" valType="str"/>
       <Param name="nReps" updates="None" val="1" valType="code"/>
       <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
-      <Param name="conditions" updates="None" val="[{'correct': u'left', 'right_color': u'magenta', 'group': 1, 'left_color': u'red', 'practice_condition': 1}, {'correct': u'left', 'right_color': u'darkviolet', 'group': 1, 'left_color': u'red', 'practice_condition': 2}, {'correct': u'left', 'right_color': u'yellow', 'group': 1, 'left_color': u'red', 'practice_condition': 3}, {'correct': u'left', 'right_color': u'saddlebrown', 'group': 1, 'left_color': u'red', 'practice_condition': 4}, {'correct': u'left', 'right_color': u'green', 'group': 1, 'left_color': u'red', 'practice_condition': 5}, {'correct': u'left,right', 'right_color': u'red', 'group': 2, 'left_color': u'red', 'practice_condition': 11}, {'correct': u'left,right', 'right_color': u'red', 'group': 2, 'left_color': u'red', 'practice_condition': 12}, {'correct': u'left,right', 'right_color': u'red', 'group': 2, 'left_color': u'red', 'practice_condition': 13}, {'correct': u'left,right', 'right_color': u'red', 'group': 2, 'left_color': u'red', 'practice_condition': 14}, {'correct': u'left,right', 'right_color': u'red', 'group': 2, 'left_color': u'red', 'practice_condition': 15}, {'correct': u'right', 'right_color': u'red', 'group': 3, 'left_color': u'magenta', 'practice_condition': 21}, {'correct': u'right', 'right_color': u'red', 'group': 3, 'left_color': u'darkviolet', 'practice_condition': 22}, {'correct': u'right', 'right_color': u'red', 'group': 3, 'left_color': u'yellow', 'practice_condition': 23}, {'correct': u'right', 'right_color': u'red', 'group': 3, 'left_color': u'saddlebrown', 'practice_condition': 24}, {'correct': u'right', 'right_color': u'red', 'group': 3, 'left_color': u'green', 'practice_condition': 25}, {'correct': u'left,right,', 'right_color': u'darkviolet', 'group': 4, 'left_color': u'magenta', 'practice_condition': 31}, {'correct': u'left,right,', 'right_color': u'green', 'group': 4, 'left_color': u'yellow', 'practice_condition': 32}, {'correct': u'left,right,', 'right_color': u'yellow', 'group': 4, 'left_color': u'saddlebrown', 'practice_condition': 33}, {'correct': u'left,right,', 'right_color': u'magenta', 'group': 4, 'left_color': u'yellow', 'practice_condition': 34}, {'correct': u'left,right,', 'right_color': u'saddlebrown', 'group': 4, 'left_color': u'green', 'practice_condition': 35}]" valType="str"/>
+      <Param name="conditions" updates="None" val="[{'right_color': u'magenta', 'practice_condition': 1, 'group': 1, 'correct': u'left', 'left_color': u'red'}, {'right_color': u'darkviolet', 'practice_condition': 2, 'group': 1, 'correct': u'left', 'left_color': u'red'}, {'right_color': u'yellow', 'practice_condition': 3, 'group': 1, 'correct': u'left', 'left_color': u'red'}, {'right_color': u'saddlebrown', 'practice_condition': 4, 'group': 1, 'correct': u'left', 'left_color': u'red'}, {'right_color': u'green', 'practice_condition': 5, 'group': 1, 'correct': u'left', 'left_color': u'red'}, {'right_color': u'red', 'practice_condition': 11, 'group': 2, 'correct': u'left,right', 'left_color': u'red'}, {'right_color': u'red', 'practice_condition': 12, 'group': 2, 'correct': u'left,right', 'left_color': u'red'}, {'right_color': u'red', 'practice_condition': 13, 'group': 2, 'correct': u'left,right', 'left_color': u'red'}, {'right_color': u'red', 'practice_condition': 14, 'group': 2, 'correct': u'left,right', 'left_color': u'red'}, {'right_color': u'red', 'practice_condition': 15, 'group': 2, 'correct': u'left,right', 'left_color': u'red'}, {'right_color': u'red', 'practice_condition': 21, 'group': 3, 'correct': u'right', 'left_color': u'magenta'}, {'right_color': u'red', 'practice_condition': 22, 'group': 3, 'correct': u'right', 'left_color': u'darkviolet'}, {'right_color': u'red', 'practice_condition': 23, 'group': 3, 'correct': u'right', 'left_color': u'yellow'}, {'right_color': u'red', 'practice_condition': 24, 'group': 3, 'correct': u'right', 'left_color': u'saddlebrown'}, {'right_color': u'red', 'practice_condition': 25, 'group': 3, 'correct': u'right', 'left_color': u'green'}, {'right_color': u'darkviolet', 'practice_condition': 31, 'group': 4, 'correct': u'left,right,', 'left_color': u'magenta'}, {'right_color': u'green', 'practice_condition': 32, 'group': 4, 'correct': u'left,right,', 'left_color': u'yellow'}, {'right_color': u'yellow', 'practice_condition': 33, 'group': 4, 'correct': u'left,right,', 'left_color': u'saddlebrown'}, {'right_color': u'magenta', 'practice_condition': 34, 'group': 4, 'correct': u'left,right,', 'left_color': u'yellow'}, {'right_color': u'saddlebrown', 'practice_condition': 35, 'group': 4, 'correct': u'left,right,', 'left_color': u'green'}]" valType="str"/>
       <Param name="Selected rows" updates="None" val="" valType="str"/>
     </LoopInitiator>
     <Routine name="practice"/>

@@ -1,8 +1,8 @@
 #!/usr/bin/env python2
 # -*- coding: utf-8 -*-
 """
-This experiment was created using PsychoPy2 Experiment Builder (v1.85.0),
-    on Sat May 20 20:14:19 2017
+This experiment was created using PsychoPy2 Experiment Builder (v1.85.1),
+    on May 29, 2017, at 11:45
 If you publish work using this script please cite the PsychoPy publications:
     Peirce, JW (2007) PsychoPy - Psychophysics software in Python.
         Journal of Neuroscience Methods, 162(1-2), 8-13.
@@ -57,7 +57,7 @@ endExpNow = False  # flag for 'escape' or other condition => quit the exp
 
 # Setup the Window
 win = visual.Window(
-    size=(1440, 900), fullscr=True, screen=0,
+    size=(1366, 768), fullscr=True, screen=0,
     allowGUI=False, allowStencil=False,
     monitor=u'testMonitor', color=u'black', colorSpace='rgb',
     blendMode='avg', useFBO=True,
@@ -83,7 +83,7 @@ import serial
 serial = serial.Serial('COM6', 57600, rtscts=True, dsrdtr=True)
 
 # Write start of experiment marker
-serial.write(chr(0))
+serial.write(chr(1))
 intro_image_1 = visual.ImageStim(
     win=win, name='intro_image_1',
     image='images/1intro_1.png', mask=None,
@@ -126,10 +126,10 @@ start_practice_image = visual.ImageStim(
 practiceClock = core.Clock()
 
 prac_fixation = visual.TextStim(win=win, name='prac_fixation',
-    text='+',
-    font='Samim',
-    pos=(0, 0), height=0.2, wrapWidth=None, ori=0, 
-    color='white', colorSpace='rgb', opacity=1,
+    text=u'+',
+    font=u'Arial',
+    pos=(0, 0), height=0.1, wrapWidth=None, ori=0, 
+    color=u'white', colorSpace='rgb', opacity=1,
     depth=-1.0);
 left_circle = visual.Polygon(
     win=win, name='left_circle',
@@ -201,9 +201,9 @@ circle_2 = visual.Polygon(
 ISI = core.StaticPeriod(win=win, screenHz=expInfo['frameRate'], name='ISI')
 respond_text = visual.TextStim(win=win, name='respond_text',
     text=u'\u061f',
-    font=u'Samim',
+    font='Samim',
     pos=(0, 0), height=0.08, wrapWidth=None, ori=0, 
-    color=u'white', colorSpace='rgb', opacity=1,
+    color='white', colorSpace='rgb', opacity=1,
     depth=-5.0);
 outcome_image = visual.ImageStim(
     win=win, name='outcome_image',
@@ -558,9 +558,9 @@ thisExp.nextEntry()
 routineTimer.reset()
 
 # set up handler to look after randomisation of conditions etc
-practice_loop = data.TrialHandler(nReps=1, method='random', 
+practice_loop = data.TrialHandler(nReps=0, method='random', 
     extraInfo=expInfo, originPath=-1,
-    trialList=data.importConditions(u'practice.xlsx'),
+    trialList=data.importConditions('practice.xlsx'),
     seed=None, name='practice_loop')
 thisExp.addLoop(practice_loop)  # add the loop to the experiment
 thisPractice_loop = practice_loop.trialList[0]  # so we can initialise stimuli with some values
@@ -601,14 +601,13 @@ for thisPractice_loop in practice_loop:
         if prac_fixation.status == STARTED and (not practice_marker_sent):
           # Mark start of practice (fixation is visible)
           practice_marker_sent = True
-          serial.write(chr(practice_loop.thisN))
+          serial.write(chr(practice_loop.thisN+1))
         
-        #if practice_key.status == STARTED:
-          #theseKeys_p = event.getKeys(keyList=['left','right'])
-          # Check if any key pressed
-          #if len(theseKeys_p) > 0:
-            # Pressed!
-            #serial.write(chr(practice_loop.thisN))
+        theseKeys_p = theseKeys #event.getKeys(keyList=['left','right'])
+        # Check if any key pressed
+        #if practice_key.rt != None:
+          # Pressed!
+        #  serial.write(chr(practice_loop.thisN+1))
         
         # *prac_fixation* updates
         if t >= 0.0 and prac_fixation.status == NOT_STARTED:
@@ -651,7 +650,7 @@ for thisPractice_loop in practice_loop:
             text.setAutoDraw(False)
         
         # *practice_key* updates
-        if t >= 1.4 and practice_key.status == NOT_STARTED:
+        if t >= 1.2 and practice_key.status == NOT_STARTED:
             # keep track of start time/frame for later
             practice_key.tStart = t
             practice_key.frameNStart = frameN  # exact frame index
@@ -659,7 +658,7 @@ for thisPractice_loop in practice_loop:
             # keyboard checking is just starting
             win.callOnFlip(practice_key.clock.reset)  # t=0 on next screen flip
             event.clearEvents(eventType='keyboard')
-        frameRemains = 1.4 + 2.0- win.monitorFramePeriod * 0.75  # most of one frame period left
+        frameRemains = 1.2 + 2.2- win.monitorFramePeriod * 0.75  # most of one frame period left
         if practice_key.status == STARTED and t >= frameRemains:
             practice_key.status = STOPPED
         if practice_key.status == STARTED:
@@ -670,6 +669,7 @@ for thisPractice_loop in practice_loop:
                 endExpNow = True
             if len(theseKeys) > 0:  # at least one key was pressed
                 practice_key.keys = theseKeys[-1]  # just the last key pressed
+                serial.write(chr(practice_loop.thisN+1))
                 practice_key.rt = practice_key.clock.getTime()
                 # a response ends the routine
                 continueRoutine = False
@@ -724,7 +724,7 @@ for thisPractice_loop in practice_loop:
     # update component parameters for each repeat
     
     # Mark start of showing feedback routine
-    serial.write(chr(practice_loop.thisN))
+    serial.write(chr(practice_loop.thisN+1))
     
     timeout = False
     failed = False
@@ -922,7 +922,7 @@ for thisBlock in blocks:
     # set up handler to look after randomisation of conditions etc
     trials_loop = data.TrialHandler(nReps=1, method='random', 
         extraInfo=expInfo, originPath=-1,
-        trialList=data.importConditions(u'conditions.xlsx'),
+        trialList=data.importConditions('conditions.xlsx'),
         seed=None, name='trials_loop')
     thisExp.addLoop(trials_loop)  # add the loop to the experiment
     thisTrials_loop = trials_loop.trialList[0]  # so we can initialise stimuli with some values
@@ -948,7 +948,7 @@ for thisBlock in blocks:
         outcome_time = 4.4 # initial value, will be changed
         timeout = True
         if agency_level=="low":
-          delay = 2.0
+          delay = 1.0
         
         trial_marker_sent = False
         
@@ -1021,7 +1021,7 @@ for thisBlock in blocks:
                 respond_text.setAutoDraw(False)
             
             # *respond_key* updates
-            if t >= 2.4 and respond_key.status == NOT_STARTED:
+            if t >= 2.2 and respond_key.status == NOT_STARTED:
                 # keep track of start time/frame for later
                 respond_key.tStart = t
                 respond_key.frameNStart = frameN  # exact frame index
@@ -1029,7 +1029,7 @@ for thisBlock in blocks:
                 # keyboard checking is just starting
                 win.callOnFlip(respond_key.clock.reset)  # t=0 on next screen flip
                 event.clearEvents(eventType='keyboard')
-            frameRemains = 2.4 + 2.0- win.monitorFramePeriod * 0.75  # most of one frame period left
+            frameRemains = 2.2 + 2.2- win.monitorFramePeriod * 0.75  # most of one frame period left
             if respond_key.status == STARTED and t >= frameRemains:
                 respond_key.status = STOPPED
             if respond_key.status == STARTED:
