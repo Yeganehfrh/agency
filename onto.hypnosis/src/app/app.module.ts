@@ -3,8 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { CogHypnosisApp } from './app.component';
 
-import { AboutPage } from '../pages/about/about';
-import { ContactPage } from '../pages/contact/contact';
+import { RecordingsPage } from '../pages/recordings/recordings';
+import { HelpPage } from '../pages/help/help';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 
@@ -17,8 +17,8 @@ import { NativeAudio } from '@ionic-native/native-audio';
 @NgModule({
   declarations: [
     CogHypnosisApp,
-    AboutPage,
-    ContactPage,
+    RecordingsPage,
+    HelpPage,
     HomePage,
     TabsPage
   ],
@@ -29,8 +29,8 @@ import { NativeAudio } from '@ionic-native/native-audio';
   bootstrap: [IonicApp],
   entryComponents: [
     CogHypnosisApp,
-    AboutPage,
-    ContactPage,
+    RecordingsPage,
+    HelpPage,
     HomePage,
     TabsPage
   ],

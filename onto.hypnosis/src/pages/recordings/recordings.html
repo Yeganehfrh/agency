@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+      درباره
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-card *ngFor="let item of items; let i = index">
+    <ion-card-header>
+      {{ item.title }}
+    </ion-card-header>
+    <ion-card-content>
+      {{ item.description }}
+    </ion-card-content>
+  </ion-card>
+</ion-content>
