@@ -17,13 +17,18 @@
 
 @font-face {
   font-family: Samim;
-  src: url('assets/fonts/samim.eot');
-  src: url('assets/fonts/samim.eot?#iefix') format('embedded-opentype'),
-       url('assets/fonts/samim.woff') format('woff'),
-       url('assets/fonts/samim.ttf') format('truetype');
+  src: url('../assets/fonts/samim.eot');
+  src: url('../assets/fonts/samim.eot?#iefix') format('embedded-opentype'),
+       url('../assets/fonts/samim.woff') format('woff'),
+       url('../assets/fonts/samim.ttf') format('truetype');
   font-weight: normal;
 }
 
-*, html, body {
-  font-family: "Samim", "Open Sans"
+.ltr {
+  direction: ltr !important;
+}
+
+* {
+  font-family: 'Samim', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  direction: rtl;
 }

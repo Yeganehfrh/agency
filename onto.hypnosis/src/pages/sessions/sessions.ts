@@ -5,10 +5,10 @@ import { File } from '@ionic-native/file';
 import { NativeAudio } from '@ionic-native/native-audio';
 
 @Component({
-  selector: 'page-recordings',
-  templateUrl: 'recordings.html'
+  selector: 'page-sessions',
+  templateUrl: 'sessions.html'
 })
-export class RecordingsPage {
+export class SessionsPage {
 
   audioFilePath = "";
   items = [];
