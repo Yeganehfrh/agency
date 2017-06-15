@@ -24,7 +24,8 @@ import { NativeAudio } from '@ionic-native/native-audio';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(CogHypnosisApp)
+    IonicModule.forRoot(CogHypnosisApp),
+    //IonicAudioModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
