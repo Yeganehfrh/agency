@@ -2994,6 +2994,20 @@ react-devtools-core@^2.1.8:
     shell-quote "^1.6.1"
     ws "^2.0.3"
 
+react-native-button@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/react-native-button/-/react-native-button-2.0.0.tgz#5b798f0ac8c9c5bfd495c7f5f308beb49ed40a4b"
+
+react-native-flat-button@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/react-native-flat-button/-/react-native-flat-button-1.0.4.tgz#abad027d1acd547b35dae3a43028ad0c80399f5c"
+
+react-native-scrollable-tab-view@^0.6.6:
+  version "0.6.6"
+  resolved "https://registry.yarnpkg.com/react-native-scrollable-tab-view/-/react-native-scrollable-tab-view-0.6.6.tgz#d49d21060745845e9c59e3d39a2bacd4056a8b59"
+  dependencies:
+    react-timer-mixin "^0.13.3"
+
 react-native-sound@^0.10.1:
   version "0.10.1"
   resolved "https://registry.yarnpkg.com/react-native-sound/-/react-native-sound-0.10.1.tgz#c6afa5114cea6e39f479a2c67d6d843894ed745c"
@@ -3100,7 +3114,7 @@ react-test-renderer@16.0.0-alpha.12:
     fbjs "^0.8.9"
     object-assign "^4.1.0"
 
-react-timer-mixin@^0.13.2:
+react-timer-mixin@^0.13.2, react-timer-mixin@^0.13.3:
   version "0.13.3"
   resolved "https://registry.yarnpkg.com/react-timer-mixin/-/react-timer-mixin-0.13.3.tgz#0da8b9f807ec07dc3e854d082c737c65605b3d22"
 

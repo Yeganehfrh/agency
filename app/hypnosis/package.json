@@ -11,6 +11,7 @@
     "react-native": "0.45.1",
     "react-native-button": "^2.0.0",
     "react-native-flat-button": "^1.0.4",
+    "react-native-scrollable-tab-view": "^0.6.6",
     "react-native-sound": "^0.10.1"
   },
   "devDependencies": {
