@@ -46,6 +46,7 @@ export default class PlayerModal extends Component {
   close() {
     this._handleStopSound();
     this.setState({visible: false});
+    this.props.closePlayerCallback();
   }
 
   render() {

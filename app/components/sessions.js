@@ -3,50 +3,81 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  ScrollView
 } from 'react-native';
 
 import Button from 'react-native-flat-button';
 
 import PlayerModal from './player';
+import {
+  Card,
+  CardImage,
+  CardTitle,
+  CardContent,
+  CardAction
+} from 'react-native-card-view';
 
 export default class Sessions extends Component {
 
-  state = {
-    playerIsOpen: false,
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      playerIsOpen: false,
+    }
+    this.closePlayer = this.closePlayer.bind(this);
   }
 
   openPlayer() {
     this.setState({playerIsOpen: true});
   }
 
+  closePlayer() {
+    this.setState({playerIsOpen: false});
+  }
+
   render() {
+    var cards = [];
+    for (var i = 0; i < 5; i++) {
+      cards.push(
+        <Card style={styles.card} key={i}>
+          <CardTitle>
+            <Text style={styles.title}>Session {i+1}</Text>
+          </CardTitle>
+          <CardContent>
+            <Text>در اولین جلسه، شما ده دقیقه به هیپنوتیزم اصلی گوش می‌دهید.</Text>
+          </CardContent>
+          <CardAction >
+            <Button
+              color="#841584"
+              type="positive"
+              containerStyle={styles.buttonContainer}
+              onPress={() => this.openPlayer()}>
+              پخش
+            </Button>
+          </CardAction>
+        </Card>
+      );
+    }
     return (
-      <View style={styles.container}>
-        <PlayerModal visible={this.state.playerIsOpen}></PlayerModal>
+      <ScrollView style={styles.container}>
+        <PlayerModal visible={this.state.playerIsOpen}
+          closePlayerCallback={this.closePlayer}></PlayerModal>
         <Text style={styles.welcome}>
           Welcome to Cognitive Hypnosis!
         </Text>
-        <Text style={styles.instructions}>
-          Press "Open Player" to start session one.
-        </Text>
-        <Button
-          color="#841584"
-          type="positive"
-          containerStyle={styles.buttonContainer}
-          onPress={() => this.openPlayer()}>
-          Open Player
-        </Button>
-      </View>
+
+        {cards}
+
+      </ScrollView>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    flex: 1
     //backgroundColor: '#F5FCFF',
   },
   buttonContainer: {
@@ -59,9 +90,15 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     margin: 10,
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+  title: {
+    fontSize: 24,
+    backgroundColor: 'transparent'
   },
+  button: {
+    marginRight: 10
+  },
+  card: {
+    flex: 1,
+    alignSelf: 'stretch'
+  }
 });

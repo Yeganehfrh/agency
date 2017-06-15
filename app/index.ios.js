@@ -9,25 +9,29 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  I18nManager
 } from 'react-native';
 
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 import Home from './components/home';
+import Help from './components/help';
 import Sessions from './components/sessions';
 
 
 export default class HypnosisApp extends Component {
   render() {
+    I18nManager.allowRTL(true);
     return (
       <ScrollableTabView tabBarPosition="bottom"
+        lock="true"
         style={{marginTop: 20 }}
         tabBarActiveTextColor="black"
         tabBarUnderlineStyle={{backgroundColor: "red"}}
         >
-        <Sessions tabLabel="Home"></Sessions>
-        <Sessions tabLabel="About"></Sessions>
+        <Home tabLabel="Home"></Home>
         <Sessions tabLabel="Sessions"></Sessions>
+        <Help tabLabel="Help"></Help>
       </ScrollableTabView>
     );
   }
@@ -36,8 +40,6 @@ export default class HypnosisApp extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: '#F5FCFF',
   }
 });

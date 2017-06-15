@@ -9,6 +9,7 @@
 	"dependencies": {
 		"react": "16.0.0-alpha.12",
 		"react-native": "0.45.1",
+		"react-native-card-view": "^0.0.3",
 		"react-native-flat-button": "^1.0.4",
 		"react-native-modal": "^2.4.0",
 		"react-native-scrollable-tab-view": "^0.6.7",
