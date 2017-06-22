@@ -99,4 +99,56 @@ const HypnosisApp = StackNavigator({
   headerMode: 'none'
 });
 
+import Storage from 'react-native-storage';
+import { AsyncStorage } from 'react-native';
+
+global.storage = new Storage({
+	// maximum capacity, default 1000 
+	size: 1000,
+	storageBackend: AsyncStorage,
+	defaultExpires: null,
+	sync : {
+    sessions(params){
+      loadDefaultSessions();
+    }
+	}
+})
+
+loadDefaultSessions = function() {
+  global.storage.remove({key:'sessions'});
+  global.storage.save({
+    key: 'sessions',
+    data: { 
+      timestamp: '234342323',
+      sessions: [{
+        audioFile: 'one.mp3',
+        id: 100,
+        title: 'آماده‌سازی و آشنایی',
+        description: 'در این جلسه شما با مفاهیم هیپنوتیزم و تلقین آشنا می‌شوید. هم‌چنین راهنمای ادامهٔ کار در این جلسه ارائه می‌شود.'
+      },{
+        audioFile: 'one.mp3',
+        id: 101,
+        title: 'جلسهٔ نخست',
+        description: 'در جلسهٔ نخست به مدت ۱۰ دقیقه شما فرآیند خلسه را تمرین خواهید نمود.'
+      },{
+        audioFile: 'one.mp3',
+        id: 102,
+        title: 'جلسهٔ دوم',
+        description: 'حالت خلسهٔ شما در این جلسه تعمیق خواهد شد. هم‌چنین برای افزایش اعتماد به نفس راه‌کاری ارائه می‌شود.'
+      },{
+        audioFile: 'one.mp3',
+        id: 103,
+        title: 'جلسهٔ چهارم',
+        description: 'در جلسهٔ نخست به مدت ۱۰ دقیقه شما فرآیند خلسه را تمرین خواهید نمود.'
+      },{
+        audioFile: 'one.mp3',
+        id: 104,
+        title: 'جلسهٔ نهایی',
+        description: 'در جلسهٔ نخست به مدت ۱۰ دقیقه شما فرآیند خلسه را تمرین خواهید نمود.'
+      }]
+    },
+  });
+}
+
+
 AppRegistry.registerComponent('HypnosisApp', () => HypnosisApp);

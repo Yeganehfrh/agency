@@ -4,7 +4,8 @@ import {
   StyleSheet,
   Text,
   View,
-  ScrollView
+  ScrollView,
+  RefreshControl
 } from 'react-native';
 
 import Button from 'react-native-flat-button';
@@ -33,11 +34,66 @@ export default class SessionsScreen extends Component {
     super(props);
     this.state = {
       playerIsOpen: false,
+      sessionsInfo: [],
+      refreshing: false,
+      cards: []
     }
+    this.reloadSessions = this.reloadSessions.bind(this);
     this.closePlayer = this.closePlayer.bind(this);
+    this.openPlayer = this.openPlayer.bind(this);
+    this.reloadSessions();
   }
 
-  openPlayer = () => {
+  reloadSessions = (forceReload) => {
+    if (forceReload) {
+      global.storage.remove({key:'sessions'});
+    }
+
+    self = this;
+    global.storage.load({
+      key: 'sessions'
+    }).then(ret => {
+      this.setState({sessionInfo: ret.sessions});
+      var cards = [];
+
+      ret.sessions.map( function(item) {
+        cards.push(
+          <Card style={[styles.card,styles.rtl]} key={item.id}>
+            <CardTitle>
+              <Text style={[styles.title,styles.rtl]}>{item.title}</Text>
+            </CardTitle>
+            <CardContent>
+              <Text style={[styles.content,styles.rtl]}>{item.description}</Text>
+            </CardContent>
+            <CardAction >
+              <Button
+                color="#841584"
+                type="positive"
+                containerStyle={styles.buttonContainer}
+                onPress={() => self.openPlayer(item)}>
+              <Icon name='control-play' size={30} color='rgb(255,255,255)'
+              />
+              </Button>
+            </CardAction>
+          </Card>
+        );
+      });
+      this.setState({cards: cards});
+
+    }).catch(err => {
+      console.warn(err.message);
+    });
+  }
+
+  _onRefresh = () => {
+    this.setState({refreshing: true});
+    this.setState({cards: []});
+    this.reloadSessions(false);
+    this.setState({refreshing: false});
+
+  }
+
+  openPlayer = (sessionInfo) => {
     this.setState({playerIsOpen: true});
   }
 
@@ -47,53 +103,22 @@ export default class SessionsScreen extends Component {
 
   render() {
     var cards = [];
-    var sessionsInfo = [{
-      title: 'آماده‌سازی و آشنایی',
-      description: 'در این جلسه شما با مفاهیم هیپنوتیزم و تلقین آشنا می‌شوید. هم‌چنین راهنمای ادامهٔ کار در این جلسه ارائه می‌شود.'
-    },{
-      title: 'جلسهٔ نخست',
-      description: 'در جلسهٔ نخست به مدت ۱۰ دقیقه شما فرآیند خلسه را تمرین خواهید نمود.'
-    },{
-      title: 'جلسهٔ دوم',
-      description: 'حالت خلسهٔ شما در این جلسه تعمیق خواهد شد. هم‌چنین برای افزایش اعتماد به نفس راه‌کاری ارائه می‌شود.'
-    },{
-      title: 'جلسهٔ چهارم',
-      description: 'در جلسهٔ نخست به مدت ۱۰ دقیقه شما فرآیند خلسه را تمرین خواهید نمود.'
-    },{
-      title: 'جلسهٔ نهایی',
-      description: 'در جلسهٔ نخست به مدت ۱۰ دقیقه شما فرآیند خلسه را تمرین خواهید نمود.'
-    }];
-    for (var i = 0; i < sessionsInfo.length; i++) {
-      cards.push(
-        <Card style={[styles.card,styles.rtl]} key={i}>
-          <CardTitle>
-            <Text style={[styles.title,styles.rtl]}>{sessionsInfo[i].title}</Text>
-          </CardTitle>
-          <CardContent>
-            <Text style={[styles.content,styles.rtl]}>{sessionsInfo[i].description}</Text>
-          </CardContent>
-          <CardAction >
-            <Button
-              color="#841584"
-              type="positive"
-              containerStyle={styles.buttonContainer}
-              onPress={() => this.openPlayer()}>
-            <Icon name='control-play' size={30} color='rgb(255,255,255)'
-            />
-            </Button>
-          </CardAction>
-        </Card>
-      );
-    }
+
     return (
-      <ScrollView style={styles.container}>
+      <ScrollView style={styles.container}
+        refreshControl={
+          <RefreshControl
+            refreshing={this.state.refreshing}
+            onRefresh={this._onRefresh.bind(this)}
+          />
+        }>
         <PlayerModal visible={this.state.playerIsOpen}
           closePlayerCallback={this.closePlayer}></PlayerModal>
         <Text style={[styles.header,,styles.rtl]}>
           لیست جلسه‌ها به شرح زیر است!
         </Text>
 
-        {cards}
+        {this.state.cards}
 
       </ScrollView>
     );
