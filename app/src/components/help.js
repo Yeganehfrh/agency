@@ -15,13 +15,20 @@ import {
 import Button from 'react-native-flat-button';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 
-export default class Help extends Component {
+export default class HelpScreen extends Component {
+
+  static navigationOptions = {
+    tabBarLabel: 'راهنما',
+    tabBarIcon: ({ focused, tintColor }) => (
+      <Icon name="question" size={26} color={ focused ? 'rgb(0,0,0)' : 'rgb(204,204,204)'}/>
+    ),
+  };
+
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.content}>
-          <Text style={styles.title}>درباره</Text>{'\n'}
-          
+        <Text style={[styles.content,styles.rtl]}>
+          <Text style={[styles.title,styles.rtl]}>راهنمای استفاده</Text>{'\n'}
           این یک متن معمولی است.
         </Text>
         <View style={styles.aboutButtonContainer}>
@@ -29,8 +36,8 @@ export default class Help extends Component {
             color="#841584"
             type="neutral"
             containerStyle={styles.aboutButton}
-            onPress={() => (alert('Not implemented'))}>
-              دربارهٔ ما
+            onPress={() => this.props.navigation.navigate('About')}>
+              <Text style={styles.rtl}>دربارهٔ ما</Text>
             </Button>
           </View>
       </View>
@@ -53,21 +60,18 @@ const styles = StyleSheet.create({
     width: 100,
     height: 50
   },
+  rtl: {
+    fontFamily: 'Samim'
+  },
   content: {
     fontSize: 16,
     textAlign: 'left',
     margin: 10,
     marginTop: 30,
-    fontFamily: 'Samim'
   },
   title: {
     fontWeight: 'bold',
     fontSize: 24
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-    fontFamily: 'Samim'
-  },
+  }
+
 });

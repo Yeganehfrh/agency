@@ -58,26 +58,26 @@ export default class PlayerModal extends Component {
           >
          <View style={{marginTop: 22}}
           style={styles.modal}>
-           <Text>Hello</Text>
+           <Text style={styles.rtl}>لطفن از هدفون استفاده کنید.</Text>
            <Button
              color="#841584"
              type="positive"
              containerStyle={styles.buttonContainer}
              onPress={() => this._handlePlaySound()}>
-             Play Sound
+             <Text style={styles.rtl}>پخش صوت</Text>
            </Button>
            <Button
              color="#841584"
              type="negative"
              containerStyle={styles.buttonContainer}
              onPress={() => this._handleStopSound()}>
-             Stop Sound
+             <Text style={styles.rtl}>توقف پخش</Text>
            </Button>
            <Button
             type="positive"
             onPress={() => this.close()}
             containerStyle={styles.buttonContainer}>
-            Close
+             <Text style={styles.rtl}>بازگشت</Text>
           </Button>
          </View>
         </Modal>
@@ -96,6 +96,9 @@ const styles = StyleSheet.create({
     width: 200,
     height: 50,
     marginVertical: 5
+  },
+  rtl: {
+    fontFamily: 'Samim'
   },
   welcome: {
     fontSize: 20,

@@ -11,6 +11,7 @@ import Button from 'react-native-flat-button';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 
 import PlayerModal from './player';
+
 import {
   Card,
   CardImage,
@@ -19,8 +20,14 @@ import {
   CardAction
 } from 'react-native-card-view';
 
-export default class Sessions extends Component {
+export default class SessionsScreen extends Component {
 
+  static navigationOptions = {
+    tabBarLabel: 'جلسه‌ها',
+    tabBarIcon: ({ focused, tintColor }) => (
+      <Icon name="earphones" size={32} color={ focused ? 'rgb(0,0,0)' : 'rgb(204,204,204)'}/>
+    ),
+  };
 
   constructor(props) {
     super(props);
@@ -58,12 +65,12 @@ export default class Sessions extends Component {
     }];
     for (var i = 0; i < sessionsInfo.length; i++) {
       cards.push(
-        <Card style={styles.card} key={i}>
+        <Card style={[styles.card,styles.rtl]} key={i}>
           <CardTitle>
-            <Text style={styles.title}>{sessionsInfo[i].title}</Text>
+            <Text style={[styles.title,styles.rtl]}>{sessionsInfo[i].title}</Text>
           </CardTitle>
           <CardContent>
-            <Text style={styles.contentText}>{sessionsInfo[i].description}</Text>
+            <Text style={[styles.content,styles.rtl]}>{sessionsInfo[i].description}</Text>
           </CardContent>
           <CardAction >
             <Button
@@ -82,7 +89,7 @@ export default class Sessions extends Component {
       <ScrollView style={styles.container}>
         <PlayerModal visible={this.state.playerIsOpen}
           closePlayerCallback={this.closePlayer}></PlayerModal>
-        <Text style={styles.header}>
+        <Text style={[styles.header,,styles.rtl]}>
           لیست جلسه‌ها به شرح زیر است!
         </Text>
 
@@ -105,25 +112,23 @@ const styles = StyleSheet.create({
   },
   header: {
     fontSize: 20,
-    fontFamily: 'Samim',
     textAlign: 'center',
     margin: 10,
   },
   title: {
     fontSize: 24,
-    fontFamily: 'Samim',
     backgroundColor: 'transparent'
   },
-  contentText: {
-    fontFamily: "Samim",
+  content: {
     textAlign: "left"
   },
   button: {
-    fontFamily: "Samim",
     marginRight: 10
   },
+  rtl: {
+    fontFamily: 'Samim'
+  },
   card: {
-    fontFamily: 'Samim',
     flex: 1,
     alignSelf: 'stretch'
   }

@@ -12,17 +12,27 @@ import {
   View
 } from 'react-native';
 
+import Button from 'react-native-flat-button';
+
 export default class AboutScreen extends Component {
   static navigationOptions = {
     title: 'درباره',
+    tabBarVisible: true
   };
   render() {
     const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
+        <Text style={styles.content}>
           درباره
         </Text>
+        <Button
+            color="#841584"
+            type="neutral"
+            containerStyle={styles.button}
+            onPress={() => this.props.navigation.navigate('Help')}>
+              بازگشت
+            </Button>
       </View>
     );
   }
@@ -35,7 +45,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#FCFCFC',
   },
-  welcome: {
+  content: {
     fontSize: 20,
     textAlign: 'center',
     margin: 10,
