@@ -12,12 +12,16 @@ import {
   View
 } from 'react-native';
 
-export default class Help extends Component {
+export default class AboutScreen extends Component {
+  static navigationOptions = {
+    title: 'درباره',
+  };
   render() {
+    const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
-          About
+          درباره
         </Text>
       </View>
     );
@@ -29,7 +33,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#FCFCFC',
   },
   welcome: {
     fontSize: 20,
