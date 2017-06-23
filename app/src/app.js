@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {
   AppRegistry,
-  StyleSheet,
   Text,
   View,
   I18nManager,
@@ -12,6 +11,8 @@ import {
   StackNavigator
 } from 'react-navigation';
 
+import Storage from 'react-native-storage';
+import { AsyncStorage } from 'react-native';
 
 //import ScrollableTabView from 'react-native-scrollable-tab-view';
 
@@ -19,6 +20,7 @@ import HomeScreen from './components/home';
 import HelpScreen from './components/help';
 import SessionsScreen from './components/sessions';
 import AboutScreen from './components/about.js';
+import PlayerScreen from './components/player.js';
 
 //import IconTabBar from './components/icontabbar';
 
@@ -56,6 +58,17 @@ const AppTabNavigator = TabNavigator({
   },
 });
 
+const HypnosisApp = StackNavigator({
+  Tabs: { screen: AppTabNavigator },  
+  About: { screen: AboutScreen },
+  Player: { screen: PlayerScreen }
+
+},{
+  initialRouteName: 'Tabs',
+  headerMode: 'none',
+  mode: 'modal'
+});
+
 I18nManager.allowRTL(true);
 I18nManager.forceRTL(true);
 
@@ -80,27 +93,7 @@ export default class HypnosisApp extends Component {
   }
 }
 */
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#FCFCFC',
-  },
-  tab: {
-    fontFamily: 'Samim'
-  }
-});
 
-const HypnosisApp = StackNavigator({
-  Tabs: { screen: AppTabNavigator },  
-  About: { screen: AboutScreen },
-
-},{
-  initialRouteName: 'Tabs',
-  headerMode: 'none'
-});
-
-import Storage from 'react-native-storage';
-import { AsyncStorage } from 'react-native';
 
 global.storage = new Storage({
 	// maximum capacity, default 1000 
@@ -149,6 +142,5 @@ loadDefaultSessions = function() {
     },
   });
 }
-
 
 AppRegistry.registerComponent('HypnosisApp', () => HypnosisApp);

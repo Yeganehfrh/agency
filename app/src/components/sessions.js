@@ -33,13 +33,11 @@ export default class SessionsScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      playerIsOpen: false,
       sessionsInfo: [],
       refreshing: false,
       cards: []
     }
     this.reloadSessions = this.reloadSessions.bind(this);
-    this.closePlayer = this.closePlayer.bind(this);
     this.openPlayer = this.openPlayer.bind(this);
     this.reloadSessions();
   }
@@ -94,11 +92,7 @@ export default class SessionsScreen extends Component {
   }
 
   openPlayer = (sessionInfo) => {
-    this.setState({playerIsOpen: true});
-  }
-
-  closePlayer = () => {
-    this.setState({playerIsOpen: false});
+    this.props.navigation.navigate('Player',{audioFile:sessionInfo.audioFile});
   }
 
   render() {
@@ -112,8 +106,6 @@ export default class SessionsScreen extends Component {
             onRefresh={this._onRefresh.bind(this)}
           />
         }>
-        <PlayerModal visible={this.state.playerIsOpen}
-          closePlayerCallback={this.closePlayer}></PlayerModal>
         <Text style={[styles.header,,styles.rtl]}>
           لیست جلسه‌ها به شرح زیر است!
         </Text>

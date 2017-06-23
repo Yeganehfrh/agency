@@ -5,7 +5,12 @@ import Button from 'react-native-flat-button';
 
 import Sound from 'react-native-sound';
 
-export default class PlayerModal extends Component {
+export default class PlayerScreen extends Component {
+
+  static navigationOptions = {
+    title: '',
+    tabBarVisible: false
+  };
 
   constructor(props, context) {
     super(props, context);
@@ -13,57 +18,52 @@ export default class PlayerModal extends Component {
       visible: props.visible
     };
     Sound.setCategory('Playback');
-    this.sessionOne = new Sound('one.mp3', Sound.MAIN_BUNDLE, (error) => {
+    // Play the sound with an onEnd callback
+    this.audio = new Sound('one.mp3', Sound.MAIN_BUNDLE, (error) => {
       if (error) {
-        console.log('Failed to load the sound', error);
+        console.warn('Failed to load the sound', error);
         return;
       }
-    })
+    });
   }
 
   componentWillReceiveProps(nextProps) {
     this.setState({visible: nextProps.visible})
   }
 
-  _handlePlaySound() {
-    // Play the sound with an onEnd callback
-    this.sessionOne.play((success) => {
+  _handlePlaySound(audioFile) {
+
+    this.audio.play((success) => {
       if (success) {
-        console.log('successfully finished playing');
+        console.warn('successfully finished playing');
       } else {
-        console.log('playback failed due to audio decoding errors');
+        console.warn('playback failed due to audio decoding errors');
       }
     });
-    console.log('Playing one!');
+    console.warn('Playing one!');
   }
 
   _handleStopSound() {
-    this.sessionOne.stop((success) => {
+    this.audio.stop((success) => {
 
     });
   }
 
   close() {
     this._handleStopSound();
-    this.setState({visible: false});
-    this.props.closePlayerCallback();
+    this.props.navigation.navigate('Sessions');
   }
 
   render() {
+    var audioFile = this.props.navigation.state.params.audioFile;
     return (
-        <Modal
-          animationType={"slide"}
-          transparent={false}
-          visible={this.state.visible}
-          >
-         <View style={{marginTop: 22}}
-          style={styles.modal}>
+         <View style={styles.modal}>
            <Text style={styles.rtl}>لطفن از هدفون استفاده کنید.</Text>
            <Button
              color="#841584"
              type="positive"
              containerStyle={styles.buttonContainer}
-             onPress={() => this._handlePlaySound()}>
+             onPress={() => this._handlePlaySound(audioFile)}>
              <Text style={styles.rtl}>پخش صوت</Text>
            </Button>
            <Button
@@ -80,7 +80,6 @@ export default class PlayerModal extends Component {
              <Text style={styles.rtl}>بازگشت</Text>
           </Button>
          </View>
-        </Modal>
     );
   }
 }
@@ -88,6 +87,7 @@ export default class PlayerModal extends Component {
 const styles = StyleSheet.create({
   modal: {
     flex: 1,
+    paddingTop: 22,
     justifyContent: 'center',
     alignItems: 'center',
     //backgroundColor: '#F5FCFF',
