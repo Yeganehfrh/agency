@@ -21,8 +21,8 @@ export default class HomeScreen extends Component {
 
   render() {
     //TODO improve charting
-    const progress = [123, 321, 123, 789, 537]
-    const sliceColor = ['#F44336','#2196F3','#FFEB3B', '#4CAF50', '#FF9800']
+    const progress = [123, 23, 200]
+    const sliceColor = ['#FCFCFC','#2196F3','#0568AA']
 
     return (
       <ScrollView style={styles.container}>

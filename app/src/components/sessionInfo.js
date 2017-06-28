@@ -15,7 +15,6 @@ export default class SessionInfoScreen extends Component {
   };
   
   openPlayer(audioFile) {
-    console.warn("[1.5]",audioFile)
     this.props.navigation.navigate('Player',{audioFile: audioFile});
   }
 
@@ -25,18 +24,19 @@ export default class SessionInfoScreen extends Component {
 
   render() {
     var audioFile = this.props.navigation.state.params.session.audioFile;
+    var instructions = this.props.navigation.state.params.session.instructions;
+
     return (
       <View style={styles.container}>
-        <Text style={styles.content}>
-          این یک متن مهم دربارهٔ جلسه است.
+        <Text style={[styles.content,styles.rtl]}>
+          {instructions}
         </Text>
         <Button
-            color="#841584"
-            type="neutral"
-            containerStyle={styles.button}
-            onPress={() => this.openPlayer(audioFile)}>
-              شروع جلسه
-            </Button>
+          type="positive"
+          containerStyle={styles.button}
+          onPress={() => this.openPlayer(audioFile)}>
+          <Text style={styles.rtl}>شروع</Text>
+        </Button>
       </View>
     );
   }
@@ -51,12 +51,19 @@ const styles = StyleSheet.create({
   },
   content: {
     fontSize: 20,
-    textAlign: 'center',
+    textAlign: 'left',
     margin: 10,
   },
   instructions: {
     textAlign: 'center',
     color: '#333333',
     marginBottom: 5,
+  },
+  rtl: {
+    fontFamily: 'Samim'
+  },
+  button: {
+    width: 100,
+    height: 50
   },
 });

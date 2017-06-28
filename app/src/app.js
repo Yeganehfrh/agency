@@ -116,7 +116,8 @@ var defaultSessions = {
       sessions: [{
         audioFile: 'one.mp3',
         id: 100,
-        title: 's و آشنایی',
+        title: 'آشنایی با هیپنوتیزم',
+        instructions: 'لطفن در مکانی آرام و با هدفون به این صورت گوش دهید.',
         description: 'در این جلسه شما با مفاهیم هیپنوتیزم و تلقین آشنا می‌شوید. هم‌چنین راهنمای ادامهٔ کار در این جلسه ارائه می‌شود.'
       },{
         audioFile: 'eye_closure_yeg_part1.mp3',
