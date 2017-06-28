@@ -21,6 +21,8 @@ import HelpScreen from './components/help';
 import SessionsScreen from './components/sessions';
 import AboutScreen from './components/about.js';
 import PlayerScreen from './components/player.js';
+import QuestionsScreen from './components/questions';
+import SessionInfoScreen from './components/sessionInfo.js';
 
 //import IconTabBar from './components/icontabbar';
 
@@ -61,8 +63,9 @@ const AppTabNavigator = TabNavigator({
 const HypnosisApp = StackNavigator({
   Tabs: { screen: AppTabNavigator },  
   About: { screen: AboutScreen },
-  Player: { screen: PlayerScreen }
-
+  Player: { screen: PlayerScreen },
+  SessionInfo: { screen: SessionInfoScreen },
+  Questions: { screen: QuestionsScreen }
 },{
   initialRouteName: 'Tabs',
   headerMode: 'none',
@@ -99,29 +102,26 @@ global.storage = new Storage({
 	// maximum capacity, default 1000 
 	size: 1000,
 	storageBackend: AsyncStorage,
+  enableCache: false,
 	defaultExpires: null,
 	sync : {
     sessions(params){
-      loadDefaultSessions();
+      loadDefaultSessions(params);
     }
 	}
 })
 
-loadDefaultSessions = function() {
-  global.storage.remove({key:'sessions'});
-  global.storage.save({
-    key: 'sessions',
-    data: { 
+var defaultSessions = { 
       timestamp: '234342323',
       sessions: [{
         audioFile: 'one.mp3',
         id: 100,
-        title: 'آماده‌سازی و آشنایی',
+        title: 's و آشنایی',
         description: 'در این جلسه شما با مفاهیم هیپنوتیزم و تلقین آشنا می‌شوید. هم‌چنین راهنمای ادامهٔ کار در این جلسه ارائه می‌شود.'
       },{
-        audioFile: 'one.mp3',
+        audioFile: 'eye_closure_yeg_part1.mp3',
         id: 101,
-        title: 'جلسهٔ نخست',
+        title: 'جلسهٔ اول',
         description: 'در جلسهٔ نخست به مدت ۱۰ دقیقه شما فرآیند خلسه را تمرین خواهید نمود.'
       },{
         audioFile: 'one.mp3',
@@ -139,8 +139,16 @@ loadDefaultSessions = function() {
         title: 'جلسهٔ نهایی',
         description: 'در جلسهٔ نخست به مدت ۱۰ دقیقه شما فرآیند خلسه را تمرین خواهید نمود.'
       }]
-    },
+    };
+
+loadDefaultSessions = function(params) {
+  //global.storage.remove({key:'sessions'});
+  global.storage.save({
+    key: 'sessions',
+    data: defaultSessions
   });
+  params.resolve(defaultSessions);
+
 }
 
 AppRegistry.registerComponent('HypnosisApp', () => HypnosisApp);

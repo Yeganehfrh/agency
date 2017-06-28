@@ -14,21 +14,18 @@ export default class PlayerScreen extends Component {
 
   constructor(props, context) {
     super(props, context);
-    this.state = {
-      visible: props.visible
-    };
+
     Sound.setCategory('Playback');
+
+    var audioFile = props.navigation.state.params.audioFile;
+
     // Play the sound with an onEnd callback
-    this.audio = new Sound('one.mp3', Sound.MAIN_BUNDLE, (error) => {
+    this.audio = new Sound(audioFile, Sound.MAIN_BUNDLE, (error) => {
       if (error) {
         console.warn('Failed to load the sound', error);
         return;
       }
     });
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState({visible: nextProps.visible})
   }
 
   _handlePlaySound(audioFile) {
@@ -40,7 +37,7 @@ export default class PlayerScreen extends Component {
         console.warn('playback failed due to audio decoding errors');
       }
     });
-    console.warn('Playing one!');
+
   }
 
   _handleStopSound() {

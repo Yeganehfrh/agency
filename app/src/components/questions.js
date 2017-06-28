@@ -8,7 +8,7 @@ import {
 
 import Button from 'react-native-flat-button';
 
-export default class AboutScreen extends Component {
+export default class QuestionsScreen extends Component {
   static navigationOptions = {
     title: 'درباره',
     tabBarVisible: true

@@ -8,24 +8,34 @@ import {
 
 import Button from 'react-native-flat-button';
 
-export default class AboutScreen extends Component {
+export default class SessionInfoScreen extends Component {
   static navigationOptions = {
     title: 'درباره',
-    tabBarVisible: true
+    tabBarVisible: false
   };
+  
+  openPlayer(audioFile) {
+    console.warn("[1.5]",audioFile)
+    this.props.navigation.navigate('Player',{audioFile: audioFile});
+  }
+
+  close() {
+    this.props.navigation.navigate('Sessions');
+  }
+
   render() {
-    const { navigate } = this.props.navigation;
+    var audioFile = this.props.navigation.state.params.session.audioFile;
     return (
       <View style={styles.container}>
         <Text style={styles.content}>
-          درباره
+          این یک متن مهم دربارهٔ جلسه است.
         </Text>
         <Button
             color="#841584"
             type="neutral"
             containerStyle={styles.button}
-            onPress={() => this.props.navigation.navigate('Help')}>
-              بازگشت
+            onPress={() => this.openPlayer(audioFile)}>
+              شروع جلسه
             </Button>
       </View>
     );

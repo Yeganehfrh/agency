@@ -5,21 +5,20 @@ import {
   Text,
   View,
   ScrollView,
-  RefreshControl
+  RefreshControl,
 } from 'react-native';
-
-import Button from 'react-native-flat-button';
-import Icon from 'react-native-vector-icons/SimpleLineIcons';
-
-import PlayerModal from './player';
 
 import {
   Card,
-  CardImage,
-  CardTitle,
+  CardAction,
   CardContent,
-  CardAction
+  CardTitle
 } from 'react-native-card-view';
+
+import FlatButton from 'react-native-flat-button';
+import Icon from 'react-native-vector-icons/SimpleLineIcons';
+
+import Button from 'react-native-button';
 
 export default class SessionsScreen extends Component {
 
@@ -38,48 +37,55 @@ export default class SessionsScreen extends Component {
       cards: []
     }
     this.reloadSessions = this.reloadSessions.bind(this);
-    this.openPlayer = this.openPlayer.bind(this);
-    this.reloadSessions();
+    this.openSession = this.openSession.bind(this);
+    this.reloadSessions(true);//DEBUG
   }
 
   reloadSessions = (forceReload) => {
+
+    global.storage.getAllDataForKey('sessions').then(all => {
+    console.log(all);
+});
     if (forceReload) {
       global.storage.remove({key:'sessions'});
     }
 
     self = this;
     global.storage.load({
-      key: 'sessions'
+      key: 'sessions',
+      autoSync: true
     }).then(ret => {
       this.setState({sessionInfo: ret.sessions});
       var cards = [];
 
+
       ret.sessions.map( function(item) {
         cards.push(
-          <Card style={[styles.card,styles.rtl]} key={item.id}>
+
+          <Card styles={{card: {flex: 1}}} key={item.id}>
             <CardTitle>
-              <Text style={[styles.title,styles.rtl]}>{item.title}</Text>
+              <Text style={[styles.title,styles.rtl]}>{item.title}    </Text>
             </CardTitle>
             <CardContent>
               <Text style={[styles.content,styles.rtl]}>{item.description}</Text>
             </CardContent>
-            <CardAction >
-              <Button
-                color="#841584"
-                type="positive"
-                containerStyle={styles.buttonContainer}
-                onPress={() => self.openPlayer(item)}>
-              <Icon name='control-play' size={30} color='rgb(255,255,255)'
-              />
-              </Button>
+            <CardAction>
+
+                <FlatButton
+                  color="#841584"
+                  type="positive"
+                  containerStyle={styles.playButton}
+                  onPress={() => self.openSession(item)}>
+                  <Icon name='control-play' size={30} color='rgb(255,255,255)'/>
+                </FlatButton>
+
             </CardAction>
           </Card>
         );
       });
       this.setState({cards: cards});
-
     }).catch(err => {
-      console.warn(err.message);
+      console.error(err);
     });
   }
 
@@ -91,8 +97,8 @@ export default class SessionsScreen extends Component {
 
   }
 
-  openPlayer = (sessionInfo) => {
-    this.props.navigation.navigate('Player',{audioFile:sessionInfo.audioFile});
+  openSession = (sessionInfo) => {
+    this.props.navigation.navigate('SessionInfo',{session: sessionInfo});
   }
 
   render() {
@@ -109,9 +115,9 @@ export default class SessionsScreen extends Component {
         <Text style={[styles.header,,styles.rtl]}>
           لیست جلسه‌ها به شرح زیر است!
         </Text>
-
+        <View style={{flex: 1}}>
         {this.state.cards}
-
+        </View>
       </ScrollView>
     );
   }
@@ -123,9 +129,12 @@ const styles = StyleSheet.create({
     paddingTop: 30
     //backgroundColor: '#F5FCFF',
   },
-  buttonContainer: {
-    width: 80,
-    height: 50
+  playButton: {
+    height: 50,
+    width: 90
+  },
+  infoButton: {
+    color: 'red'
   },
   header: {
     fontSize: 20,
@@ -147,6 +156,7 @@ const styles = StyleSheet.create({
   },
   card: {
     flex: 1,
+    backgroundColor: 'red',
     alignSelf: 'stretch'
   }
 });
