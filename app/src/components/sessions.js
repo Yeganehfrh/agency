@@ -38,14 +38,11 @@ export default class SessionsScreen extends Component {
     }
     this.reloadSessions = this.reloadSessions.bind(this);
     this.openSession = this.openSession.bind(this);
-    this.reloadSessions(true);//DEBUG
+    this.reloadSessions(false);
   }
 
   reloadSessions = (forceReload) => {
 
-    global.storage.getAllDataForKey('sessions').then(all => {
-    console.log(all);
-});
     if (forceReload) {
       global.storage.remove({key:'sessions'});
     }
@@ -64,7 +61,7 @@ export default class SessionsScreen extends Component {
 
           <Card styles={{card: {flex: 1}}} key={item.id}>
             <CardTitle>
-              <Text style={[styles.title,styles.rtl]}>{item.title}    </Text>
+              <Text style={[styles.title,styles.rtl]}>{item.title}</Text>
             </CardTitle>
             <CardContent>
               <Text style={[styles.content,styles.rtl]}>{item.description}</Text>
@@ -76,7 +73,7 @@ export default class SessionsScreen extends Component {
                   type="positive"
                   containerStyle={styles.playButton}
                   onPress={() => self.openSession(item)}>
-                  <Icon name='control-play' size={30} color='rgb(255,255,255)'/>
+                  <Text style={[styles.playButtonText, styles.rtl]}>شروع</Text>
                 </FlatButton>
 
             </CardAction>
@@ -92,7 +89,7 @@ export default class SessionsScreen extends Component {
   _onRefresh = () => {
     this.setState({refreshing: true});
     this.setState({cards: []});
-    this.reloadSessions(false);
+    this.reloadSessions(true);
     this.setState({refreshing: false});
 
   }
@@ -112,8 +109,8 @@ export default class SessionsScreen extends Component {
             onRefresh={this._onRefresh.bind(this)}
           />
         }>
-        <Text style={[styles.header,,styles.rtl]}>
-          لیست جلسه‌ها به شرح زیر است!
+        <Text style={[styles.instructions, styles.rtl]}>
+با گوش دادن به جلسه‌های موجود و کسب امتیاز، جلسه‌های قفل‌شده به رایگان برایتان قابل دسترس می‌شود.
         </Text>
         <View style={{flex: 1}}>
         {this.state.cards}
@@ -136,6 +133,9 @@ const styles = StyleSheet.create({
   infoButton: {
     color: 'red'
   },
+  playButtonText: {
+    fontSize: 18
+  },
   header: {
     fontSize: 20,
     textAlign: 'center',
@@ -146,7 +146,14 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent'
   },
   content: {
-    textAlign: "left"
+    textAlign: "left",
+    paddingLeft: 10,
+    fontSize: 16
+  },
+  instructions: {
+    margin: 10,
+    textAlign: "left",
+    fontSize: 14
   },
   button: {
     marginRight: 10

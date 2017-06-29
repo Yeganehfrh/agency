@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Modal, Text, StyleSheet, View } from 'react-native';
+import { Text, StyleSheet, View } from 'react-native';
 
-import Button from 'react-native-flat-button';
+import Button from 'react-native-button';
+import FlatButton from 'react-native-flat-button';
 
 import Sound from 'react-native-sound';
 
@@ -54,27 +55,27 @@ export default class PlayerScreen extends Component {
   render() {
     var audioFile = this.props.navigation.state.params.audioFile;
     return (
-         <View style={styles.modal}>
+         <View style={[styles.modal]}>
            <Text style={styles.rtl}>لطفن از هدفون استفاده کنید.</Text>
-           <Button
+           <FlatButton
              color="#841584"
              type="positive"
              containerStyle={styles.buttonContainer}
              onPress={() => this._handlePlaySound(audioFile)}>
              <Text style={styles.rtl}>پخش صوت</Text>
-           </Button>
-           <Button
+           </FlatButton>
+           <FlatButton
              color="#841584"
              type="negative"
              containerStyle={styles.buttonContainer}
              onPress={() => this._handleStopSound()}>
              <Text style={styles.rtl}>توقف پخش</Text>
-           </Button>
-           <Button
-            type="positive"
-            onPress={() => this.close()}
-            containerStyle={styles.buttonContainer}>
-             <Text style={styles.rtl}>بازگشت</Text>
+           </FlatButton>
+          <Button
+            style={[styles.rtl,{paddingTop: 30, fontSize: 20, color: 'grey'}]}
+            styleDisabled={{color: 'grey'}}
+            onPress={() => this.close()}>
+            بازگشت
           </Button>
          </View>
     );

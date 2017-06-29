@@ -35,7 +35,7 @@ export default class SessionInfoScreen extends Component {
           type="positive"
           containerStyle={styles.button}
           onPress={() => this.openPlayer(audioFile)}>
-          <Text style={styles.rtl}>شروع</Text>
+          <Text style={styles.rtl}>ادامه</Text>
         </Button>
       </View>
     );
