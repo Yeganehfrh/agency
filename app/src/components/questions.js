@@ -1,52 +1,87 @@
 import React, { Component } from 'react';
 import {
   AppRegistry,
-  StyleSheet,
   Text,
-  View
+  View,
+  ScrollView,
+  Picker
 } from 'react-native';
 
-import Button from 'react-native-flat-button';
+import surveys from '../surveys.default';
+
+import styles from '../styles';
+
+import FlatButton from 'react-native-flat-button';
 
 export default class QuestionsScreen extends Component {
   static navigationOptions = {
     title: 'درباره',
     tabBarVisible: true
   };
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      questions: props.navigation.state.params.survey.questions,
+      survey: props.navigation.state.params.survey,
+      session: props.navigation.state.params.session
+    }
+    
+    this.loadQuesions = this.loadQuesions.bind(this);
+    this.loadQuesions(false);
+  }
+
+  loadQuesions = (forceReload) => {
+  }
+
+  continue = () => {
+    this.props.navigation.navigate('SessionInfo',{session: this.state.session})
+  }
+
+  renderOptions = (opt) => {
+    return(
+        <Picker.Item label={opt.label} value={opt.value} key={opt.value} />
+    )
+  }
+
+  renderQuestion = (question) => {
+    return(
+        <View style={styles.container} key={question.id}>
+            <Text style={styles.questionText}>{question.content}</Text>
+            <Picker selectedValue={2}
+              itemStyle={styles.rtl}>
+              {question.options.map(this.renderOptions)}
+            </Picker>
+        </View>
+    );
+  }
+
   render() {
     const { navigate } = this.props.navigation;
     return (
-      <View style={styles.container}>
-        <Text style={styles.content}>
-          درباره
+      <ScrollView style={styles.container}>
+        <Text style={[styles.instructions, styles.rtl]}>
+          پرسش‌ها
         </Text>
-        <Button
-            color="#841584"
-            type="neutral"
-            containerStyle={styles.button}
-            onPress={() => this.props.navigation.navigate('Help')}>
-              بازگشت
-            </Button>
-      </View>
+
+        {this.state.questions.map(this.renderQuestion)}
+
+        <View style={styles.questionsButtonContainer}>
+          <FlatButton
+              type="neutral"
+              containerStyle={[styles.button]}
+              onPress={() => this.props.navigation.navigate('Sessions')}>
+                <Text style={styles.rtl}>بازگشت</Text>
+          </FlatButton>
+          <FlatButton
+              type="positive"
+              containerStyle={[styles.button]}
+              onPress={() => this.continue()}>
+                <Text style={styles.rtl}>ادامه</Text>
+          </FlatButton>
+          </View>
+      </ScrollView>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#FCFCFC',
-  },
-  content: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});

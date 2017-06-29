@@ -60,20 +60,19 @@ export default class PlayerScreen extends Component {
     var audioFile = this.props.navigation.state.params.audioFile;
     return (
          <View style={[styles.modal]}>
-           <Text style={styles.rtl}>لطفن از هدفون استفاده کنید.</Text>
+           <Text style={[styles.rtl, styles.instructions]}>لطفاً از هدفون استفاده کنید.</Text>
+           <View style={{justifyContent: 'space-around', alignItems:'center', flex:1, flexDirection: 'row'}}>
            <FlatButton
-             color="#841584"
-             type="positive"
-             containerStyle={styles.buttonContainer}
-             onPress={() => this._handlePlaySound(audioFile)}>
-             <Text style={styles.rtl}>پخش صوت</Text>
+             type="negative"
+             containerStyle={styles.playerButtonContainer}
+             onPress={() => this._handleStopSound()}>
+             <Icon name='control-pause' color='white' size={30} />
            </FlatButton>
            <FlatButton
-             color="#841584"
-             type="negative"
-             containerStyle={styles.buttonContainer}
-             onPress={() => this._handleStopSound()}>
-             <Text style={styles.rtl}>توقف پخش</Text>
+             type="positive"
+             containerStyle={styles.playerButtonContainer}
+             onPress={() => this._handlePlaySound(audioFile)}>
+             <Icon name='control-play' color='white' size={30} />
            </FlatButton>
            <ActionButton
              hideShadow={true}
@@ -82,6 +81,7 @@ export default class PlayerScreen extends Component {
              icon={<Icon name='close' color='grey' size={25} />}
              onPress={() => this.close()}>
            </ActionButton>
+           </View>
          </View>
 
     );

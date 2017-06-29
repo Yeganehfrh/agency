@@ -15,6 +15,8 @@ import {
   CardTitle
 } from 'react-native-card-view';
 
+import surveys from '../surveys.default';
+
 import FlatButton from 'react-native-flat-button';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 
@@ -32,13 +34,37 @@ export default class SessionsScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      sessionsInfo: [],
-      refreshing: false,
-      cards: []
+      sessions: [],
+      refreshing: false
     }
     this.reloadSessions = this.reloadSessions.bind(this);
     this.openSession = this.openSession.bind(this);
     this.reloadSessions(false);
+  }
+
+  renderCard = (session) => {
+    self = this;
+    return(
+      <Card styles={{card: {flex: 1}}} key={session.id}>
+        <CardTitle>
+          <Text style={[styles.title,styles.rtl]}>{session.title}</Text>
+        </CardTitle>
+        <CardContent>
+          <Text style={[styles.content,styles.rtl]}>{session.description}</Text>
+        </CardContent>
+        
+        <CardAction>
+          <FlatButton
+            color="#841584"
+            type="positive"
+            containerStyle={styles.playButton}
+            onPress={() => self.openSession(session)}>
+              <Text style={[styles.playButtonText, styles.rtl]}>شروع</Text>
+          </FlatButton>
+
+        </CardAction>
+      </Card>
+    );
   }
 
   reloadSessions = (forceReload) => {
@@ -52,35 +78,7 @@ export default class SessionsScreen extends Component {
       key: 'sessions',
       autoSync: true
     }).then(ret => {
-      this.setState({sessionInfo: ret.sessions});
-      var cards = [];
-
-
-      ret.sessions.map( function(item) {
-        cards.push(
-
-          <Card styles={{card: {flex: 1}}} key={item.id}>
-            <CardTitle>
-              <Text style={[styles.title,styles.rtl]}>{item.title}</Text>
-            </CardTitle>
-            <CardContent>
-              <Text style={[styles.content,styles.rtl]}>{item.description}</Text>
-            </CardContent>
-            <CardAction>
-
-                <FlatButton
-                  color="#841584"
-                  type="positive"
-                  containerStyle={styles.playButton}
-                  onPress={() => self.openSession(item)}>
-                  <Text style={[styles.playButtonText, styles.rtl]}>شروع</Text>
-                </FlatButton>
-
-            </CardAction>
-          </Card>
-        );
-      });
-      this.setState({cards: cards});
+      this.setState({sessions: ret.sessions});
     }).catch(err => {
       console.error(err);
     });
@@ -88,18 +86,19 @@ export default class SessionsScreen extends Component {
 
   _onRefresh = () => {
     this.setState({refreshing: true});
-    this.setState({cards: []});
+    this.setState({sessions: []});
     this.reloadSessions(true);
     this.setState({refreshing: false});
 
   }
 
-  openSession = (sessionInfo) => {
-    this.props.navigation.navigate('SessionInfo',{session: sessionInfo});
+  openSession = (session) => {
+    var id = session.id;
+    var survey = surveys[0];
+    this.props.navigation.navigate('Questions',{survey: survey, session: session});
   }
 
   render() {
-    var cards = [];
 
     return (
       <ScrollView style={styles.container}
@@ -113,7 +112,7 @@ export default class SessionsScreen extends Component {
 با گوش دادن به جلسه‌های موجود و کسب امتیاز، جلسه‌های قفل‌شده به رایگان برایتان قابل دسترس می‌شود.
         </Text>
         <View style={{flex: 1}}>
-        {this.state.cards}
+          {this.state.sessions.map(this.renderCard)}
         </View>
       </ScrollView>
     );

@@ -8,10 +8,31 @@ export default styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#FCFCFC'
   },
-  buttonContainer: {
-    width: 200,
+  playerButtonContainer: {
+    width: 60,
+    height: 60,
+    margin: 10
+  },
+  questionsButtonContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  questionText: {
+    fontFamily: 'Samim',
+    fontSize: 18,
+    padding: 20,
+    textAlign: 'left'
+  },
+
+  container: {
+    flex: 1
+  },
+  button: {
+    width: 100,
     height: 50,
-    marginVertical: 5
+    margin: 30
   },
   rtl: {
     fontFamily: 'Samim'
@@ -34,5 +55,6 @@ export default styles = StyleSheet.create({
     textAlign: 'center',
     color: '#333333',
     marginBottom: 5,
+    paddingTop: 20
   },
 });
