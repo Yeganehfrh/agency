@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
-import { Text, StyleSheet, View } from 'react-native';
+import { Text, Button, View } from 'react-native';
 
-import Button from 'react-native-button';
+import ActionButton from 'react-native-action-button';
+import styles from '../styles.js';
+
 import FlatButton from 'react-native-flat-button';
 
 import Sound from 'react-native-sound';
+
+import Icon from 'react-native-vector-icons/SimpleLineIcons';
 
 export default class PlayerScreen extends Component {
 
@@ -42,7 +46,7 @@ export default class PlayerScreen extends Component {
   }
 
   _handleStopSound() {
-    this.audio.stop((success) => {
+    this.audio.pause((success) => {
 
     });
   }
@@ -71,41 +75,16 @@ export default class PlayerScreen extends Component {
              onPress={() => this._handleStopSound()}>
              <Text style={styles.rtl}>توقف پخش</Text>
            </FlatButton>
-          <Button
-            style={[styles.rtl,{paddingTop: 30, fontSize: 20, color: 'grey'}]}
-            styleDisabled={{color: 'grey'}}
-            onPress={() => this.close()}>
-            بازگشت
-          </Button>
+           <ActionButton
+             hideShadow={true}
+             buttonColor="transparent"
+             position='center'
+             icon={<Icon name='close' color='grey' size={25} />}
+             onPress={() => this.close()}>
+           </ActionButton>
          </View>
+
     );
   }
 }
 
-const styles = StyleSheet.create({
-  modal: {
-    flex: 1,
-    paddingTop: 22,
-    justifyContent: 'center',
-    alignItems: 'center',
-    //backgroundColor: '#F5FCFF',
-  },
-  buttonContainer: {
-    width: 200,
-    height: 50,
-    marginVertical: 5
-  },
-  rtl: {
-    fontFamily: 'Samim'
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
