@@ -31,7 +31,8 @@ export default class HomeScreen extends Component {
             به هیپنوتیزمِ شناختی خوش آمدید!
           </Text>
           <Text style={[styles.content,styles.rtl]}>
-            برای شروع، به صفحهٔ جلسات مراجعه کنید.
+            شما هنوز در امتیازی کسب نکرده‌اید.{'\n'}
+            برای شروع، به صفحهٔ جلسه‌ها مراجعه کنید.
           </Text>
         </View>
         <View style={styles.chartContainer}>

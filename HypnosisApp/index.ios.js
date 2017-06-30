@@ -1,0 +1,1 @@
+import HypnosisApp from './src/app';

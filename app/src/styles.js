@@ -19,6 +19,12 @@ export default styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  aboutButtonContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   questionText: {
     fontFamily: 'Samim',
     fontSize: 18,
@@ -36,6 +42,20 @@ export default styles = StyleSheet.create({
   },
   rtl: {
     fontFamily: 'Samim'
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    padding: 20,
+    paddingTop: 30,
+    textAlign: 'left',
+    color: 'rgb(51,51,51)'
+  },
+  help: {
+    fontSize: 18,
+    textAlign: 'left',
+    padding: 10,
+    paddingLeft: 20
   },
   welcome: {
     fontSize: 20,

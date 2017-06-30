@@ -3,10 +3,8 @@ package com.hypnosis;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
-import com.cboy.rn.splashscreen.SplashScreenReactPackage;
-import com.reactnativenavigation.NavigationReactPackage;
-import com.oblador.vectoricons.VectorIconsPackage;
 import com.zmxv.RNSound.RNSoundPackage;
+import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -27,10 +25,8 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new SplashScreenReactPackage(),
-            new NavigationReactPackage(),
-            new VectorIconsPackage(),
-            new RNSoundPackage()
+            new RNSoundPackage(),
+            new VectorIconsPackage()
       );
     }
   };

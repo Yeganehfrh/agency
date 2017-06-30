@@ -109,7 +109,7 @@ export default class SessionsScreen extends Component {
           />
         }>
         <Text style={[styles.instructions, styles.rtl]}>
-با گوش دادن به جلسه‌های موجود و کسب امتیاز، جلسه‌های قفل‌شده به رایگان برایتان قابل دسترس می‌شود.
+با گوش دادن به جلسه‌های موجود و کسب امتیاز، جلسه‌های ستاره‌دار، به رایگان برایتان قابل دسترس می‌شود.
         </Text>
         <View style={{flex: 1}}>
           {this.state.sessions.map(this.renderCard)}
