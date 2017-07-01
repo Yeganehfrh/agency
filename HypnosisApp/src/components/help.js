@@ -32,7 +32,7 @@ export default class HelpScreen extends Component {
         <Text style={[styles.help,styles.rtl]}>در صورتی که شما، حداقل ۲۰۰ امتیاز کسب کنید، می‌توانید از جوایز دیگری هم‌چون ضبط و تحلیل رایگان سیگنال‌های غیرتهاجمی انسفالوگرام استفاده کنید. این جایزه در کلینیک‌های تخصصی مغز، ارزشی مادی معادل با حداقل ۲۰۰ هزار تومان (سال ۱۳۹۶) دارد.</Text>
         
         <Text style={[styles.title,styles.rtl]}>تماس با ما</Text>
-        <Text style={[styles.help,styles.rtl]}>برای اطلاعات بیشتر به http://cog.onto.ir/hypnosis مراجعه کنید. هم‌چنین می‌توانید از طریق تلگرام (کانال @hypnosisapp) با ما مکاتبه نمایید. قدردان نظرات، پیشنهادات و انتقادات شما خواهیم بود.</Text>
+        <Text style={[styles.help,styles.rtl]}>از طریق کانال تلگرام @CognitiveHypnosis با ما مکاتبه نمایید. قدردان نظرات، پیشنهادات و انتقادات شما خواهیم بود.</Text>
         
         <View style={styles.aboutButtonContainer}>
           <Button

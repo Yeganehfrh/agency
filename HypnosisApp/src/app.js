@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import {
-  AppRegistry,
   Text,
-  View,
-  I18nManager,
+  View
 } from 'react-native';
 
 import {
@@ -64,7 +62,7 @@ const AppTabNavigator = TabNavigator({
   },
 });
 
-const HypnosisApp = StackNavigator({
+export default HypnosisApp = StackNavigator({
   Tabs: { screen: AppTabNavigator },  
   About: { screen: AboutScreen },
   Player: { screen: PlayerScreen },
@@ -75,11 +73,6 @@ const HypnosisApp = StackNavigator({
   headerMode: 'none',
   mode: 'modal'
 });
-
-I18nManager.allowRTL(true);
-I18nManager.forceRTL(true);
-
-
 
 global.storage = new Storage({
 	// maximum capacity, default 1000 
@@ -104,5 +97,3 @@ loadDefaultSessions = function(params) {
   params.resolve(defaultSessions);
 
 }
-
-AppRegistry.registerComponent('HypnosisApp', () => HypnosisApp);

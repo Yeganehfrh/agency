@@ -4,11 +4,13 @@ import {
   StyleSheet,
   Text,
   View,
-  ScrollView
+  ScrollView,
+  Dimensions
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
-import PieChart from 'react-native-pie-chart';
+
+import ProgressCircle from 'react-native-progress/Circle';
 
 export default class HomeScreen extends Component {
 
@@ -18,6 +20,14 @@ export default class HomeScreen extends Component {
       <Icon name="pie-chart" size={26} color={ focused ? 'rgb(0,0,0)' : 'rgb(204,204,204)'}/>
     ),
   };
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      progress: 0,
+      indeterminate: false,
+    };
+  }
 
   render() {
     //TODO improve charting
@@ -36,18 +46,34 @@ export default class HomeScreen extends Component {
           </Text>
         </View>
         <View style={styles.chartContainer}>
-          <Text style={[styles.header,,styles.rtl]}>نمودار پیشرفت</Text>
-          <PieChart
-            chart_wh={250}
-            series={progress}
-            sliceColor={sliceColor}
-            doughnut={true}
-            coverRadius={0.45}
-            coverFill={'#FCFCFC'}
-          />
+          <Text style={[styles.header,,styles.rtl]}>امتیاز شما</Text>
+          <ProgressCircle 
+            color="#2ecc71"
+            thickness={10}
+            direction='counter-clockwise'
+            size={Dimensions.get('window').width/2}
+            progress={this.state.progress}
+            formatText={(progress) => this.getProgressText(progress)}
+            indeterminate={this.state.indeterminate}
+            showsText={true} />
         </View>
       </ScrollView>
     );
+  }
+
+  getProgressText() {
+    return "۶۳";
+  }
+
+  updateProgress() {
+    //TODO calc progress
+    setTimeout(() => {
+      this.setState({ progress: 0.63});
+    }, 1000);
+  }
+
+  componentDidMount() {
+    this.updateProgress();
   }
 }
 
@@ -59,7 +85,10 @@ const styles = StyleSheet.create({
   },
   chartContainer: {
     justifyContent: 'center',
-    alignItems: 'center'
+    backgroundColor: '#FCFCFC',
+    alignItems: 'center',
+    flex: 1,
+    paddingTop: 20
   },
   header: {
     fontSize: 24,

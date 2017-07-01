@@ -18,7 +18,7 @@ export default class AboutScreen extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.content}>
-          درباره
+          از طریق کانال تلگرام
         </Text>
         <Button
             color="#841584"

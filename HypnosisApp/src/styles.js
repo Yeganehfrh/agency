@@ -6,7 +6,7 @@ export default styles = StyleSheet.create({
     paddingTop: 22,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#FCFCFC'
+    backgroundColor: '#fcfcfc'
   },
   playerButtonContainer: {
     width: 60,
@@ -31,9 +31,13 @@ export default styles = StyleSheet.create({
     padding: 20,
     textAlign: 'left'
   },
-
   container: {
-    flex: 1
+    flex: 1,
+  },
+  sessionInfoContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   button: {
     width: 100,
@@ -76,6 +80,12 @@ export default styles = StyleSheet.create({
     marginBottom: 5,
     paddingTop: 20
   },
+  sessionInstructions: {
+    padding: 20,
+    paddingTop: 60,
+    fontSize: 16,
+    textAlign: 'left'
+  },
   sessionsScrollView: {
     paddingBottom: 80
   },
@@ -88,7 +98,7 @@ export default styles = StyleSheet.create({
     fontFamily: 'samim'
   },
   sessionsCardContent: {
-    textAlign: "left",
+    textAlign: 'left',
     paddingLeft: 10,
     fontSize: 16
   },
@@ -100,7 +110,7 @@ export default styles = StyleSheet.create({
   sessionsTopInstructions: {
     marginTop: 20,
     marginLeft: 10,
-    textAlign: "left",
+    textAlign: 'left',
     fontSize: 14
   },
 });

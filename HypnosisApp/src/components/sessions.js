@@ -55,11 +55,11 @@ export default class SessionsScreen extends Component {
         
         <CardAction>
           <FlatButton
-            color="#841584"
             type="positive"
             containerStyle={styles.sessionsPlayButton}
+            contentStyle={styles.sessionsPlayButtonText}
             onPress={() => self.openSession(session)}>
-              <Text style={[styles.sessionsPlayButtonText, styles.rtl]}>شروع</Text>
+              شروع
           </FlatButton>
 
         </CardAction>
