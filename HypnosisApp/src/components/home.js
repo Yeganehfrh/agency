@@ -49,7 +49,7 @@ export default class HomeScreen extends Component {
           <Text style={[styles.header,,styles.rtl]}>امتیاز شما</Text>
           <ProgressCircle 
             color="#2ecc71"
-            thickness={10}
+            thickness={20}
             direction='counter-clockwise'
             size={Dimensions.get('window').width/2}
             progress={this.state.progress}
