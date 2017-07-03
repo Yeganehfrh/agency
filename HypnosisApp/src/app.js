@@ -9,6 +9,8 @@ import {
   StackNavigator
 } from 'react-navigation';
 
+import codePush from 'react-native-code-push';
+
 import defaultSessions from './sessions.default';
 
 import Storage from 'react-native-storage';
@@ -71,8 +73,10 @@ export default HypnosisApp = StackNavigator({
 },{
   initialRouteName: 'Tabs',
   headerMode: 'none',
-  mode: 'modal'
+  mode: 'card'
 });
+
+HypnosisApp = codePush(HypnosisApp);
 
 global.storage = new Storage({
 	// maximum capacity, default 1000 

@@ -1,3 +1,4 @@
 <resources>
+    <string moduleConfig="true" name="reactNativeCodePush_androidDeploymentKey">SluVh-fRfRoMbH2I0INDO1DveiGic460d7fa-0063-45aa-bc45-ed330c1c73d3</string>
     <string name="app_name">HypnosisApp</string>
 </resources>
