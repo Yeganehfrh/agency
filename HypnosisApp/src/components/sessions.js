@@ -15,10 +15,9 @@ import {
   CardTitle
 } from 'react-native-card-view';
 
-import FlatButton from 'react-native-flat-button';
-import Icon from 'react-native-vector-icons/SimpleLineIcons';
+import Button from 'apsl-react-native-button';
 
-import Button from 'react-native-button';
+import Icon from 'react-native-vector-icons/SimpleLineIcons';
 
 import styles from '../styles';
 
@@ -45,7 +44,7 @@ export default class SessionsScreen extends Component {
   renderCard = (session) => {
     self = this;
     return(
-      <Card styles={{card: {flex: 1}}} key={session.id}>
+      <Card key={session.id}>
         <CardTitle>
           <Text style={[styles.sessionsCardTitle,styles.rtl]}>{session.title}</Text>
         </CardTitle>
@@ -53,16 +52,13 @@ export default class SessionsScreen extends Component {
           <Text style={[styles.sessionsCardContent,styles.rtl]}>{session.description}</Text>
         </CardContent>
         
-        <CardAction>
-          <FlatButton
+          <Button
             type="positive"
-            containerStyle={styles.sessionsPlayButton}
-            contentStyle={styles.sessionsPlayButtonText}
+            style={styles.playButton}
+            textStyle={styles.playButtonText}
             onPress={() => self.openSession(session)}>
               شروع
-          </FlatButton>
-
-        </CardAction>
+          </Button>
       </Card>
     );
   }

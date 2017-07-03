@@ -3,7 +3,8 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  WebView
 } from 'react-native';
 
 import Button from 'react-native-flat-button';
@@ -30,8 +31,17 @@ export default class AboutScreen extends Component {
       </View>
     );
   }
-}
 
+
+  render_test_web() {
+      return (
+        <WebView
+          source={{uri: 'https://cog.onto.ir'}}
+          style={{marginTop: 20}}
+        />
+      );
+  }
+}
 const styles = StyleSheet.create({
   container: {
     flex: 1,

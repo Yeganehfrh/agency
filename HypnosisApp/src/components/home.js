@@ -46,7 +46,7 @@ export default class HomeScreen extends Component {
           </Text>
         </View>
         <View style={styles.chartContainer}>
-          <Text style={[styles.header,,styles.rtl]}>امتیاز شما</Text>
+          <Text style={[styles.header,,styles.rtl]}>پیشرفت شما</Text>
           <ProgressCircle 
             color="#2ecc71"
             thickness={20}
@@ -62,14 +62,14 @@ export default class HomeScreen extends Component {
   }
 
   getProgressText() {
-    return "۶۳";
+    return <Text style={styles.rtl}>۶۳</Text>;
   }
 
   updateProgress() {
     //TODO calc progress
     setTimeout(() => {
       this.setState({ progress: 0.63});
-    }, 1000);
+    }, 500);
   }
 
   componentDidMount() {

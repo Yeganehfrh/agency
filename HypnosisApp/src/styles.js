@@ -89,14 +89,31 @@ export default styles = StyleSheet.create({
   sessionsScrollView: {
     paddingBottom: 80
   },
-  sessionsPlayButton: {
+
+  stopButton: {
     height: 50,
-    width: 90
+    borderWidth: 0,
+    borderColor: '#c0392b',
+    backgroundColor: '#e74c3c',
+    marginLeft: 10,
+    marginRight: 10
   },
-  sessionsPlayButtonText: {
+
+  playButton: {
+    height: 50,
+    borderWidth: 0,
+    borderColor: '#27ae60',
+    backgroundColor: '#2ecc71',
+    marginLeft: 10,
+    marginRight: 10
+  },
+
+  playButtonText: {
+    color: 'white',
     fontSize: 18,
     fontFamily: 'samim'
   },
+  
   sessionsCardContent: {
     textAlign: 'left',
     paddingLeft: 10,
