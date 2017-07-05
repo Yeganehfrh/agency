@@ -53,9 +53,8 @@ export default class SessionsScreen extends Component {
         </CardContent>
         
           <Button
-            type="positive"
-            style={styles.playButton}
-            textStyle={styles.playButtonText}
+            style={styles.positive}
+            textStyle={styles.buttonText}
             onPress={() => self.openSession(session)}>
               شروع
           </Button>

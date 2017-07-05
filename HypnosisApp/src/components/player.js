@@ -67,30 +67,30 @@ export default class PlayerScreen extends Component {
 
   render() {
     return (
-         <View style={[styles.modal]}>
+         <View style={[styles.playerContainer]}>
            <Text style={[styles.rtl, styles.instructions]}>لطفاً از هدفون استفاده کنید.</Text>
-           <View style={{justifyContent: 'space-around', alignItems:'center', flex:1, flexDirection: 'row'}}>
+           <View style={{justifyContent: 'center', alignItems:'center',flexDirection: 'row'}}>
            <Button
             isDisabled={!this.state.isPlaying}
-             style={[styles.stopButton,{height: 60, width: 60}]}
+             style={styles.pause}
              onPress={() => this._handleStopSound()}>
-             <Icon name='control-pause' color='white' size={30} />
+             <Icon name='control-pause' color='white' size={40} />
            </Button>
            <Button
              type="positive"
              isDisabled={this.state.isPlaying}
-             style={[styles.playButton,{height: 60,width: 60}]}
+             style={styles.play}
              onPress={() => this._handlePlaySound()}>
-             <Icon name='control-play' color='white' size={30} />
+             <Icon name='control-play' color='white' size={40} />
            </Button>
+           </View>
            <ActionButton
              hideShadow={true}
              buttonColor="transparent"
              position='center'
-             icon={<Icon name='close' color='grey' size={25} />}
+             icon={<Icon name='close' color='grey' size={40} />}
              onPress={() => this.close()}>
            </ActionButton>
-           </View>
          </View>
 
     );

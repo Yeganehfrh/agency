@@ -9,7 +9,7 @@ import {
 
 import styles from '../styles';
 
-import FlatButton from 'react-native-flat-button';
+import Button from 'apsl-react-native-button';
 
 export default class QuestionsScreen extends Component {
   static navigationOptions = {
@@ -67,19 +67,19 @@ export default class QuestionsScreen extends Component {
 
         {this.state.questions.map(this.renderQuestion)}
 
-        <View style={styles.questionsButtonContainer}>
-          <FlatButton
-              type="neutral"
-              containerStyle={[styles.button]}
+        <View style={styles.buttonsContainer}>
+          <Button
+              style={styles.neutral}
+              textStyle={styles.buttonText}
               onPress={() => this.props.navigation.navigate('Sessions')}>
-                <Text style={styles.rtl}>بازگشت</Text>
-          </FlatButton>
-          <FlatButton
-              type="positive"
-              containerStyle={[styles.button]}
-              onPress={() => this.continue()}>
-                <Text style={styles.rtl}>ادامه</Text>
-          </FlatButton>
+                بازگشت
+          </Button>
+          <Button
+            style={styles.positive}
+            textStyle={styles.buttonText}
+            onPress={() => this.continue()}>
+              ادامه
+          </Button>
           </View>
       </ScrollView>
     );

@@ -8,16 +8,22 @@ export default styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#fcfcfc'
   },
+  playerContainer: {
+    flex: 1,
+    paddingTop: 22,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fcfcfc'
+  },
   playerButtonContainer: {
     width: 60,
     height: 60,
     margin: 10
   },
-  questionsButtonContainer: {
+  buttonsContainer: {
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: 'space-around'
   },
   aboutButtonContainer: {
     flex: 1,
@@ -33,6 +39,7 @@ export default styles = StyleSheet.create({
   },
   container: {
     flex: 1,
+    marginTop: 22,
   },
   sessionInfoContainer: {
     flex: 1,
@@ -90,7 +97,8 @@ export default styles = StyleSheet.create({
     paddingBottom: 80
   },
 
-  stopButton: {
+  negative: {
+    flex: 1,
     height: 50,
     borderWidth: 0,
     borderColor: '#c0392b',
@@ -99,16 +107,47 @@ export default styles = StyleSheet.create({
     marginRight: 10
   },
 
-  playButton: {
+  neutral: {
+    flex: 1,
+    marginLeft: 10,
+    marginRight: 10,
     height: 50,
     borderWidth: 0,
-    borderColor: '#27ae60',
-    backgroundColor: '#2ecc71',
+    backgroundColor: '#95a5a6',
+    borderColor: '#7f8c8d'
+  },
+
+  pause: {
+    height: 80,
+    width: 80,
+    borderWidth: 0,
+    borderColor: '#c0392b',
+    backgroundColor: '#e74c3c',
     marginLeft: 10,
     marginRight: 10
   },
 
-  playButtonText: {
+  play: {
+    marginLeft: 10,
+    marginRight: 10,
+    height: 80,
+    width: 80,
+    borderWidth: 0,
+    borderColor: '#27ae60',
+    backgroundColor: '#2ecc71',
+  },
+
+  positive: {
+    flex: 1,
+    marginLeft: 10,
+    marginRight: 10,
+    height: 50,
+    borderWidth: 0,
+    borderColor: '#27ae60',
+    backgroundColor: '#2ecc71',
+  },
+
+  buttonText: {
     color: 'white',
     fontSize: 18,
     fontFamily: 'samim'

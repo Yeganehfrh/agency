@@ -30,9 +30,6 @@ export default class HomeScreen extends Component {
   }
 
   render() {
-    //TODO improve charting
-    const progress = [123, 23, 200]
-    const sliceColor = ['#FCFCFC','#2196F3','#0568AA']
 
     return (
       <ScrollView style={styles.container}>
@@ -65,15 +62,15 @@ export default class HomeScreen extends Component {
     return <Text style={styles.rtl}>۶۳</Text>;
   }
 
-  updateProgress() {
+  updateProgress(progress) {
     //TODO calc progress
     setTimeout(() => {
-      this.setState({ progress: 0.63});
+      this.setState({ progress: progress/100});
     }, 500);
   }
 
   componentDidMount() {
-    this.updateProgress();
+    this.updateProgress(63);
   }
 }
 

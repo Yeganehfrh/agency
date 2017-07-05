@@ -7,7 +7,7 @@ import {
   View
 } from 'react-native';
 
-import Button from 'react-native-flat-button';
+import Button from 'apsl-react-native-button';
 import styles from '../styles';
 
 export default class SessionInfoScreen extends Component {
@@ -35,10 +35,10 @@ export default class SessionInfoScreen extends Component {
             {instructions}{'\n'}
           </Text>
           <Button
-            type="positive"
-            containerStyle={styles.button}
+            style={styles.positive}
+            textStyle={styles.buttonText}
             onPress={() => this.openPlayer(session)}>
-            <Text style={styles.rtl}>ادامه</Text>
+            ادامه
           </Button>
         </View>
       </ScrollView>

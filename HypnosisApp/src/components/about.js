@@ -7,7 +7,11 @@ import {
   WebView
 } from 'react-native';
 
-import Button from 'react-native-flat-button';
+import ActionButton from 'react-native-action-button';
+import Button from 'apsl-react-native-button';
+import Icon from 'react-native-vector-icons/SimpleLineIcons';
+
+import '../styles';
 
 export default class AboutScreen extends Component {
   static navigationOptions = {
@@ -17,17 +21,16 @@ export default class AboutScreen extends Component {
   render() {
     const { navigate } = this.props.navigation;
     return (
-      <View style={styles.container}>
-        <Text style={styles.content}>
-          از طریق کانال تلگرام
-        </Text>
-        <Button
-            color="#841584"
-            type="neutral"
-            containerStyle={styles.button}
-            onPress={() => this.props.navigation.navigate('Help')}>
-              بازگشت
-            </Button>
+      <View style={styles.playerContainer}>
+        <Text style={[styles.title,styles.rtl]}>تماس با ما</Text>
+        <Text style={[styles.help,styles.rtl]}>از طریق کانال تلگرام CognitiveHypnosis با ما مکاتبه نمایید. قدردان نظرات، پیشنهادات و انتقادات شما خواهیم بود.</Text>
+           <ActionButton
+             hideShadow={true}
+             buttonColor="transparent"
+             position='center'
+             icon={<Icon name='close' color='grey' size={40} />}
+             onPress={() => this.props.navigation.navigate('Help')}>
+           </ActionButton>
       </View>
     );
   }
@@ -42,21 +45,3 @@ export default class AboutScreen extends Component {
       );
   }
 }
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#FCFCFC',
-  },
-  content: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
