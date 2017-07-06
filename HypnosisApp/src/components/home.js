@@ -23,14 +23,26 @@ export default class HomeScreen extends Component {
 
   constructor(props) {
     super(props);
+
     this.state = {
       progress: 0,
       indeterminate: false,
     };
   }
 
+
+  async signup(email, pass) {
+      try {
+        //await firebase.auth().createUserWithEmailAndPassword(email, pass);
+        //console.warn("Account created");
+      } catch (error) {
+          console.log(error.toString())
+      }
+  }
+
   render() {
 
+    this.signup("ansarinia@me.com", "hello123");
     return (
       <ScrollView style={styles.container}>
         <View>

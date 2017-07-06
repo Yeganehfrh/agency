@@ -11,7 +11,11 @@ import styles from '../styles';
 
 import Button from 'apsl-react-native-button';
 
-export default class QuestionsScreen extends Component {
+import { bindActionCreators } from 'redux';
+import {connect} from 'react-redux';
+import * as Actions from '../actions';
+
+class QuestionsScreen extends Component {
   static navigationOptions = {
     title: 'درباره',
     tabBarVisible: true
@@ -85,3 +89,11 @@ export default class QuestionsScreen extends Component {
     );
   }
 }
+
+export default connect(state => ({
+    state: state.surveys
+  }),
+  (dispatch) => ({
+    actions: bindActionCreators(Actions, dispatch)
+  })
+)(QuestionsScreen);
