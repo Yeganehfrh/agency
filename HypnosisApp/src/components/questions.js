@@ -41,8 +41,7 @@ class QuestionsScreen extends Component {
 
   continue = () => {
     var payload = {"id":14,"answers":[5,6]}
-    fetch("http://192.168.1.2:3000/surveys",{method:"POST", body:JSON.stringify(payload)})
-    this.props.submit(payload.id, payload.answers)
+    this.props.submit(payload)
     this.props.navigation.navigate('SessionInfo',{session: this.state.session})
   }
 
@@ -96,8 +95,8 @@ class QuestionsScreen extends Component {
 const mapDispatchToProps = (dispatch) => {
   return {
     dispatch,
-    submit: (surveyId, answers) => {
-      dispatch(Actions.submitSurvey( surveyId, answers ))
+    submit: (payload) => {
+      dispatch(Actions.submitSurvey(payload))
     }
   }
 }

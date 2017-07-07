@@ -13,6 +13,7 @@
 		"react-native": "0.45.1",
 		"react-native-action-button": "^2.7.1",
 		"react-native-card-view": "^0.0.3",
+		"react-native-device-info": "^0.10.2",
 		"react-native-flat-button": "^1.0.4",
 		"react-native-pie-chart": "1.0.11",
 		"react-native-progress": "^3.2.1",

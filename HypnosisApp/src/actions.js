@@ -15,15 +15,10 @@ export const TERMINATE_SESSION = 'TERMINATE_SESSION'
  * action creators
  */
 
-export function submitSurvey(surveyId, answers) {
-  var payload = {
-    surveyId: surveyId,
-    answers: answers
-  }
+export function submitSurvey(payload) {
   return {
     type: SUBMIT_SURVEY,
     payload: payload
-
   }
 }
 

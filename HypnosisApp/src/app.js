@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import {
   Text,
-  View
+  View,
+  NetInfo
 } from 'react-native';
 
 import {
@@ -15,6 +16,8 @@ import Storage from 'react-native-storage';
 import { AsyncStorage } from 'react-native';
 
 import {I18nManager} from 'react-native';
+
+import DeviceInfo from 'react-native-device-info';
 
 //import ScrollableTabView from 'react-native-scrollable-tab-view';
 
@@ -81,8 +84,22 @@ AppNavigator = StackNavigator({
   mode: 'card'
 });
 
-
 export default class HypnosisApp extends Component {
+
+  syncState = store => next => action => {
+    next(action)
+    
+    //WORKAROUND: Check if store is not empty
+    if (this.store.getState() == undefined
+      || this.store.getState().surveys == []
+      || this.store.getState().surveys == undefined
+      || this.store.getState().surveys.length==0)
+      return;
+    //TODO submit to server
+    console.warn(DeviceInfo.getUniqueID(), JSON.stringify(store.getState()));
+    this.persistor.purge();
+    //store.dispatch({type:"RESET_STORE"})
+  }
 
   constructor(props) {
     I18nManager.allowRTL(true);
@@ -93,12 +110,22 @@ export default class HypnosisApp extends Component {
       reducers,
       undefined,
       compose(
-        applyMiddleware(thunk,logger),
+        applyMiddleware(thunk,logger, this.syncState),
         autoRehydrate()
       )
     );
-    persistStore(this.store,{storage: AsyncStorage})
+    this.persistor = persistStore(this.store,{storage: AsyncStorage})
+
+    this.handleConnectivityChange = this.handleConnectivityChange.bind(this);
+    // Lookup network changes
+    NetInfo.isConnected.addEventListener('change', this.handleConnectivityChange);
   }
+  
+  handleConnectivityChange(connected) {
+    if (connected) this.store.dispatch({type:"SEND_TO_SERVER"})
+    //console.warn('Mobile is ' + (connected ? 'online' : 'offline'));
+  }
+
   render() {
     return (
       <Provider store={this.store}>

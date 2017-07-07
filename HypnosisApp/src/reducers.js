@@ -4,10 +4,10 @@ import {
   SUBMIT_SURVEY, SUBMIT_FEEDBACK
 } from './actions';
 
-function surveys(state = {}, action) {
+function surveys(state = [], action) {
   switch (action.type) {
     case SUBMIT_SURVEY:
-      return {...state, "survey":{id:action.payload.surveyId,answers:action.payload.answers}};
+      return [...state, action.payload];
     default:
       return state
   }
