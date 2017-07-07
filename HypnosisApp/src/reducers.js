@@ -4,18 +4,12 @@ import {
   SUBMIT_SURVEY, SUBMIT_FEEDBACK
 } from './actions';
 
-function surveys(state = [], action) {
+function surveys(state = {}, action) {
   switch (action.type) {
     case SUBMIT_SURVEY:
-      return [
-        ...state,
-        {
-          id: action.id,
-          completed: true,
-          timestamp: action.timestamp,
-          value: action.value
-        }
-      ]
+      return {...state, [action.payload.id]:action.payload.value};
+    case SUBMIT_SURVEY+'_ROLLBACK':
+      return omit(state, [action.payload.id]);
     default:
       return state
   }

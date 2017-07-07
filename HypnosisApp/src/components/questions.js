@@ -40,6 +40,7 @@ class QuestionsScreen extends Component {
   }
 
   continue = () => {
+    this.props.submit("q12", [1,2,3,4,5,6,8])
     this.props.navigation.navigate('SessionInfo',{session: this.state.session})
   }
 
@@ -90,10 +91,13 @@ class QuestionsScreen extends Component {
   }
 }
 
-export default connect(state => ({
-    state: state.surveys
-  }),
-  (dispatch) => ({
-    actions: bindActionCreators(Actions, dispatch)
-  })
-)(QuestionsScreen);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    dispatch,
+    submit: (id, value) => {
+      dispatch(Actions.submitSurvey( id, value ))
+    }
+  }
+}
+
+export default connect(state => ({ state: state.surveys }), mapDispatchToProps)(QuestionsScreen);

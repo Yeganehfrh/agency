@@ -33,7 +33,21 @@ import thunk from 'redux-thunk';
 import reducers from './reducers';
 import { offline } from 'redux-offline';
 import offlineConfig from 'redux-offline/lib/defaults';
+import effect from 'redux-offline/lib/defaults/effect';
+import retry from 'redux-offline/lib/defaults/retry';
+import discard from 'redux-offline/lib/defaults/discard';
 
+/*
+const offlineConfig = {
+  retry,
+  discard,
+  effect: (effect, action) => {
+    console.warn("Effecting...")
+    console.warn(effect, action)
+    return Promise.resolve()
+  }
+};
+*/
 const store = createStore(
   reducers,
   undefined,
