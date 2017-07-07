@@ -15,24 +15,15 @@ export const TERMINATE_SESSION = 'TERMINATE_SESSION'
  * action creators
  */
 
-export function submitSurvey(id, value) {
+export function submitSurvey(surveyId, answers) {
   var payload = {
-    id: id,
-    value: value
+    surveyId: surveyId,
+    answers: answers
   }
   return {
     type: SUBMIT_SURVEY,
-    payload: payload,
-    meta: {
-      offline: {
-        // the network action to execute:
-        effect: { url: 'http://192.168.1.2:3000/surveys', method: 'POST', body: payload },
-        // action to dispatch when effect succeeds:
-        commit: { type: 'SUBMIT_SURVEY_COMMIT', meta: payload },
-        // action to dispatch if network action fails permanently:
-        rollback: { type: 'SUBMIT_SURVEY_ROLLBACK', meta: payload }
-      }
-    }
+    payload: payload
+
   }
 }
 

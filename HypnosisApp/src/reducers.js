@@ -7,9 +7,7 @@ import {
 function surveys(state = {}, action) {
   switch (action.type) {
     case SUBMIT_SURVEY:
-      return {...state, [action.payload.id]:action.payload.value};
-    case SUBMIT_SURVEY+'_ROLLBACK':
-      return omit(state, [action.payload.id]);
+      return {...state, "survey":{id:action.payload.surveyId,answers:action.payload.answers}};
     default:
       return state
   }

@@ -9,12 +9,12 @@ import {
   StackNavigator
 } from 'react-navigation';
 
-import codePush from 'react-native-code-push';
-
 import defaultSessions from './sessions.default';
 
 import Storage from 'react-native-storage';
 import { AsyncStorage } from 'react-native';
+
+import {I18nManager} from 'react-native';
 
 //import ScrollableTabView from 'react-native-scrollable-tab-view';
 
@@ -31,31 +31,8 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import reducers from './reducers';
-import { offline } from 'redux-offline';
-import offlineConfig from 'redux-offline/lib/defaults';
-import effect from 'redux-offline/lib/defaults/effect';
-import retry from 'redux-offline/lib/defaults/retry';
-import discard from 'redux-offline/lib/defaults/discard';
-
-/*
-const offlineConfig = {
-  retry,
-  discard,
-  effect: (effect, action) => {
-    console.warn("Effecting...")
-    console.warn(effect, action)
-    return Promise.resolve()
-  }
-};
-*/
-const store = createStore(
-  reducers,
-  undefined,
-  compose(
-    applyMiddleware(thunk),
-    offline(offlineConfig)
-  )
-);
+import logger from 'redux-logger';
+import {persistStore, autoRehydrate} from 'redux-persist';
 
 const AppTabNavigator = TabNavigator({
   Home: { screen: HomeScreen },
@@ -105,17 +82,31 @@ AppNavigator = StackNavigator({
 });
 
 
-class HypnosisApp extends Component {
+export default class HypnosisApp extends Component {
+
+  constructor(props) {
+    I18nManager.allowRTL(true);
+    I18nManager.forceRTL(true);
+    super(props);
+
+    this.store = createStore(
+      reducers,
+      undefined,
+      compose(
+        applyMiddleware(thunk,logger),
+        autoRehydrate()
+      )
+    );
+    persistStore(this.store,{storage: AsyncStorage})
+  }
   render() {
     return (
-      <Provider store={store}>
+      <Provider store={this.store}>
         <AppNavigator />
       </Provider>
     );
   }
 }
-
-export default CodePushApp = codePush(HypnosisApp);
 
 global.storage = new Storage({
 	// maximum capacity, default 1000 

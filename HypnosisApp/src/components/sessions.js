@@ -42,7 +42,6 @@ export default class SessionsScreen extends Component {
   }
 
   renderCard = (session) => {
-    self = this;
     return(
       <Card key={session.id}>
         <CardTitle>
@@ -55,7 +54,7 @@ export default class SessionsScreen extends Component {
           <Button
             style={styles.positive}
             textStyle={styles.buttonText}
-            onPress={() => self.openSession(session)}>
+            onPress={() => this.openSession(session)}>
               شروع
           </Button>
       </Card>
@@ -68,12 +67,12 @@ export default class SessionsScreen extends Component {
       global.storage.remove({key:'sessions'});
     }
 
-    self = this;
+    var self = this;
     global.storage.load({
       key: 'sessions',
       autoSync: true
     }).then(ret => {
-      this.setState({sessions: ret.sessions});
+      self.setState({sessions: ret.sessions});
     }).catch(err => {
       console.error(err);
     });
