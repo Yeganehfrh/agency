@@ -96,9 +96,8 @@ export default class HypnosisApp extends Component {
       || this.store.getState().surveys.length==0)
       return;
     //TODO submit to server
+    this.persistor.purge()
     console.warn(DeviceInfo.getUniqueID(), JSON.stringify(store.getState()));
-    this.persistor.purge();
-    //store.dispatch({type:"RESET_STORE"})
   }
 
   constructor(props) {
