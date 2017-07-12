@@ -59,7 +59,7 @@ class QuestionsScreen extends Component {
 
   renderOptions = (opt, index) => {
     return(
-        <Picker.Item  label={opt.label} value={opt.value} key={index} />
+        <Picker.Item  label={opt.label} value={opt.key} key={opt.key} />
     )
   }
 

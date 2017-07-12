@@ -21,6 +21,8 @@ import DeviceInfo from 'react-native-device-info';
 
 import * as Actions from './actions';
 
+import RNRestart from 'react-native-restart';
+
 //import ScrollableTabView from 'react-native-scrollable-tab-view';
 
 import HomeScreen from './components/home';
@@ -123,6 +125,20 @@ export default class HypnosisApp extends Component {
     I18nManager.forceRTL(true);
     super(props);
 
+    this.state = {
+      preventRTLWorkaroundRestart: false
+    };
+
+    var self = this;
+    global.storage.load({
+      key: 'configs',
+      autoSync: true
+    }).then(ret => {
+      self.setState({preventRTLWorkaroundRestart: ret.preventRTLWorkaroundRestart});
+    }).catch(err => {
+      console.error(err);
+    });
+
     this.store = createStore(
       rootReducer,
       undefined,
@@ -144,6 +160,19 @@ export default class HypnosisApp extends Component {
   }
 
   render() {
+    if (!this.state.preventRTLWorkaroundRestart) {
+      global.storage.save({
+        key: 'configs',
+        data: {
+          preventRTLWorkaroundRestart: true
+        }
+      });
+
+      if (!I18nManager.isRTL) {
+        RNRestart.Restart();
+      }
+    }
+
     return (
       <Provider store={this.store}>
         <AppNavigator />

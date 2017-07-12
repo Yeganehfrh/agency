@@ -23,7 +23,9 @@ export default styles = StyleSheet.create({
   buttonsContainer: {
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'space-around'
+    justifyContent: 'space-around',
+    paddingTop: 40,
+    paddingBottom: 20
   },
   aboutButtonContainer: {
     flex: 1,

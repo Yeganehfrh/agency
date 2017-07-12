@@ -5,7 +5,8 @@ import {
   Text,
   View,
   ScrollView,
-  Dimensions
+  Dimensions,
+  I18nManager
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
@@ -30,8 +31,9 @@ class HomeScreen extends Component {
 
     this.state = {
       progress: 0,
-      indeterminate: false,
+      indeterminate: false
     };
+
   }
 
   async loadProgress() {
@@ -48,8 +50,6 @@ class HomeScreen extends Component {
   }
 
   render() {
-
-    this.signup("ansarinia@me.com", "hello123");
     return (
       <ScrollView style={styles.container}>
         <View>
