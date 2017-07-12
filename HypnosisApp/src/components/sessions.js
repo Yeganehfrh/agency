@@ -94,7 +94,7 @@ export default class SessionsScreen extends Component {
       return;
     }
 
-    this.props.navigation.navigate('Questions',{session: session});
+    this.props.navigation.navigate('Questions',{postSession: false, session: session});
   }
 
   render() {

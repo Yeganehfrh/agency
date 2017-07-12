@@ -29,6 +29,7 @@ export default class PlayerScreen extends Component {
     };
 
     this.audioFile = this.props.navigation.state.params.session.audioFile;
+    this.session = this.props.navigation.state.params.session;
 
     // Play the sound with an onEnd callback
     this.audio = new Sound(this.audioFile, Sound.MAIN_BUNDLE, (error) => {
@@ -62,7 +63,15 @@ export default class PlayerScreen extends Component {
 
   close() {
     this._handleStopSound();
-    this.props.navigation.navigate('Sessions');
+    
+    var id = this.session.id;
+
+    if (!this.session.postSurvey || this.session.postSurvey.questions.length==0) {
+      this.props.navigation.navigate('Sessions');
+      return;
+    }
+
+    this.props.navigation.navigate('Questions',{postSession: true, session: this.session});
   }
 
   render() {

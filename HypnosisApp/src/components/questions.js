@@ -25,11 +25,12 @@ class QuestionsScreen extends Component {
     super(props);
 
     this.state = {
-      questions: props.navigation.state.params.session.preSurvey.questions,
-      survey: props.navigation.state.params.session.preSurvey,
+      questions: [],
+      survey: {},
       session: props.navigation.state.params.session,
       answers: [],
-      q:[]
+      q:[],
+      postSession: props.navigation.state.params.postSession
     }
 
     this.loadQuesions = this.loadQuesions.bind(this);
@@ -42,10 +43,12 @@ class QuestionsScreen extends Component {
   }
 
   continue = () => {
-    console.warn("Answers", this.state.answers)
     var payload = {data: this.state.answers}
     this.props.submit(payload)
-    this.props.navigation.navigate('SessionInfo',{session: this.state.session})
+    if (this.state.postSession)
+      this.props.navigation.navigate('Sessions');      
+    else
+      this.props.navigation.navigate('SessionInfo',{session: this.state.session})
   }
 
   updateAnswers = (qIndex, qId, value) => {
@@ -55,6 +58,18 @@ class QuestionsScreen extends Component {
     answers[qIndex] = {question: qId, value: value}
     q[qIndex] = value
     this.setState({answers:answers, q: q});
+  }
+
+  componentDidMount() {
+    if (this.state.postSession) {
+      this.setState({
+        survey: this.props.navigation.state.params.session.postSurvey,
+        questions: this.props.navigation.state.params.session.postSurvey.questions});
+    } else {
+      this.setState({
+        survey: this.props.navigation.state.params.session.preSurvey,
+        questions: this.props.navigation.state.params.session.preSurvey.questions});
+    }
   }
 
   renderOptions = (opt, index) => {
