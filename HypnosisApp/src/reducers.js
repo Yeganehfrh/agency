@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
 
 import {
-  SUBMIT_SURVEY, SUBMIT_FEEDBACK
+  SUBMIT_SURVEY, SUBMIT_FEEDBACK, RESET_STORE
 } from './actions';
 
 function surveys(state = [], action) {
@@ -29,7 +29,18 @@ function feedbacks(state = [], action) {
   }
 }
 
-export default reducers = combineReducers({
+
+const appReducers = combineReducers({
   surveys,
   feedbacks
 })
+
+const initialState = appReducers({}, {})
+
+export default rootReducer = (state = {}, action) => {
+  if (action.type === RESET_STORE){
+    state = initialState
+    console.warn("State reset")
+  }
+  return appReducers(state, action)
+}

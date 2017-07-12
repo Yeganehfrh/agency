@@ -12,7 +12,11 @@ import Icon from 'react-native-vector-icons/SimpleLineIcons';
 
 import ProgressCircle from 'react-native-progress/Circle';
 
-export default class HomeScreen extends Component {
+import { bindActionCreators } from 'redux';
+import {connect} from 'react-redux';
+import * as Actions from '../actions';
+
+class HomeScreen extends Component {
 
   static navigationOptions = {
     tabBarLabel: 'خانه',
@@ -30,6 +34,9 @@ export default class HomeScreen extends Component {
     };
   }
 
+  async loadProgress() {
+
+  }
 
   async signup(email, pass) {
       try {
@@ -50,7 +57,6 @@ export default class HomeScreen extends Component {
             به هیپنوتیزمِ شناختی خوش آمدید!
           </Text>
           <Text style={[styles.content,styles.rtl]}>
-            شما هنوز در امتیازی کسب نکرده‌اید.{'\n'}
             برای شروع، به صفحهٔ جلسه‌ها مراجعه کنید.
           </Text>
         </View>
@@ -71,7 +77,7 @@ export default class HomeScreen extends Component {
   }
 
   getProgressText() {
-    return <Text style={styles.rtl}>۶۳</Text>;
+    return <Text style={styles.rtl}>۶۲</Text>
   }
 
   updateProgress(progress) {
@@ -103,6 +109,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     textAlign: 'center',
     margin: 10,
+    color: 'black'
   },
   rtl: {
     fontFamily: 'samim'
@@ -110,7 +117,19 @@ const styles = StyleSheet.create({
   content: {
     fontSize: 16,
     textAlign: 'center',
-    color: '#333333',
+    color: 'black',
     marginBottom: 5,
   },
 });
+
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    dispatch,
+    loadProgress: () => {
+      dispatch(Actions.loadProgress())
+    }
+  }
+}
+
+export default connect(state => ({ state: state.progress }), mapDispatchToProps)(HomeScreen);

@@ -27,7 +27,9 @@ class QuestionsScreen extends Component {
     this.state = {
       questions: props.navigation.state.params.session.preSurvey.questions,
       survey: props.navigation.state.params.session.preSurvey,
-      session: props.navigation.state.params.session
+      session: props.navigation.state.params.session,
+      answers: [],
+      q:[]
     }
 
     this.loadQuesions = this.loadQuesions.bind(this);
@@ -40,24 +42,35 @@ class QuestionsScreen extends Component {
   }
 
   continue = () => {
-    var payload = {"id":14,"answers":[5,6]}
+    console.warn("Answers", this.state.answers)
+    var payload = {data: this.state.answers}
     this.props.submit(payload)
     this.props.navigation.navigate('SessionInfo',{session: this.state.session})
   }
 
-  renderOptions = (opt) => {
+  updateAnswers = (qIndex, qId, value) => {
+    var {answers, q} = this.state;
+    if (answers.length<qIndex+1)
+      answers.push({question: 0, value: 0})
+    answers[qIndex] = {question: qId, value: value}
+    q[qIndex] = value
+    this.setState({answers:answers, q: q});
+  }
+
+  renderOptions = (opt, index) => {
     return(
-        <Picker.Item label={opt.label} value={opt.value} key={opt.value} />
+        <Picker.Item  label={opt.label} value={opt.value} key={index} />
     )
   }
 
-  renderQuestion = (question) => {
+  renderQuestion = (question, qIndex) => {
+  
     return(
         <View style={styles.container} key={question.id}>
             <Text style={styles.questionText}>{question.content}</Text>
-            <Picker selectedValue={2}
-              itemStyle={styles.rtl}>
-              {question.options.map(this.renderOptions)}
+            <Picker selectedValue={this.state.q[qIndex]} onValueChange={(value, index) => this.updateAnswers(qIndex, question.id, value)}
+              itemStyle={styles.questionText}>
+              {question.options.map((o,i) => this.renderOptions(o,i))}
             </Picker>
         </View>
     );
@@ -71,7 +84,7 @@ class QuestionsScreen extends Component {
           پرسش‌ها
         </Text>
 
-        {this.state.questions.map(this.renderQuestion)}
+        {this.state.questions.map((q,i) => this.renderQuestion(q,i))}
 
         <View style={styles.buttonsContainer}>
           <Button

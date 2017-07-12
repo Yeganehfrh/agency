@@ -57,15 +57,16 @@ export default styles = StyleSheet.create({
   title: {
     fontSize: 24,
     padding: 20,
-    paddingTop: 30,
+    paddingTop: 0,
     textAlign: 'left',
-    color: 'rgb(51,51,51)'
+    color: 'black'
   },
   help: {
     fontSize: 18,
     textAlign: 'left',
     padding: 10,
-    paddingLeft: 20
+    paddingLeft: 20,
+    color: 'black'
   },
   welcome: {
     fontSize: 20,
@@ -156,17 +157,20 @@ export default styles = StyleSheet.create({
   sessionsCardContent: {
     textAlign: 'left',
     paddingLeft: 10,
-    fontSize: 16
+    fontSize: 16,
+    color: 'black'
   },
   sessionsCardTitle: {
     fontSize: 24,
     padding: 0,
-    backgroundColor: 'transparent'
+    backgroundColor: 'transparent',
+    color: 'grey'
   },
   sessionsTopInstructions: {
-    marginTop: 20,
+    marginTop: 0,
     marginLeft: 10,
     textAlign: 'left',
-    fontSize: 14
+    fontSize: 14,
+    color: 'black'
   },
 });

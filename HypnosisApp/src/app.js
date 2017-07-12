@@ -19,6 +19,8 @@ import {I18nManager} from 'react-native';
 
 import DeviceInfo from 'react-native-device-info';
 
+import * as Actions from './actions';
+
 //import ScrollableTabView from 'react-native-scrollable-tab-view';
 
 import HomeScreen from './components/home';
@@ -33,9 +35,9 @@ import SessionInfoScreen from './components/sessionInfo.js';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
-import reducers from './reducers';
+import rootReducer from './reducers';
 import logger from 'redux-logger';
-import {persistStore, autoRehydrate} from 'redux-persist';
+import {persistStore, purgeStoredState, autoRehydrate} from 'redux-persist';
 
 const AppTabNavigator = TabNavigator({
   Home: { screen: HomeScreen },
@@ -96,8 +98,24 @@ export default class HypnosisApp extends Component {
       || this.store.getState().surveys.length==0)
       return;
     //TODO submit to server
-    this.persistor.purge()
-    console.warn(DeviceInfo.getUniqueID(), JSON.stringify(store.getState()));
+    var userId = DeviceInfo.getUniqueID();
+    if (store.getState()!=undefined) {
+      fetch("https://cut.social/2017/hypnosisapp1/save/" + userId, {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(store.getState())
+      }).then(function(res) {
+        console.warn(JSON.stringify(res))
+        //this.persistor.purge()
+        purgeStoredState({storage: AsyncStorage})
+        store.dispatch({type: Actions.RESET_STORE});
+      });
+    }
+
+    //console.warn(DeviceInfo.getUniqueID(), JSON.stringify(store.getState()));
   }
 
   constructor(props) {
@@ -106,7 +124,7 @@ export default class HypnosisApp extends Component {
     super(props);
 
     this.store = createStore(
-      reducers,
+      rootReducer,
       undefined,
       compose(
         applyMiddleware(thunk,logger, this.syncState),
