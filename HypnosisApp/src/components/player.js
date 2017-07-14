@@ -10,6 +10,8 @@ import Sound from 'react-native-sound';
 
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 
+import RNFS from 'react-native-fs';
+
 export default class PlayerScreen extends Component {
 
   static navigationOptions = {
@@ -28,7 +30,8 @@ export default class PlayerScreen extends Component {
       isFinished: false
     };
 
-    this.audioFile = this.props.navigation.state.params.session.audioFile;
+    this.audioFile = RNFS.DocumentDirectoryPath + '/' + this.props.navigation.state.params.session.audioFile;
+
     this.session = this.props.navigation.state.params.session;
 
     // Play the sound with an onEnd callback

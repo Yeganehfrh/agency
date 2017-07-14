@@ -7,6 +7,8 @@ import {
   Picker
 } from 'react-native';
 
+import {Divider} from 'react-native-elements';
+
 import styles from '../styles';
 
 import Button from 'apsl-react-native-button';
@@ -93,21 +95,29 @@ class QuestionsScreen extends Component {
 
   render() {
     const { navigate } = this.props.navigation;
+    var topSection
+
     return (
       <ScrollView style={styles.container}>
-        <Text style={[styles.instructions, styles.rtl]}>
-          پرسش‌ها
-        </Text>
+        <Text style={[styles.instructions, styles.rtl]}>پرسش‌ها</Text>
+        {this.state.postSession && (
+          <Text style={[styles.instructions, styles.rtl]}>با تشکر از شما، این جلسه به پایان رسید. با پاسخ به پرسش‌های زیر علاوه بر یاریِ ما در پژوهشی دانشگاهی در حوزهٔ علوم شناختی، ده امتیاز اضافی کسب می‌کنید. هیچ پاسخ درست یا غلطی وجود ندارد و تنها شما معیار بهترین پاسخ هستید.</Text>
+          )
+        }
+
+        <Divider style={styles.questionScreenDivider} />
 
         {this.state.questions.map((q,i) => this.renderQuestion(q,i))}
 
         <View style={styles.buttonsContainer}>
-          <Button
-              style={styles.neutral}
-              textStyle={styles.buttonText}
-              onPress={() => this.props.navigation.navigate('Sessions')}>
-                بازگشت
-          </Button>
+          {!this.state.postSession &&
+            <Button
+                style={styles.neutral}
+                textStyle={styles.buttonText}
+                onPress={() => this.props.navigation.navigate('Sessions')}>
+                  بازگشت
+            </Button>
+          }
           <Button
             style={styles.positive}
             textStyle={styles.buttonText}

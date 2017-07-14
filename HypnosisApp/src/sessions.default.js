@@ -83,20 +83,20 @@ export default sessions = {
         id: 341,
         content: "آیا در جلسه‌های پیشین تجربهٔ خوش‌آیندی از هیپنوتیزم داشته‌اید؟",
         options: [
-          {value:1, label:"هرگز"},
-          {value:2, label:"اندکی"},
-          {value:3, label:"نمی‌دانم"},
-          {value:4, label:"تا حدی"},
-          {value:5, label:"کاملاً"}]
+          {key:1, label:"هرگز"},
+          {key:2, label:"اندکی"},
+          {key:3, label:"نمی‌دانم"},
+          {key:4, label:"تا حدی"},
+          {key:5, label:"کاملاً"}]
       },{
         id: 342,
         content: "آیا معتقدید می‌توانید تحت القای هیپنوتیزمی وارد خلسه شوید؟",
         options: [
-          {value:1, label:"هرگز"},
-          {value:2, label:"اندکی"},
-          {value:3, label:"شاید"},
-          {value:4, label:"تا حدی"},
-          {value:5, label:"حتماً"}]
+          {key:1, label:"هرگز"},
+          {key:2, label:"اندکی"},
+          {key:3, label:"شاید"},
+          {key:4, label:"تا حدی"},
+          {key:5, label:"حتماً"}]
         }]
       }
   }]

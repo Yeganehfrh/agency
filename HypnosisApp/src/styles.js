@@ -15,6 +15,11 @@ export default styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#fcfcfc'
   },
+  questionScreenDivider: {
+    backgroundColor: 'grey',
+    height: 1,
+    margin: 20
+  },
   playerButtonContainer: {
     width: 60,
     height: 60,
@@ -88,7 +93,7 @@ export default styles = StyleSheet.create({
     textAlign: 'center',
     color: '#333333',
     marginBottom: 5,
-    paddingTop: 20
+    padding: 20
   },
   sessionInstructions: {
     padding: 20,
