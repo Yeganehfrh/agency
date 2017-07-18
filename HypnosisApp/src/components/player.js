@@ -47,10 +47,10 @@ export default class PlayerScreen extends Component {
     var self = this;
     this.setState({ isPlaying: true},function() {
       self.audio.play((success) => {
-        if (success) {
-          console.warn('successfully finished playing');
+        if (success && this.session && this.session.postSurvey && this.session.postSurvey.questions.length>0) {
+            this.props.navigation.navigate('Questions',{postSession: true, session: this.session});
         } else {
-          console.warn('playback failed due to audio decoding errors');
+          this.props.navigation.navigate('Sessions');
         }
       });
     });
@@ -83,17 +83,18 @@ export default class PlayerScreen extends Component {
            <Text style={[styles.rtl, styles.instructions]}>لطفاً از هدفون استفاده کنید.</Text>
            <View style={{justifyContent: 'center', alignItems:'center',flexDirection: 'row'}}>
            <Button
-            isDisabled={!this.state.isPlaying}
-             style={styles.pause}
+             isDisabled={!this.state.isPlaying}
+             disabledStyle={{opacity:0.1}}
+             style={[styles.pause, {backgroundColor: 'transparent'}]}
              onPress={() => this._handleStopSound()}>
-             <Icon name='control-pause' color='white' size={40} />
+             <Icon name='control-pause' color='red' size={40} />
            </Button>
            <Button
-             type="positive"
              isDisabled={this.state.isPlaying}
-             style={styles.play}
+             disabledStyle={{opacity:0.1}}
+             style={[styles.play, {backgroundColor: 'transparent'}]}
              onPress={() => this._handlePlaySound()}>
-             <Icon name='control-play' color='white' size={40} />
+             <Icon name='control-play' color='green' size={40} />
            </Button>
            </View>
            <ActionButton

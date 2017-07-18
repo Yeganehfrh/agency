@@ -13,9 +13,9 @@ import Icon from 'react-native-vector-icons/SimpleLineIcons';
 
 import '../styles';
 
-export default class AboutScreen extends Component {
+export default class ContactUsScreen extends Component {
   static navigationOptions = {
-    title: 'درباره',
+    title: 'تماس با ما',
     tabBarVisible: true
   };
   render() {
@@ -29,7 +29,7 @@ export default class AboutScreen extends Component {
              buttonColor="transparent"
              position='center'
              icon={<Icon name='close' color='grey' size={40} />}
-             onPress={() => this.props.navigation.navigate('Help')}>
+             onPress={() => this.props.navigation.navigate('Home')}>
            </ActionButton>
       </View>
     );

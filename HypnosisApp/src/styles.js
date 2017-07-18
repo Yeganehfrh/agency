@@ -15,6 +15,16 @@ export default styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#fcfcfc'
   },
+
+  restartButton: {
+    marginLeft: 10,
+    marginRight: 10,
+    height: 50,
+    borderWidth: 0,
+    borderColor: '#27ae60',
+    backgroundColor: '#2ecc71',
+  },
+
   questionScreenDivider: {
     backgroundColor: 'grey',
     height: 1,

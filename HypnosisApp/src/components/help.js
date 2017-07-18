@@ -31,14 +31,12 @@ export default class HelpScreen extends Component {
         <Text style={[styles.help,styles.rtl]}>شما با انجام موفقیت‌آمیز هر جلسهٔ هیپنوتیزم (به طور کامل)، امتیازی کسب می‌کنید. این امتیاز برای دسترسی به جلسه‌های پیچیده‌تر به کار می‌رود. در ابتدا و پایان هر جلسه، برای تضمین تاثیرگذاری بهتر پرسش‌هایی مطرح می‌شود که با پاسخ‌گویی درست به آن تجربهٔ هیپنوتیزم مناسب‌تری خواهید داشت.</Text>
         <Text style={[styles.help,styles.rtl]}>در صورتی که شما، حداقل ۲۰۰ امتیاز کسب کنید، می‌توانید از جوایز دیگری هم‌چون ضبط و تحلیل رایگان سیگنال‌های غیرتهاجمی انسفالوگرام استفاده کنید. این جایزه در کلینیک‌های تخصصی مغز، ارزشی مادی معادل با حداقل ۲۰۰ هزار تومان (سال ۱۳۹۶) دارد.</Text>
                 
-        <View style={styles.aboutButtonContainer}>
-          <Button
-            style={styles.neutral}
-            textStyle={styles.buttonText}
-            onPress={() => this.props.navigation.navigate('About')}>
-              تماس با ما
-            </Button>
-          </View>
+        <Button
+            style={{backgroundColor: 'transparent', borderWidth: 0,margin: 30}}
+            textStyle={[styles.buttonText, styles.rtl, {color: 'grey'}]}
+            onPress={() => this.props.navigation.navigate('ContactUs')}>
+            تماس با ما
+        </Button>
       </ScrollView>
     );
   }

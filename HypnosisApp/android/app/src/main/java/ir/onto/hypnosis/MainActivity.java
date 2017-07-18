@@ -1,4 +1,4 @@
-package com.hypnosisapp;
+package ir.onto.hypnosis;
 
 import com.facebook.react.ReactActivity;
 

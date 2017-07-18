@@ -21,18 +21,16 @@ import DeviceInfo from 'react-native-device-info';
 
 import * as Actions from './actions';
 
-import RNRestart from 'react-native-restart';
-
 //import ScrollableTabView from 'react-native-scrollable-tab-view';
 
 import HomeScreen from './components/home';
 import HelpScreen from './components/help';
 import SessionsScreen from './components/sessions';
-import AboutScreen from './components/about.js';
-import PlayerScreen from './components/player.js';
+import ContactUsScreen from './components/contact';
+import PlayerScreen from './components/player';
 import QuestionsScreen from './components/questions';
-import SessionInfoScreen from './components/sessionInfo.js';
-
+import SessionInfoScreen from './components/sessionInfo';
+import RestartScreen from './components/restart';
 // Redux imports
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
@@ -78,7 +76,8 @@ const AppTabNavigator = TabNavigator({
 
 AppNavigator = StackNavigator({
   Tabs: { screen: AppTabNavigator },  
-  About: { screen: AboutScreen },
+  ContactUs: { screen: ContactUsScreen },
+  Restart: { screen: RestartScreen },
   Player: { screen: PlayerScreen },
   SessionInfo: { screen: SessionInfoScreen },
   Questions: { screen: QuestionsScreen }
@@ -102,19 +101,23 @@ export default class HypnosisApp extends Component {
     //TODO submit to server
     var userId = DeviceInfo.getUniqueID();
     if (store.getState()!=undefined) {
-      fetch("https://cut.social/2017/hypnosisapp1/save/" + userId, {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(store.getState())
-      }).then(function(res) {
-        console.warn(JSON.stringify(res))
-        //this.persistor.purge()
-        purgeStoredState({storage: AsyncStorage})
-        store.dispatch({type: Actions.RESET_STORE});
-      });
+      try {
+        fetch("https://cut.social/2017/hypnosisapp1/save/" + userId, {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(store.getState())
+        }).then(function(res) {
+          console.warn(JSON.stringify(res))
+          //this.persistor.purge()
+          purgeStoredState({storage: AsyncStorage})
+          store.dispatch({type: Actions.RESET_STORE});
+        });
+      } catch (e) {
+        console.warn("While submitting",e);
+      }
     }
 
     //console.warn(DeviceInfo.getUniqueID(), JSON.stringify(store.getState()));
@@ -125,19 +128,6 @@ export default class HypnosisApp extends Component {
     I18nManager.forceRTL(true);
     super(props);
 
-    this.state = {
-      preventRTLWorkaroundRestart: false
-    };
-
-    var self = this;
-    global.storage.load({
-      key: 'configs',
-      autoSync: true
-    }).then(ret => {
-      self.setState({preventRTLWorkaroundRestart: ret.preventRTLWorkaroundRestart});
-    }).catch(err => {
-      console.error(err);
-    });
 
     this.store = createStore(
       rootReducer,
@@ -160,19 +150,6 @@ export default class HypnosisApp extends Component {
   }
 
   render() {
-    if (!this.state.preventRTLWorkaroundRestart) {
-      global.storage.save({
-        key: 'configs',
-        data: {
-          preventRTLWorkaroundRestart: true
-        }
-      });
-
-      if (!I18nManager.isRTL) {
-        RNRestart.Restart();
-      }
-    }
-
     return (
       <Provider store={this.store}>
         <AppNavigator />

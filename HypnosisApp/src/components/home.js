@@ -6,12 +6,15 @@ import {
   View,
   ScrollView,
   Dimensions,
-  I18nManager
+  I18nManager,
+  TouchableHighlight
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 
 import ProgressCircle from 'react-native-progress/Circle';
+
+import Button from 'apsl-react-native-button';
 
 import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux';
@@ -31,7 +34,8 @@ class HomeScreen extends Component {
 
     this.state = {
       progress: 0,
-      indeterminate: false
+      indeterminate: false,
+      preventRTLWorkaroundRestart: false
     };
 
   }
@@ -49,7 +53,38 @@ class HomeScreen extends Component {
       }
   }
 
+  componentWillMount() {
+
+    var self = this;
+
+    global.storage.load({
+      key: 'configs',
+      autoSync: true
+    }).then(ret => {      
+      self.setState({preventRTLWorkaroundRestart: ret.preventRTLWorkaroundRestart});
+  
+      if (!ret.preventRTLWorkaroundRestart && !I18nManager.isRTL) {
+        this.props.navigation.navigate('Restart');
+      }
+
+    }).catch(err => {
+      global.storage.save({
+        key: 'configs',
+        data: {
+          preventRTLWorkaroundRestart: true
+        }
+      });
+      if (!I18nManager.isRTL) {
+        this.props.navigation.navigate('Restart');
+      }
+    });
+
+
+
+  }
+
   render() {
+
     return (
       <ScrollView style={styles.container}>
         <View>
@@ -72,12 +107,19 @@ class HomeScreen extends Component {
             indeterminate={this.state.indeterminate}
             showsText={true} />
         </View>
+
+        <Button
+          style={{backgroundColor: 'transparent', borderWidth: 0,margin: 30}}
+          textStyle={[styles.buttonText, styles.rtl, {color: 'grey'}]}
+          onPress={() => this.props.navigation.navigate('ContactUs')}>
+          تماس با ما
+        </Button>
       </ScrollView>
     );
   }
 
   getProgressText() {
-    return <Text style={styles.rtl}>۶۲</Text>
+    return <Text style={styles.rtl}>{this.state.progress*100}</Text>
   }
 
   updateProgress(progress) {
@@ -88,7 +130,7 @@ class HomeScreen extends Component {
   }
 
   componentDidMount() {
-    this.updateProgress(63);
+    this.updateProgress(62);
   }
 }
 
