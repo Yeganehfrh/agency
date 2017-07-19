@@ -12,7 +12,11 @@ import Icon from 'react-native-vector-icons/SimpleLineIcons';
 
 import RNFS from 'react-native-fs';
 
-export default class PlayerScreen extends Component {
+import { bindActionCreators } from 'redux';
+import {connect} from 'react-redux';
+import * as Actions from '../actions';
+
+class PlayerScreen extends Component {
 
   static navigationOptions = {
     title: '',
@@ -43,10 +47,16 @@ export default class PlayerScreen extends Component {
     });
   }
 
+  componentDidMount() {
+    this.props.submit({data: {session: this.session.id, action: 'started', timestamp: Math.floor(Date.now())}})
+  }
+
   async _handlePlaySound() {
     var self = this;
     this.setState({ isPlaying: true},function() {
+      this.props.submit({data: {session: self.session.id, action: 'played', timestamp: Math.floor(Date.now())}})
       self.audio.play((success) => {
+        this.props.submit({data: {session: self.session.id, action: 'finished', timestamp: Math.floor(Date.now())}})
         if (success && this.session && this.session.postSurvey && this.session.postSurvey.questions.length>0) {
             this.props.navigation.navigate('Questions',{postSession: true, session: this.session});
         } else {
@@ -59,6 +69,7 @@ export default class PlayerScreen extends Component {
   _handleStopSound() {
     var self = this;
     this.audio.pause((success) => {
+      this.props.submit({data: {session: self.session.id, action: 'paused', timestamp: Math.floor(Date.now())}})
       self.setState({ isPlaying: false},function() {
       });
     });
@@ -69,12 +80,18 @@ export default class PlayerScreen extends Component {
     
     var id = this.session.id;
 
+    this.props.submit({data: {session: this.session.id, action: 'closed', timestamp: Math.floor(Date.now())}})
+
+    this.props.navigation.navigate('Sessions');
+
+/*
     if (!this.session.postSurvey || this.session.postSurvey.questions.length==0) {
       this.props.navigation.navigate('Sessions');
       return;
     }
 
     this.props.navigation.navigate('Questions',{postSession: true, session: this.session});
+*/
   }
 
   render() {
@@ -110,3 +127,13 @@ export default class PlayerScreen extends Component {
   }
 }
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    dispatch,
+    submit: (payload) => {
+      dispatch(Actions.submitTimestamp(payload))
+    }
+  }
+}
+
+export default connect(state => ({ state: state.timestamps }), mapDispatchToProps)(PlayerScreen);

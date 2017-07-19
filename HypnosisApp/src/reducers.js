@@ -1,8 +1,17 @@
 import { combineReducers } from 'redux'
 
 import {
-  SUBMIT_SURVEY, SUBMIT_FEEDBACK, RESET_STORE
+  SUBMIT_SURVEY, SUBMIT_FEEDBACK, RESET_STORE, SUBMIT_TIMESTAMP
 } from './actions';
+
+function timestamps(state = [], action) {
+  switch (action.type) {
+    case SUBMIT_TIMESTAMP:
+      return [...state, action.payload];
+    default:
+      return state
+  }
+}
 
 function surveys(state = [], action) {
   switch (action.type) {
@@ -31,6 +40,7 @@ function feedbacks(state = [], action) {
 
 
 const appReducers = combineReducers({
+  timestamps,
   surveys,
   feedbacks
 })

@@ -3,6 +3,7 @@
  */
 
 export const SUBMIT_SURVEY = 'SUBMIT_SURVEY'
+export const SUBMIT_TIMESTAMP = 'SUBMIT_TIMESTAMP'
 export const UPDATE_PROGRESS = 'UPDATE_PROGRESS'
 export const SUBMIT_FEEDBACK = 'SUBMIT_FEEDBACK'
 export const INIT_APP = 'INIT_APP'
@@ -19,6 +20,13 @@ export const RESET_STORE = 'RESET_STORE'
 export function submitSurvey(payload) {
   return {
     type: SUBMIT_SURVEY,
+    payload: payload
+  }
+}
+
+export function submitTimestamp(payload) {
+  return {
+    type: SUBMIT_TIMESTAMP,
     payload: payload
   }
 }
