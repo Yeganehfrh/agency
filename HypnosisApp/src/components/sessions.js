@@ -109,10 +109,12 @@ export default class SessionsScreen extends Component {
             onRefresh={this._onRefresh.bind(this)}
           />
         }>
-
+        <View style={{flex: 1}}>
+          {this.state.sessions.map(this.renderCard)}
+        </View>
         {!this.state.refreshing &&
           <Button
-            style={[{marginTop: 10},styles.transparentButton]}
+            style={[{marginTop: 0},styles.transparentButton]}
             onPress={() => this._onRefresh()}>
             <View style={{flex:1, flexDirection:'row', alignItems: 'center',justifyContent: 'center'}}>
             <Icon name='refresh' color='grey' size={30} style={{padding: 10}}/>
@@ -120,9 +122,6 @@ export default class SessionsScreen extends Component {
             </View>
           </Button>
         }
-        <View style={{flex: 1}}>
-          {this.state.sessions.map(this.renderCard)}
-        </View>
       </ScrollView>
     );
   }

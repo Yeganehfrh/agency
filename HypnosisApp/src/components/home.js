@@ -7,7 +7,8 @@ import {
   ScrollView,
   Dimensions,
   I18nManager,
-  TouchableHighlight
+  TouchableHighlight,
+  Image
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
@@ -90,11 +91,18 @@ class HomeScreen extends Component {
     return (
       <ScrollView style={styles.container}>
         <View style={{alignItems: 'center'}}>
-          <Text style={[styles.title,styles.rtl]}>
-            هیپنوتیزم شناختی
-          </Text>
+          <View style={{flex:1, flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
+            <Image
+              style={{width: 80, height: 80}}
+              source={require('../images/logo.png')}/>
+            <Text style={[styles.title,{textAlign: 'center',paddingLeft: 5, paddingRight: 5, marginLeft:0, marginRight: 0},styles.rtl]}>
+              هیپنوتیزم شناختی
+            </Text>
+          </View>
+
           <Text style={[styles.instructions,styles.rtl]}>
-            برای شروع، به صفحهٔ جلسه‌ها مراجعه کنید.
+            خوش آمدید! از بخش «جلسه‌ها» شروع کنید و به صوت‌های هیپنوتیزم گوش دهید.
+            امتیازِ پیشرفت شما بعد از اجرای کامل یک جلسه و پاسخ به پرسش‌های آن افزایش می‌یابد.
           </Text>
         </View>
         <View style={styles.chartContainer}>
@@ -111,7 +119,7 @@ class HomeScreen extends Component {
         </View>
 
         <Button
-          style={[{marginTop: 20},styles.transparentButton]}
+          style={[{marginTop: 20, marginBottom: 30},styles.transparentButton]}
           textStyle={[styles.buttonText, styles.rtl, {color: 'grey'}]}
           onPress={() => this.props.navigation.navigate('ContactUs')}>
           تماس با ما
