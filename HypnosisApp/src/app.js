@@ -10,8 +10,6 @@ import {
   StackNavigator
 } from 'react-navigation';
 
-import defaultSessions from './sessions.default';
-
 import Storage from 'react-native-storage';
 import { AsyncStorage } from 'react-native';
 
@@ -166,18 +164,33 @@ global.storage = new Storage({
 	defaultExpires: null,
 	sync : {
     sessions(params){
-      loadDefaultSessions(params);
+      loadSessions(params);
     }
 	}
 })
 
 
-loadDefaultSessions = function(params) {
+loadSessions = function(params) {
   //global.storage.remove({key:'sessions'});
-  global.storage.save({
-    key: 'sessions',
-    data: defaultSessions
-  });
-  params.resolve(defaultSessions);
+  let { id, resolve, reject } = params;
+  fetch('https://cut.social/public/hypnosis/sessions.json', {
+		method: 'GET'
+	}).then(response => {
+		return response.json();
+	}).then(json => {
+			// console.log(json);
+		if(json){
+			storage.save({
+				key: 'sessions',
+				data: json
+			});
+			resolve && resolve(json);
+		} else {
+			reject && reject(new Error('data parse error'));
+		}
+	}).catch(err => {
+		console.warn(err);
+		reject && reject(err);
+	});
 
 }

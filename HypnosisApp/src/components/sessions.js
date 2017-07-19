@@ -107,9 +107,14 @@ export default class SessionsScreen extends Component {
             onRefresh={this._onRefresh.bind(this)}
           />
         }>
-        <Text style={[styles.sessionsTopInstructions, styles.rtl]}>
-با گوش دادن به جلسه‌های موجود و کسب امتیاز، جلسه‌های ستاره‌دار، به رایگان برایتان قابل دسترس می‌شود.
-        </Text>
+        <Button
+          style={[{marginTop: 10},styles.transparentButton]}
+          onPress={() => this._onRefresh()}>
+          <View style={{flex:1, flexDirection:'row', alignItems: 'center',justifyContent: 'center'}}>
+          <Icon name='refresh' color='grey' size={30} style={{padding: 10}}/>
+          <Text style={[styles.buttonText, styles.rtl, {color: 'grey'}]}>به‌روزرسانی جلسه‌ها</Text>
+          </View>
+        </Button>
         <View style={{flex: 1}}>
           {this.state.sessions.map(this.renderCard)}
         </View>

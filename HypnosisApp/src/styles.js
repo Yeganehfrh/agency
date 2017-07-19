@@ -56,7 +56,7 @@ export default styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    marginTop: 22,
+    paddingTop: 10,
   },
   sessionInfoContainer: {
     flex: 1,
