@@ -6,6 +6,7 @@ import {
   View,
   ScrollView,
   RefreshControl,
+  ToastAndroid
 } from 'react-native';
 
 import {
@@ -73,8 +74,10 @@ export default class SessionsScreen extends Component {
       autoSync: true
     }).then(ret => {
       self.setState({sessions: ret.sessions});
+      this.setState({refreshing: false});
     }).catch(err => {
-      console.error(err);
+      ToastAndroid.showWithGravity('امکان ارتباط با سرور مهیا نیست. لطفاً تنظیمات شبکهٔ خود را بررسی کنید.', ToastAndroid.LONG, ToastAndroid.CENTER);
+      this.setState({refreshing: false});
     });
   }
 
@@ -82,7 +85,6 @@ export default class SessionsScreen extends Component {
     this.setState({refreshing: true});
     this.setState({sessions: []});
     this.reloadSessions(true);
-    this.setState({refreshing: false});
 
   }
 
@@ -107,14 +109,17 @@ export default class SessionsScreen extends Component {
             onRefresh={this._onRefresh.bind(this)}
           />
         }>
-        <Button
-          style={[{marginTop: 10},styles.transparentButton]}
-          onPress={() => this._onRefresh()}>
-          <View style={{flex:1, flexDirection:'row', alignItems: 'center',justifyContent: 'center'}}>
-          <Icon name='refresh' color='grey' size={30} style={{padding: 10}}/>
-          <Text style={[styles.buttonText, styles.rtl, {color: 'grey'}]}>به‌روزرسانی جلسه‌ها</Text>
-          </View>
-        </Button>
+
+        {!this.state.refreshing &&
+          <Button
+            style={[{marginTop: 10},styles.transparentButton]}
+            onPress={() => this._onRefresh()}>
+            <View style={{flex:1, flexDirection:'row', alignItems: 'center',justifyContent: 'center'}}>
+            <Icon name='refresh' color='grey' size={30} style={{padding: 10}}/>
+            <Text style={[styles.buttonText, styles.rtl, {color: 'grey'}]}>به‌روزرسانی جلسه‌ها</Text>
+            </View>
+          </Button>
+        }
         <View style={{flex: 1}}>
           {this.state.sessions.map(this.renderCard)}
         </View>
