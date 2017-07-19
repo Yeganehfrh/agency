@@ -112,8 +112,8 @@ class QuestionsScreen extends Component {
         <View style={styles.buttonsContainer}>
           {!this.state.postSession &&
             <Button
-                style={styles.neutral}
-                textStyle={styles.buttonText}
+                style={[styles.transparentButton, {flex:1}]}
+                textStyle={[styles.buttonText, styles.rtl,{color: 'grey'}]}
                 onPress={() => this.props.navigation.navigate('Sessions')}>
                   بازگشت
             </Button>

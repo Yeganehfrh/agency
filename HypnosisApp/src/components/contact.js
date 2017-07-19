@@ -39,7 +39,7 @@ export default class ContactUsScreen extends Component {
   render_test_web() {
       return (
         <WebView
-          source={{uri: 'https://cog.onto.ir'}}
+          source={{uri: 'https://cog.onto.ir/hypnosis'}}
           style={{marginTop: 20}}
         />
       );

@@ -115,6 +115,11 @@ export default styles = StyleSheet.create({
     paddingBottom: 80
   },
 
+  transparentButton: {
+    backgroundColor: 'transparent',
+    borderWidth: 0,
+    borderColor: 'transparent',
+  },
   negative: {
     flex: 1,
     height: 50,
@@ -123,6 +128,14 @@ export default styles = StyleSheet.create({
     backgroundColor: '#e74c3c',
     marginLeft: 10,
     marginRight: 10
+  },
+
+  chartContainer: {
+    justifyContent: 'center',
+    backgroundColor: 'transparent',
+    alignItems: 'center',
+    flex: 1,
+    paddingTop: 20
   },
 
   neutral: {

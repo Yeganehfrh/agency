@@ -32,7 +32,7 @@ export default class HelpScreen extends Component {
         <Text style={[styles.help,styles.rtl]}>در صورتی که شما، حداقل ۲۰۰ امتیاز کسب کنید، می‌توانید از جوایز دیگری هم‌چون ضبط و تحلیل رایگان سیگنال‌های غیرتهاجمی انسفالوگرام استفاده کنید. این جایزه در کلینیک‌های تخصصی مغز، ارزشی مادی معادل با حداقل ۲۰۰ هزار تومان (سال ۱۳۹۶) دارد.</Text>
                 
         <Button
-            style={{backgroundColor: 'transparent', borderWidth: 0,margin: 30}}
+            style={[styles.transparentButton, {paddingBottom: 30, margin: 30}]}
             textStyle={[styles.buttonText, styles.rtl, {color: 'grey'}]}
             onPress={() => this.props.navigation.navigate('ContactUs')}>
             تماس با ما

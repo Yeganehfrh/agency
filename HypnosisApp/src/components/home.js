@@ -20,6 +20,8 @@ import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux';
 import * as Actions from '../actions';
 
+import styles from '../styles';
+
 class HomeScreen extends Component {
 
   static navigationOptions = {
@@ -87,16 +89,16 @@ class HomeScreen extends Component {
 
     return (
       <ScrollView style={styles.container}>
-        <View>
-          <Text style={[styles.header,styles.rtl]}>
-            به هیپنوتیزمِ شناختی خوش آمدید!
+        <View style={{alignItems: 'center'}}>
+          <Text style={[styles.title,styles.rtl]}>
+            هیپنوتیزم شناختی
           </Text>
-          <Text style={[styles.content,styles.rtl]}>
+          <Text style={[styles.instructions,styles.rtl]}>
             برای شروع، به صفحهٔ جلسه‌ها مراجعه کنید.
           </Text>
         </View>
         <View style={styles.chartContainer}>
-          <Text style={[styles.header,,styles.rtl]}>پیشرفت شما</Text>
+          <Text style={[styles.title,styles.rtl]}>پیشرفت شما</Text>
           <ProgressCircle 
             color="#2ecc71"
             thickness={20}
@@ -109,7 +111,7 @@ class HomeScreen extends Component {
         </View>
 
         <Button
-          style={{backgroundColor: 'transparent', borderWidth: 0,margin: 30}}
+          style={[{marginTop: 20},styles.transparentButton]}
           textStyle={[styles.buttonText, styles.rtl, {color: 'grey'}]}
           onPress={() => this.props.navigation.navigate('ContactUs')}>
           تماس با ما
@@ -133,37 +135,6 @@ class HomeScreen extends Component {
     this.updateProgress(62);
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#FCFCFC',
-    paddingTop: 30
-  },
-  chartContainer: {
-    justifyContent: 'center',
-    backgroundColor: '#FCFCFC',
-    alignItems: 'center',
-    flex: 1,
-    paddingTop: 20
-  },
-  header: {
-    fontSize: 24,
-    textAlign: 'center',
-    margin: 10,
-    color: 'black'
-  },
-  rtl: {
-    fontFamily: 'samim'
-  },
-  content: {
-    fontSize: 16,
-    textAlign: 'center',
-    color: 'black',
-    marginBottom: 5,
-  },
-});
-
 
 const mapDispatchToProps = (dispatch) => {
   return {
