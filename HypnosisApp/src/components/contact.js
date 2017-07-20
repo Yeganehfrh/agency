@@ -7,7 +7,8 @@ import {
   View,
   TextInput,
   WebView,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  Linking
 } from 'react-native';
 
 import ActionButton from 'react-native-action-button';
@@ -35,6 +36,10 @@ class ContactUsScreen extends Component {
       name: "",
       content: ""
     }
+  }
+
+  openUrl(url) {
+    Linking.openURL(url).catch(err => console.error('An error occurred', err));
   }
 
   submitFeedback() {

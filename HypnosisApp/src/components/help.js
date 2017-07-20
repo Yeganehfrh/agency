@@ -5,7 +5,8 @@ import {
   Text,
   ScrollView,
   View,
-  Image
+  Image,
+  Linking
 } from 'react-native';
 
 import styles from '../styles'
@@ -23,6 +24,10 @@ export default class HelpScreen extends Component {
       <Icon name="question" size={26} color={ focused ? 'rgb(0,0,0)' : 'rgb(204,204,204)'}/>
     ),
   };
+
+  openUrl(url) {
+    Linking.openURL(url).catch(err => console.error('An error occurred', err));
+  }
 
   render() {
     return (
@@ -57,7 +62,7 @@ export default class HelpScreen extends Component {
 
           <Button
             style={[{flex:1, marginTop: 20, marginBottom: 30},styles.transparentButton]}
-            onPress={() => {}}>
+            onPress={() => this.openUrl('http://t.me/CognitiveHypnosis')}>
             <Icon name="paper-plane" size={26} color={'grey'}/>
             <Text style={[styles.buttonText, styles.rtl, {padding: 10, color: 'grey'}]}>
             کانال تلگرام
@@ -128,7 +133,7 @@ export default class HelpScreen extends Component {
 
           <Button
             style={[{flex:1, marginTop: 20, marginBottom: 30},styles.transparentButton]}
-            onPress={() => {}}>
+            onPress={() => this.openUrl('http://t.me/CognitiveHypnosis')}>
             <Icon name="paper-plane" size={26} color={'grey'}/>
             <Text style={[styles.buttonText, styles.rtl, {padding: 10, color: 'grey'}]}>
             کانال تلگرام

@@ -8,7 +8,8 @@ import {
   Dimensions,
   I18nManager,
   TouchableHighlight,
-  Image
+  Image,
+  Linking
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
@@ -54,6 +55,10 @@ class HomeScreen extends Component {
       } catch (error) {
           console.log(error.toString())
       }
+  }
+
+  openUrl(url) {
+    Linking.openURL(url).catch(err => console.error('An error occurred', err));
   }
 
   componentWillMount() {
@@ -130,7 +135,7 @@ class HomeScreen extends Component {
 
           <Button
             style={[{flex:1, marginTop: 20, marginBottom: 30},styles.transparentButton]}
-            onPress={() => {}}>
+            onPress={() => this.openUrl('http://t.me/CognitiveHypnosis')}>
             <Icon name="paper-plane" size={26} color={'grey'}/>
             <Text style={[styles.buttonText, styles.rtl, {padding: 10, color: 'grey'}]}>
             کانال تلگرام
