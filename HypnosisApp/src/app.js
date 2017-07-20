@@ -92,10 +92,15 @@ export default class HypnosisApp extends Component {
     
     //WORKAROUND: Check if store is not empty
     if (this.store.getState() == undefined
-      || this.store.getState().surveys == []
       || this.store.getState().surveys == undefined
       || this.store.getState().surveys.length==0)
-      return;
+      if (this.store.getState() == undefined
+        || this.store.getState().timestamps == undefined
+        || this.store.getState().timestamps.length==0)
+        if (this.store.getState() == undefined
+          || this.store.getState().feedbacks == undefined
+          || this.store.getState().feedbacks.length==0)
+          return;
     //TODO submit to server
     var userId = DeviceInfo.getUniqueID();
     if (store.getState()!=undefined) {
@@ -108,10 +113,11 @@ export default class HypnosisApp extends Component {
           },
           body: JSON.stringify(store.getState())
         }).then(function(res) {
-          console.warn(JSON.stringify(res))
-          //this.persistor.purge()
-          purgeStoredState({storage: AsyncStorage})
-          store.dispatch({type: Actions.RESET_STORE});
+          if (res.ok) {
+            //this.persistor.purge()
+            purgeStoredState({storage: AsyncStorage})
+            store.dispatch({type: Actions.RESET_STORE});
+          }
         });
       } catch (e) {
         console.warn("While submitting",e);

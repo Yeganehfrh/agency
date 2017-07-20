@@ -44,7 +44,7 @@ export default class RestartScreen extends Component {
             style={styles.restartButton}
             textStyle={styles.buttonText}
             onPress={() => this.doRestart()}>
-              راه‌اندزی مجدد
+              راه‌اندازی مجدد
           </Button>
       </View>
     );

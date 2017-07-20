@@ -5,7 +5,8 @@ import {
   View,
   ScrollView,
   Picker,
-  TextInput
+  TextInput,
+  KeyboardAvoidingView
 } from 'react-native';
 
 import {Divider} from 'react-native-elements';
@@ -48,8 +49,7 @@ class QuestionsScreen extends Component {
   }
 
   continue = () => {
-    var payload = {data: this.state.answers}
-    this.props.submit(payload)
+    this.props.submit(this.state.answers)
     if (this.state.postSession)
       this.props.navigation.navigate('Sessions');      
     else
@@ -103,22 +103,23 @@ class QuestionsScreen extends Component {
     return (
       <ScrollView style={styles.container}>
         <Text style={[styles.title, styles.rtl, {textAlign: 'center'}]}>پرسش‌ها</Text>
-        {true && (
+        
+        {this.state.postSession && (
           <Text style={[styles.instructions, styles.rtl, {textAlign: 'left'}]}>با تشکر از شما، این جلسه به پایان رسید. با پاسخ به پرسش‌های زیر علاوه بر یاریِ ما در پژوهشی دانشگاهی در حوزهٔ علوم شناختی، ده امتیاز اضافی کسب می‌کنید. هیچ پاسخ درست یا غلطی وجود ندارد و تنها شما معیار بهترین پاسخ هستید.</Text>
           )
         }
 
         {this.state.postSession && (
-          <View>
+          <KeyboardAvoidingView>
             <Text style={[styles.questionText,{paddingBottom: 0}]}>در چند خط به طور خلاصه تجربهٔ خود از این جلسه را بنویسید.</Text>
             <TextInput
-              onChangeText={(text) => this.updateAnswers(0, 99, text)}
+              onChangeText={(text) => this.updateAnswers(0, 99, text)} // question.id=99
               numberOfLines={4}
               placeholderTextColor={"lightgrey"}
               placeholder={"تجربهٔ شخصی شما"}
               multiline={true}
               style={[styles.rtl,{color:'black',margin:10}]}/>
-          </View>
+          </KeyboardAvoidingView>
         )}
 
         {this.state.questions.map((q,i) => this.renderQuestion(q,i+1))}

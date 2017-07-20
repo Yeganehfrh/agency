@@ -24,6 +24,13 @@ export function submitSurvey(payload) {
   }
 }
 
+export function submitFeedback(payload) {
+  return {
+    type: SUBMIT_FEEDBACK,
+    payload: payload
+  }
+}
+
 export function submitTimestamp(payload) {
   return {
     type: SUBMIT_TIMESTAMP,
@@ -40,10 +47,6 @@ export function clearStore() {
 
 export function updateProgress(value) {
   return { type: UPDATE_PROGRESS, value: value }
-}
-
-export function submitFeedback(feedback) {
-  return { type: SUBMIT_FEEDBACK, feedback: feedback }
 }
 
 export function initApp(info) {

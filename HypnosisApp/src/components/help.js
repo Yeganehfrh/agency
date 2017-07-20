@@ -44,13 +44,26 @@ export default class HelpScreen extends Component {
 
           }
         </Markdown>
-
-        <Button
-            style={[styles.transparentButton, {paddingBottom: 30, margin: 30}]}
-            textStyle={[styles.buttonText, styles.rtl, {color: 'grey'}]}
+        
+        <View style={{flex:1, flexDirection: 'row'}}>
+          <Button
+            style={[{flex:1, marginTop: 20, marginBottom: 30},styles.transparentButton]}
             onPress={() => this.props.navigation.navigate('ContactUs')}>
+            <Icon name="envelope" size={26} color={'grey'}/>
+            <Text style={[styles.buttonText, styles.rtl, {padding: 10, color: 'grey'}]}>
             تماس با ما
-        </Button>
+            </Text>
+          </Button>
+
+          <Button
+            style={[{flex:1, marginTop: 20, marginBottom: 30},styles.transparentButton]}
+            onPress={() => {}}>
+            <Icon name="paper-plane" size={26} color={'grey'}/>
+            <Text style={[styles.buttonText, styles.rtl, {padding: 10, color: 'grey'}]}>
+            کانال تلگرام
+            </Text>
+          </Button>
+        </View>
         
         <View style={{position: 'relative', flex:1, flexDirection: 'row',alignItems: 'center'}}>
           <Image resizeMode="contain" style={{flex:1, width: '100%'}} source={require('../images/ut.jpg')}/>
@@ -103,12 +116,26 @@ export default class HelpScreen extends Component {
         }
         </Markdown>
     
-        <Button
-            style={[styles.transparentButton, {paddingBottom: 30, margin: 30}]}
-            textStyle={[styles.buttonText, styles.rtl, {color: 'grey'}]}
+        <View style={{flex:1, flexDirection: 'row'}}>
+          <Button
+            style={[{flex:1, marginTop: 20, marginBottom: 30},styles.transparentButton]}
             onPress={() => this.props.navigation.navigate('ContactUs')}>
+            <Icon name="envelope" size={26} color={'grey'}/>
+            <Text style={[styles.buttonText, styles.rtl, {padding: 10, color: 'grey'}]}>
             تماس با ما
-        </Button>
+            </Text>
+          </Button>
+
+          <Button
+            style={[{flex:1, marginTop: 20, marginBottom: 30},styles.transparentButton]}
+            onPress={() => {}}>
+            <Icon name="paper-plane" size={26} color={'grey'}/>
+            <Text style={[styles.buttonText, styles.rtl, {padding: 10, color: 'grey'}]}>
+            کانال تلگرام
+            </Text>
+          </Button>
+        </View>
+
       </ScrollView>
     );
   }

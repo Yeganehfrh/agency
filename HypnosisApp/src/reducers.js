@@ -25,14 +25,7 @@ function surveys(state = [], action) {
 function feedbacks(state = [], action) {
   switch (action.type) {
     case SUBMIT_FEEDBACK:
-      return [
-        ...state,
-        {
-          timestamp: action.timestamp,
-          contact: action.contact,
-          content: action.content
-        }
-      ]
+      return [...state, action.payload];
     default:
       return state
   }

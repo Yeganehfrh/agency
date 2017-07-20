@@ -117,13 +117,27 @@ class HomeScreen extends Component {
             indeterminate={this.state.indeterminate}
             showsText={true} />
         </View>
+        
+        <View style={{flex:1, flexDirection: 'row'}}>
+          <Button
+            style={[{flex:1, marginTop: 20, marginBottom: 30},styles.transparentButton]}
+            onPress={() => this.props.navigation.navigate('ContactUs')}>
+            <Icon name="envelope" size={26} color={'grey'}/>
+            <Text style={[styles.buttonText, styles.rtl, {padding: 10, color: 'grey'}]}>
+            تماس با ما
+            </Text>
+          </Button>
 
-        <Button
-          style={[{marginTop: 20, marginBottom: 30},styles.transparentButton]}
-          textStyle={[styles.buttonText, styles.rtl, {color: 'grey'}]}
-          onPress={() => this.props.navigation.navigate('ContactUs')}>
-          تماس با ما
-        </Button>
+          <Button
+            style={[{flex:1, marginTop: 20, marginBottom: 30},styles.transparentButton]}
+            onPress={() => {}}>
+            <Icon name="paper-plane" size={26} color={'grey'}/>
+            <Text style={[styles.buttonText, styles.rtl, {padding: 10, color: 'grey'}]}>
+            کانال تلگرام
+            </Text>
+          </Button>
+        </View>
+
       </ScrollView>
     );
   }
