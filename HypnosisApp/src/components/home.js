@@ -48,6 +48,20 @@ class HomeScreen extends Component {
 
   }
 
+  toPersianDigits(num) {
+    var res = '';
+    var pos;
+    var sNum = num.toString()
+    persianNumbers = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
+
+    for (var i=0; i < sNum.length; i++)
+      if ((pos = persianNumbers[sNum.charAt(i)] ))
+        res += pos;
+      else
+        res += sNum.charAt(i);
+    return res;
+  }
+
   async signup(email, pass) {
       try {
         //await firebase.auth().createUserWithEmailAndPassword(email, pass);
@@ -148,7 +162,7 @@ class HomeScreen extends Component {
   }
 
   getProgressText() {
-    return <Text style={styles.rtl}>{this.state.progress*100}</Text>
+    return <Text style={styles.rtl}>{this.toPersianDigits(this.state.progress*100)}</Text>
   }
 
   updateProgress(progress) {
