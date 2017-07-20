@@ -29,6 +29,8 @@ import PlayerScreen from './components/player';
 import QuestionsScreen from './components/questions';
 import SessionInfoScreen from './components/sessionInfo';
 import RestartScreen from './components/restart';
+import EditProfileScreen from './components/editprofile';
+
 // Redux imports
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
@@ -78,7 +80,8 @@ AppNavigator = StackNavigator({
   Restart: { screen: RestartScreen },
   Player: { screen: PlayerScreen },
   SessionInfo: { screen: SessionInfoScreen },
-  Questions: { screen: QuestionsScreen }
+  Questions: { screen: QuestionsScreen },
+  EditProfile: { screen: EditProfileScreen}
 },{
   initialRouteName: 'Tabs',
   headerMode: 'none',
@@ -91,17 +94,11 @@ export default class HypnosisApp extends Component {
     next(action)
     
     //WORKAROUND: Check if store is not empty
-    if (this.store.getState() == undefined
-      || this.store.getState().surveys == undefined
-      || this.store.getState().surveys.length==0)
-      if (this.store.getState() == undefined
-        || this.store.getState().timestamps == undefined
-        || this.store.getState().timestamps.length==0)
-        if (this.store.getState() == undefined
-          || this.store.getState().feedbacks == undefined
-          || this.store.getState().feedbacks.length==0)
-          return;
-    //TODO submit to server
+    if (( this.store.getState() == undefined || this.store.getState().surveys == undefined    || this.store.getState().surveys.length==0)
+      && (this.store.getState() == undefined || this.store.getState().timestamps == undefined || this.store.getState().timestamps.length==0)
+      && (this.store.getState() == undefined || this.store.getState().feedbacks == undefined  || this.store.getState().feedbacks.length==0))
+        return;
+
     var userId = DeviceInfo.getUniqueID();
     if (store.getState()!=undefined) {
       try {

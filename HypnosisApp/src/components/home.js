@@ -112,18 +112,32 @@ class HomeScreen extends Component {
         <View style={{alignItems: 'center'}}>
           <View style={{flex:1, flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
             <Image
-              style={{width: 80, height: 80}}
+              style={{width: 100, height: 100}}
               source={require('../images/logo.png')}/>
-            <Text style={[styles.title,{textAlign: 'center',paddingLeft: 5, paddingRight: 5, marginLeft:0, marginRight: 0},styles.rtl]}>
+            <Text style={[styles.title,{textAlign: 'center', paddingBottom:0, marginBottom:0,paddingLeft: 5, paddingRight: 5, marginLeft:0, marginRight: 0},styles.rtl]}>
               هیپنوتیزم شناختی
             </Text>
+            <Text style={[styles.rtl, {fontSize:10, color: 'grey'}]}>نسخهٔ ۱.۰</Text>
           </View>
 
-          <Text style={[styles.instructions,styles.rtl]}>
-            خوش آمدید! از بخش «جلسه‌ها» شروع کنید و به صوت‌های هیپنوتیزم گوش دهید.
+          <Text style={[styles.instructions,styles.rtl,{margin: 10, backgroundColor: 'white', paddingRight: 30, paddingLeft: 30, textAlign:'left'}]}>
+            خوش آمدید! بعد از خواندن راهنما، از بخش «جلسه‌ها» شروع کنید و به صوت‌های هیپنوتیزم گوش دهید.
             امتیازِ پیشرفت شما بعد از اجرای کامل یک جلسه و پاسخ به پرسش‌های آن افزایش می‌یابد.
           </Text>
         </View>
+
+        <View style={{flex:1, flexDirection: 'row'}}>
+          <Button
+            style={[{flex:1, marginTop: 20, marginBottom: 30},styles.transparentButton]}
+            onPress={() => this.props.navigation.navigate('EditProfile')}>
+            <Icon name="user" size={26} color={'grey'}/>
+            <Text style={[styles.buttonText, styles.rtl, {padding: 10, color: 'grey'}]}>
+            اصلاح اطلاعات تماس
+            </Text>
+          </Button>
+        </View>
+
+
         <View style={styles.chartContainer}>
           <Text style={[styles.title,styles.rtl]}>پیشرفت شما</Text>
           <ProgressCircle 
@@ -141,7 +155,7 @@ class HomeScreen extends Component {
           <Button
             style={[{flex:1, marginTop: 20, marginBottom: 30},styles.transparentButton]}
             onPress={() => this.props.navigation.navigate('ContactUs')}>
-            <Icon name="envelope" size={26} color={'grey'}/>
+            <Icon name="speech" size={26} color={'grey'}/>
             <Text style={[styles.buttonText, styles.rtl, {padding: 10, color: 'grey'}]}>
             تماس با ما
             </Text>

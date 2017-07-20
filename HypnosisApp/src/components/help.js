@@ -54,7 +54,7 @@ export default class HelpScreen extends Component {
           <Button
             style={[{flex:1, marginTop: 20, marginBottom: 30},styles.transparentButton]}
             onPress={() => this.props.navigation.navigate('ContactUs')}>
-            <Icon name="envelope" size={26} color={'grey'}/>
+            <Icon name="speech" size={26} color={'grey'}/>
             <Text style={[styles.buttonText, styles.rtl, {padding: 10, color: 'grey'}]}>
             تماس با ما
             </Text>
@@ -115,7 +115,7 @@ export default class HelpScreen extends Component {
 
           '### اطلاعات تماس خود را وارد نکرده‌ام یا اشتباه وارد نموده‌ام.' +
           '\n\n' +
-          'در صفحهٔ «خانه» بر روی «تغییر اطلاعات شخصی» کلیک کنید و مشخصات خود را وارد یا به‌روز نمایید.' +
+          'در صفحهٔ «خانه» از طریق «اصلاح اطلاعات تماس» مشخصات خود را وارد یا به‌روز نمایید.' +
           '\n\n'
 
         }
@@ -125,7 +125,7 @@ export default class HelpScreen extends Component {
           <Button
             style={[{flex:1, marginTop: 20, marginBottom: 30},styles.transparentButton]}
             onPress={() => this.props.navigation.navigate('ContactUs')}>
-            <Icon name="envelope" size={26} color={'grey'}/>
+            <Icon name="speech" size={26} color={'grey'}/>
             <Text style={[styles.buttonText, styles.rtl, {padding: 10, color: 'grey'}]}>
             تماس با ما
             </Text>

@@ -51,7 +51,7 @@ class ContactUsScreen extends Component {
   render() {
     const { navigate } = this.props.navigation;
     return (
-      <ScrollView contentContainerStyle={styles.container}>
+      <ScrollView>
         <Markdown markdownStyles={{block: {padding: 10},text:{fontSize: 16, color: 'black', fontFamily:'samim'},strong: {fontFamily: 'samim'},h1:{padding: 10, paddingTop: 20, fontSize: 22, color:'grey',fontFamily:'samim'}}}>
           {
           '# تماس با ما' +
