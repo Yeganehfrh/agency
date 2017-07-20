@@ -74,8 +74,6 @@ export default class SessionInfoScreen extends Component {
         this.setState({downloadJobId: dlFile.jobId});
         dlFile.promise.then(res => {
           RNFS.moveFile(downloadDest + '_tmp', downloadDest).then(res => {
-            console.warn("Moved", res);
-            console.warn("loading from " + downloadDest);
             self.setState({audioIsAvailable: true});
           }).catch(err => { // Moving failed
             console.error("Cannot move downloaded file");

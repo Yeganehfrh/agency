@@ -52,7 +52,8 @@ export default styles = StyleSheet.create({
     fontFamily: 'samim',
     fontSize: 18,
     padding: 20,
-    textAlign: 'left'
+    textAlign: 'left',
+    color: 'grey'
   },
   container: {
     flex: 1,
