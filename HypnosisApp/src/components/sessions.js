@@ -122,9 +122,16 @@ export default class SessionsScreen extends Component {
             onRefresh={this._onRefresh.bind(this)}
           />
         }>
-        <Text style={[styles.rtl, styles.instructions]}>
-          با تکمیل اطلاعات تماس و گوش دادن به جلسه‌های موجود، جلسه‌های جدید برای شما قابل دسترس می‌شود.
+        {this.state.progress===0 &&
+          <Text style={[styles.instructions,styles.rtl,{margin: 10, backgroundColor: 'white', paddingRight: 30, paddingLeft: 30, textAlign:'left'}]}>
+            با وارد نمودن نام و شمارهٔ تماس خود، ۴ امتیاز کسب می‌کنید و جلسهٔ نخست برای شما قابل دسترس می‌شود. جهت تکمیل اطلاعات تماس، در صفحهٔ «خانه» بر روی «اصلاح اطلاعات تماس» کلیک کنید.
+          </Text>
+        }
+        {this.state.progress>0 &&
+          <Text style={[styles.instructions,styles.rtl,{margin: 10, backgroundColor: 'white', paddingRight: 30, paddingLeft: 30, textAlign:'left'}]}>
+          با گوش دادن به جلسه‌های موجود و کسب امتیاز، جلسه‌های جدید برای شما قابل دسترس می‌شود.
         </Text>
+        }
         <View style={{flex: 1}}>
           {this.state.sessions.filter(s => s.minProgress<=this.state.progress).map(this.renderCard)}
         </View>

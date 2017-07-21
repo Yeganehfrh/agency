@@ -137,7 +137,7 @@ class HomeScreen extends Component {
             <Text style={[styles.title,{textAlign: 'center', paddingBottom:0, marginBottom:0,paddingLeft: 5, paddingRight: 5, marginLeft:0, marginRight: 0},styles.rtl]}>
               هیپنوتیزم شناختی
             </Text>
-            <Text style={[styles.rtl, {fontSize:10, color: 'grey'}]}>نسخهٔ ۱.۰</Text>
+            <Text style={[styles.rtl, {fontSize:10, color: 'grey'}]}>نسخهٔ ۱.۲.۱</Text>
           </View>
 
           <Text style={[styles.instructions,styles.rtl,{margin: 10, backgroundColor: 'white', paddingRight: 30, paddingLeft: 30, textAlign:'left'}]}>
