@@ -117,7 +117,7 @@ export default class HypnosisApp extends Component {
           }
         });
       } catch (e) {
-        console.warn("While submitting",e);
+        console.error(e);
       }
     }
 

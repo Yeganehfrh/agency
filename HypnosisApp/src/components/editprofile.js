@@ -49,6 +49,7 @@ class EditProfileScreen extends Component {
 
   componentWillMount() {
     var self = this;
+
     global.storage.load({
       key: 'profile',
       autoSync: true
@@ -98,7 +99,9 @@ class EditProfileScreen extends Component {
       expires: null
     });
       
-    global.saveProgress(4, "profileEdited");
+    if (this.state.phone!==undefined && this.state.name!==undefined
+      && this.state.phone!=="" && this.state.name!="")
+      global.saveProgress(4, "profileEdited");
     this.props.submit(payload)
     this.props.navigation.navigate('Home');
   }

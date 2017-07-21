@@ -165,7 +165,7 @@ class HomeScreen extends Component {
             thickness={20}
             direction='counter-clockwise'
             size={Dimensions.get('window').width/2}
-            progress={this.state.progress}
+            progress={(this.state.progress>100)?100:this.state.progress}
             formatText={(progress) => this.getProgressText(progress)}
             indeterminate={this.state.indeterminate}
             showsText={true} />
@@ -196,7 +196,7 @@ class HomeScreen extends Component {
   }
 
   getProgressText() {
-    return <Text style={styles.rtl}>{this.toPersianDigits(this.state.progress*100)}</Text>
+    return <Text style={styles.rtl}>{this.toPersianDigits(Math.round(this.state.progress*100))}</Text>
   }
 
   updateProgress(progress) {
