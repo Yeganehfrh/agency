@@ -63,9 +63,7 @@ class EditProfileScreen extends Component {
       self.setState({phone: ret.phone});
       if ((ret.name===undefined || ret.name.trim().length===0) && (ret.phone===undefined || ret.phone.trim().length===0)) {
         self.setState({firstTime: true});
-        console.warn("First Time")
       }
-      console.warn(ret.phone.trim().length, ret.name.trim().length)
     }).catch(err => {
       self.setState({firstTime: true});
       //console.error(err);
