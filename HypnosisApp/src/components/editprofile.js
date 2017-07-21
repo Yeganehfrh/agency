@@ -43,7 +43,8 @@ class EditProfileScreen extends Component {
       gender: "",
       phone: "",
       email: "",
-      askToEditProfile: ""
+      askToEditProfile: "",
+      firstTime: true
     }
   }
 
@@ -54,12 +55,19 @@ class EditProfileScreen extends Component {
       key: 'profile',
       autoSync: true
     }).then(ret => {
+      self.setState({firstTime: false});
       self.setState({name: ret.name});
       self.setState({age: ret.age});
       self.setState({gender: ret.gender});
       self.setState({email: ret.email});
       self.setState({phone: ret.phone});
+      if ((ret.name===undefined || ret.name.trim.length==0) && (ret.phone===undefined || ret.phone.trim.length==0)) {
+        self.setState({firstTime: true});
+        console.warn("First Time")
+      }
+      console.warn(ret.name, ret.phone)
     }).catch(err => {
+      self.setState({firstTime: true});
       //console.error(err);
     });
   }
@@ -76,13 +84,14 @@ class EditProfileScreen extends Component {
   }
 
   submitProfile() {
-    
+
     var payload = {
       name: this.state.name,
       gender: this.state.gender,
       email: this.state.email,
       phone: this.state.phone,
       age: this.state.age,
+      firstTime: false,
       timestamp: Math.floor(Date.now())}
 
     global.storage.save({
@@ -98,10 +107,13 @@ class EditProfileScreen extends Component {
       data: payload,
       expires: null
     });
-      
+           
     if (this.state.phone!==undefined && this.state.name!==undefined
-      && this.state.phone!=="" && this.state.name!="")
+      && this.state.phone.trim()!=="" && this.state.name.trim()!=""
+      && this.state.firstTime) {
       global.saveProgress(4, "profileEdited");
+    }
+
     this.props.submit(payload)
     this.props.navigation.navigate('Home');
   }

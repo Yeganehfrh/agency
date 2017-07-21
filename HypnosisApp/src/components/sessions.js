@@ -35,10 +35,23 @@ export default class SessionsScreen extends Component {
     super(props);
     this.state = {
       sessions: [],
-      refreshing: false
+      refreshing: false,
+      progress: 0
     }
     this.reloadSessions = this.reloadSessions.bind(this);
     this.openSession = this.openSession.bind(this);
+
+    global.storage.getAllDataForKey('progress').then(items => {
+      var progress = 0;
+      items.forEach(item => {
+        progress += item.progress
+      });
+      this.setState({progress: progress});
+    }).catch(err => {
+      console.error(err);
+      this.setState({progress: progress});
+    })
+
     this.reloadSessions(false);
   }
 
@@ -109,8 +122,11 @@ export default class SessionsScreen extends Component {
             onRefresh={this._onRefresh.bind(this)}
           />
         }>
+        <Text style={[styles.rtl, styles.instructions]}>
+          با تکمیل اطلاعات تماس و گوش دادن به جلسه‌های موجود، جلسه‌های جدید برای شما قابل دسترس می‌شود.
+        </Text>
         <View style={{flex: 1}}>
-          {this.state.sessions.map(this.renderCard)}
+          {this.state.sessions.filter(s => s.minProgress<=this.state.progress).map(this.renderCard)}
         </View>
         {!this.state.refreshing &&
           <Button
