@@ -38,6 +38,18 @@ class ContactUsScreen extends Component {
     }
   }
 
+  componentWillMount() {
+    var self = this;
+    global.storage.load({
+      key: 'profile',
+      autoSync: true
+    }).then(ret => {
+      self.setState({name: ret.name});
+    }).catch(err => {
+      //console.error(err);
+    });
+  }
+
   openUrl(url) {
     Linking.openURL(url).catch(err => console.error('An error occurred', err));
   }
@@ -68,6 +80,7 @@ class ContactUsScreen extends Component {
             placeholderTextColor={"lightgrey"}
             placeholder={"نام شما (اختیاری)"}
             multiline={false}
+            value={this.state.name}
             style={[styles.rtl,{color:'black', margin:10}]}/>
 
           <Text style={[styles.questionText,{paddingBottom: 0}]}>پیام شما</Text>

@@ -172,6 +172,19 @@ global.storage = new Storage({
 	}
 })
 
+global.saveProgress = function(progress, reason) {
+  global.storage.save({
+    key: 'progress',
+    id: Math.floor(Date.now()),
+    expires: null,
+    data: {
+      progress: progress,
+      reason: reason,
+      userId: '-',
+      timestamp: Math.floor(Date.now())
+    }
+  });
+}
 
 loadSessions = function(params) {
   //global.storage.remove({key:'sessions'});

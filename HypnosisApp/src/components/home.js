@@ -39,7 +39,8 @@ class HomeScreen extends Component {
     this.state = {
       progress: 0,
       indeterminate: false,
-      preventRTLWorkaroundRestart: false
+      preventRTLWorkaroundRestart: false,
+      askToEditProfile: true
     };
 
   }
@@ -75,6 +76,21 @@ class HomeScreen extends Component {
     Linking.openURL(url).catch(err => console.error('An error occurred', err));
   }
 
+  showProfileEdit() {
+    
+    var self = this;
+
+    global.storage.load({
+      key: 'askToEditProfile'
+    }).then(ret => {      
+      if (ret.askToEditProfile)
+        this.props.navigation.navigate("EditProfile");
+    }).catch(err => {
+      if (this.state.preventRTLWorkaroundRestart && this.state.askToEditProfile)
+        this.props.navigation.navigate("EditProfile");
+    });
+  }
+
   componentWillMount() {
 
     var self = this;
@@ -87,7 +103,14 @@ class HomeScreen extends Component {
   
       if (!ret.preventRTLWorkaroundRestart && !I18nManager.isRTL) {
         this.props.navigation.navigate('Restart');
+        return;
       }
+      
+      global.storage.load({
+        key: 'askToEditProfile'
+      }).then(ret => {
+        self.setState({askToEditProfile: res.askToEditProfile})
+      }).catch(err => {});
 
     }).catch(err => {
       global.storage.save({
@@ -100,9 +123,6 @@ class HomeScreen extends Component {
         this.props.navigation.navigate('Restart');
       }
     });
-
-
-
   }
 
   render() {
@@ -180,14 +200,22 @@ class HomeScreen extends Component {
   }
 
   updateProgress(progress) {
-    //TODO calc progress
-    setTimeout(() => {
-      this.setState({ progress: progress/100});
-    }, 500);
+    this.setState({ progress: progress/100});
   }
 
   componentDidMount() {
-    this.updateProgress(62);
+    this.showProfileEdit();
+    
+    global.storage.getAllDataForKey('progress').then(items => {
+      var progress = 0;
+      items.forEach(item => {
+        progress += item.progress
+      });
+      this.updateProgress(progress);
+    }).catch(err => {
+      console.error(err);
+      this.updateProgress(0);
+    })
   }
 }
 

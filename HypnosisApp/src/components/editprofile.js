@@ -42,7 +42,8 @@ class EditProfileScreen extends Component {
       age: "",
       gender: "",
       phone: "",
-      email: ""
+      email: "",
+      askToEditProfile: ""
     }
   }
 
@@ -58,8 +59,19 @@ class EditProfileScreen extends Component {
       self.setState({email: ret.email});
       self.setState({phone: ret.phone});
     }).catch(err => {
-      console.error(err);
+      //console.error(err);
     });
+  }
+
+  cancel() {
+    global.storage.save({
+      key: 'askToEditProfile',
+      data: {
+        askToEditProfile: false
+      },
+      expires: null
+    });
+    this.props.navigation.navigate('Home');
   }
 
   submitProfile() {
@@ -72,11 +84,21 @@ class EditProfileScreen extends Component {
       age: this.state.age,
       timestamp: Math.floor(Date.now())}
 
+    global.storage.save({
+      key: 'askToEditProfile',
+      data: {
+        askToEditProfile: false
+      },
+      expires: null
+    });
+
     storage.save({
 			key: 'profile',
-			data: payload
+      data: payload,
+      expires: null
     });
       
+    global.saveProgress(4, "profileEdited");
     this.props.submit(payload)
     this.props.navigation.navigate('Home');
   }
@@ -157,7 +179,7 @@ class EditProfileScreen extends Component {
           <Button
             style={[styles.transparentButton, {flex:1}]}
             textStyle={[styles.buttonText, styles.rtl,{color: 'grey'}]}
-            onPress={() => this.props.navigation.navigate('Home')}>
+            onPress={() => {this.cancel()}}>
             بازگشت
           </Button>
 

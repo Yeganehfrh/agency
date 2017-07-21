@@ -56,8 +56,10 @@ class PlayerScreen extends Component {
     this.setState({ isPlaying: true},function() {
       this.props.submit({session: self.session.id, action: 'played', timestamp: Math.floor(Date.now())})
       self.audio.play((success) => {
+        global.saveProgress(21, "sessionFinished");
         this.props.submit({session: self.session.id, action: 'finished', timestamp: Math.floor(Date.now())})
         if (success && this.session && this.session.postSurvey && this.session.postSurvey.questions.length>0) {
+        
             this.props.navigation.navigate('Questions',{postSession: true, session: this.session});
         } else {
           this.props.navigation.navigate('Sessions');

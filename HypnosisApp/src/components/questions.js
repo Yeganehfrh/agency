@@ -50,10 +50,12 @@ class QuestionsScreen extends Component {
 
   continue = () => {
     this.props.submit(this.state.answers)
-    if (this.state.postSession)
+    if (this.state.postSession) {
+      global.saveProgress(10, "postSurveyDone");
       this.props.navigation.navigate('Sessions');      
-    else
+    } else {
       this.props.navigation.navigate('SessionInfo',{session: this.state.session})
+    }
   }
 
   updateAnswers = (qIndex, qId, value) => {
