@@ -61,11 +61,11 @@ class EditProfileScreen extends Component {
       self.setState({gender: ret.gender});
       self.setState({email: ret.email});
       self.setState({phone: ret.phone});
-      if ((ret.name===undefined || ret.name.trim.length==0) && (ret.phone===undefined || ret.phone.trim.length==0)) {
+      if ((ret.name===undefined || ret.name.trim().length===0) && (ret.phone===undefined || ret.phone.trim().length===0)) {
         self.setState({firstTime: true});
         console.warn("First Time")
       }
-      console.warn(ret.name, ret.phone)
+      console.warn(ret.phone.trim().length, ret.name.trim().length)
     }).catch(err => {
       self.setState({firstTime: true});
       //console.error(err);
