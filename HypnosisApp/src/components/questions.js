@@ -59,21 +59,27 @@ class QuestionsScreen extends Component {
   }
 
   updateAnswers = (qIndex, qId, value) => {
+    console.warn("updating ", qIndex, qId, value);
     var {answers, q} = this.state;
-    if (answers.length<qIndex+1)
-      answers.push({question: 0, value: 0})
     answers[qIndex] = {question: qId, value: value}
     q[qIndex] = value
     this.setState({answers:answers, q: q});
   }
 
   componentDidMount() {
+    var answers = [{question: 99, value: ''}];
     if (this.state.postSession) {
+      var qs = this.props.navigation.state.params.session.postSurvey.questions;
+      qs.map((o, i) => answers.push({question: o.id, value: 1}))
       this.setState({
+        answers: answers,
         survey: this.props.navigation.state.params.session.postSurvey,
-        questions: this.props.navigation.state.params.session.postSurvey.questions});
+        questions: qs});
     } else {
+      var qs = this.props.navigation.state.params.session.preSurvey.questions;
+      qs.map((o, i) => answers.push({question: o.id, value: 1}))
       this.setState({
+        answers: answers,
         survey: this.props.navigation.state.params.session.preSurvey,
         questions: this.props.navigation.state.params.session.preSurvey.questions});
     }
@@ -87,10 +93,13 @@ class QuestionsScreen extends Component {
 
   renderQuestion = (question, qIndex) => {
   
+    //this.updateAnswers(qIndex, question.id, "0");
+
     return(
         <View style={styles.container} key={question.id}>
             <Text style={styles.questionText}>{question.content}</Text>
-            <Picker selectedValue={this.state.q[qIndex]} onValueChange={(value, index) => this.updateAnswers(qIndex, question.id, value)}
+            <Picker selectedValue={this.state.q[qIndex]}
+              onValueChange={(value, index) => this.updateAnswers(qIndex, question.id, value)}
               itemStyle={styles.questionText}>
               {question.options.map((o,i) => this.renderOptions(o,i))}
             </Picker>
