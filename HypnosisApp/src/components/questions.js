@@ -122,7 +122,7 @@ class QuestionsScreen extends Component {
 
         {this.state.postSession && (
           <KeyboardAvoidingView>
-            <Text style={[styles.questionText,{paddingBottom: 0}]}>در چند خط به طور خلاصه تجربهٔ خود از این جلسه را بنویسید.</Text>
+            <Text style={[styles.questionText,{paddingBottom: 0}]}>در حداکثر سه دقیقه، به طور خلاصه در چند خط بگویید چه اتفاقی از زمان شروع نگاه کردن به نشانه افتاد.</Text>
             <TextInput
               onChangeText={(text) => this.updateAnswers(0, 99, text)} // question.id=99
               numberOfLines={4}
