@@ -120,16 +120,18 @@ class EditProfileScreen extends Component {
     const { navigate } = this.props.navigation;
     return (
       <ScrollView>
-        <Markdown markdownStyles={{block: {padding: 10},text:{fontSize: 14, color: 'black', fontFamily:'samim'},strong: {fontFamily: 'samim'},h1:{padding: 10, paddingTop: 20, fontSize: 22, color:'grey',fontFamily:'samim'}}}>
+        <Markdown markdownStyles={{block: {backgroundColor: 'white', padding:10, margin: 10},text:{fontSize: 13, color: 'black', fontFamily:'samim'},strong: {fontFamily: 'samim'},h1:{padding: 10, paddingTop: 20, fontSize: 22, color:'grey',fontFamily:'samim'}}}>
           {
           '# اطلاعات تماس' +
           '\n\n' +
-          'تکمیل این اطلاعات اختیاری است و تنها برای شرکت در قرعه‌کشی مورد استفاده قرار می‌گیرد.' +
-          ' برای اطلاع از شرایط دریافت جایزه به صفحهٔ «راهنما» مراجعه نمایید.' +
-          ' جهت رعایت حریم خصوصی شما، این اطلاعات قابل اتصال به پاسخ‌های شما به پرسش‌نامه‌های جلسه‌ها و امتیازهای شما نیست.' +
+          'تکمیل این اطلاعات اختیاری است و تنها برای اعلام برندگان مورد استفاده قرار می‌گیرد.' +
+          ' برای اطلاع از شرایط شرکت در قرعه‌کشی به صفحهٔ «راهنما» مراجعه نمایید.' +
+          '\n'+
+          'جهت رعایت حریم خصوصی شما، این اطلاعات قابل اتصال به پاسخ‌های شما، امتیازهای شما و دیگر اطلاعات جلسه‌ها نیست، و بعد از اعلام نتایج از بین خواهد رفت.' +
           '\n\n'
           }
         </Markdown>
+
         <KeyboardAvoidingView behavior={'padding'}>
           <Text style={[styles.questionText,{paddingBottom: 0}]}>نام</Text>
           <TextInput
@@ -139,33 +141,6 @@ class EditProfileScreen extends Component {
             multiline={false}
             value={this.state.name}
             style={[styles.rtl,{color:'black', margin:10}]}/>
-
-          <View style={{flex:1, flexDirection: 'row'}}>
-            <View style={{flex:1, flexDirection: 'column'}}>
-            <Text style={[styles.questionText,{paddingBottom: 0}]}>جنسیت</Text>
-            <Picker selectedValue={this.state.gender}
-              onValueChange={(value, index) => this.setState({gender: value})}
-              itemStyle={styles.questionText}>
-              <Picker.Item label="زن" value="female" key="1" />
-              <Picker.Item label="مرد" value="male" key="2" />
-              <Picker.Item label="تمایلی به اعلام ندارم" value="none" key="3" />
-            </Picker>
-            </View>
-            <View style={{flex:1, flexDirection: 'column'}}>
-            <Text style={[styles.questionText,{paddingBottom: 0}]}>سن</Text>
-            <Picker selectedValue={this.state.age}
-              onValueChange={(value, index) => this.setState({age: value})}
-              itemStyle={styles.questionText}>
-              <Picker.Item label="زیر ۱۸ سال" value="-18" key="1" />
-              <Picker.Item label="۱۸-۲۵" value="18-25" key="2" />
-              <Picker.Item label="۲۶-۳۲" value="26-32" key="3" />
-              <Picker.Item label="۳۳-۴۰" value="33-40" key="4" />
-              <Picker.Item label="۴۱-۵۰" value="41-50" key="5" />
-              <Picker.Item label="۵۱-۶۵" value="51-65" key="6" />
-              <Picker.Item label="بالاتر از ۶۶ سال" value="+66" key="7" />
-            </Picker>
-            </View>
-          </View>
 
           <Text style={[styles.questionText,{paddingBottom: 0}]}>پست‌الکترونیکی</Text>
           <TextInput
