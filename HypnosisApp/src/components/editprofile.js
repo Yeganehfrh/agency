@@ -39,10 +39,7 @@ class EditProfileScreen extends Component {
     super(props);
     this.state = {
       name: "",
-      age: "",
-      gender: "",
-      phone: "",
-      email: "",
+      emailPhone: "",
       askToEditProfile: "",
       firstTime: true
     }
@@ -57,11 +54,8 @@ class EditProfileScreen extends Component {
     }).then(ret => {
       self.setState({firstTime: false});
       self.setState({name: ret.name});
-      self.setState({age: ret.age});
-      self.setState({gender: ret.gender});
-      self.setState({email: ret.email});
-      self.setState({phone: ret.phone});
-      if ((ret.name===undefined || ret.name.trim().length===0) && (ret.phone===undefined || ret.phone.trim().length===0)) {
+      self.setState({emailPhone: ret.emailPhone});
+      if ((ret.name===undefined || ret.name.trim().length===0) && (ret.emailPhone===undefined || ret.emailPhone.trim().length===0)) {
         self.setState({firstTime: true});
       }
     }).catch(err => {
@@ -85,10 +79,7 @@ class EditProfileScreen extends Component {
 
     var payload = {
       name: this.state.name,
-      gender: this.state.gender,
-      email: this.state.email,
-      phone: this.state.phone,
-      age: this.state.age,
+      emailPhone: this.state.emailPhone,
       firstTime: false,
       timestamp: Math.floor(Date.now())}
 
@@ -105,11 +96,13 @@ class EditProfileScreen extends Component {
       data: payload,
       expires: null
     });
-           
-    if (this.state.phone!==undefined && this.state.name!==undefined
-      && this.state.phone.trim()!=="" && this.state.name.trim()!=""
-      && this.state.firstTime) {
-      global.saveProgress(4, "profileEdited");
+        
+    if (this.state.firstTime) {
+      if (this.state.emailPhone!==undefined && this.state.name!==undefined
+        && this.state.emailPhone.trim()!=="" && this.state.name.trim()!="") {
+        global.saveProgress(4, "profileEdited");
+      }
+      global.saveProgress(1, "installApp");
     }
 
     this.props.submit(payload)
@@ -142,23 +135,14 @@ class EditProfileScreen extends Component {
             value={this.state.name}
             style={[styles.rtl,{color:'black', margin:10}]}/>
 
-          <Text style={[styles.questionText,{paddingBottom: 0}]}>پست‌الکترونیکی</Text>
+          <Text style={[styles.questionText,{paddingBottom: 0}]}>شماره تماس</Text>
           <TextInput
-            onChangeText={(text) => this.setState({email: text})}
+            onChangeText={(text) => this.setState({emailPhone: text})}
             placeholderTextColor={"lightgrey"}
-            placeholder={"پست الکترونیکی"}
+            placeholder={"شماره موبایل (یا پست الکترونیکی)"}
             multiline={false}
             keyboardType={'email-address'}
-            value={this.state.email}
-            style={[styles.rtl,{color:'black', margin:10}]}/>
-
-          <Text style={[styles.questionText,{paddingBottom: 0}]}>تلفن</Text>
-          <TextInput
-            onChangeText={(text) => this.setState({phone: text})}
-            placeholderTextColor={"lightgrey"}
-            placeholder={"شمارهٔ تلفن همراه"}
-            multiline={false}
-            value={this.state.phone}
+            value={this.state.emailPhone}
             style={[styles.rtl,{color:'black', margin:10}]}/>
 
         </KeyboardAvoidingView>
