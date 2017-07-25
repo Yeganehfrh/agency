@@ -34,7 +34,13 @@ export default class HelpScreen extends Component {
       <ScrollView style={styles.container}>
         
         <View style={{flex:1, alignItems: 'center'}}>
-          <Image style={{width: 100, height: 100}} source={require('../images/utlogo.png')}/>
+          <View style={{flex:1, flexDirection: 'row'}}>
+            <Image style={{width: 100, height: 100}} source={require('../images/utlogo.png')}/>
+            <Image style={{width: 100, height: 100}} source={require('../images/logo.png')}/>
+          </View>
+          <Text style={[styles.rtl, styles.instructions, {padding: 0, paddingTop: 10, margin: 0, color: 'grey'}]}>آزمایشگاه شناختی</Text>
+          <Text style={[styles.rtl, styles.instructions, {padding: 0, margin: 0, color: 'grey'}]}>دانشکدهٔ روان‌شناسی و علوم تربیتی</Text>
+          <Text style={[styles.rtl, styles.instructions, {padding: 0, margin: 0, color: 'grey'}]}>دانشگاه تهران</Text>
         </View>
         <Markdown markdownStyles={{block: {padding: 10},text:{fontSize: 16, color: 'black', fontFamily:'samim'},strong: {fontFamily: 'samim'},h3:{padding: 10, paddingTop: 20, fontSize: 22, color:'grey',fontFamily:'samim'}}}>
           {

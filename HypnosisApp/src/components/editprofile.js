@@ -41,7 +41,7 @@ class EditProfileScreen extends Component {
       name: "",
       emailPhone: "",
       askToEditProfile: "",
-      firstTime: true
+      firstTime: true //TODO store number of pressing submit instead of firstTime only
     }
   }
 
@@ -60,7 +60,7 @@ class EditProfileScreen extends Component {
       }
     }).catch(err => {
       self.setState({firstTime: true});
-      //console.error(err);
+      console.error(err);
     });
   }
 
@@ -99,10 +99,11 @@ class EditProfileScreen extends Component {
         
     if (this.state.firstTime) {
       if (this.state.emailPhone!==undefined && this.state.name!==undefined
-        && this.state.emailPhone.trim()!=="" && this.state.name.trim()!="") {
+        && this.state.emailPhone.trim()!=="" && this.state.name.trim()!=="") {
         global.saveProgress(4, "profileEdited");
       }
       global.saveProgress(1, "installApp");
+      this.setState({firstTime: false});
     }
 
     this.props.submit(payload)
@@ -120,7 +121,8 @@ class EditProfileScreen extends Component {
           'تکمیل این اطلاعات اختیاری است و تنها برای اعلام برندگان مورد استفاده قرار می‌گیرد.' +
           ' برای اطلاع از شرایط شرکت در قرعه‌کشی به صفحهٔ «راهنما» مراجعه نمایید.' +
           '\n'+
-          'جهت رعایت حریم خصوصی شما، این اطلاعات قابل اتصال به پاسخ‌های شما، امتیازهای شما و دیگر اطلاعات جلسه‌ها نیست، و بعد از اعلام نتایج از بین خواهد رفت.' +
+          'به دلیل محدودیت‌های اخلاقی پژوهش‌های آکادمیک، فشردن دکمهٔ «تایید» برای اولین بار به منزلهٔ شرکت شما در این پژوهش تلقی می‌شود. ' +
+          'جهت رعایت حریم خصوصی شما، این اطلاعات قابل اتصال به پاسخ‌های شما، امتیازهایتان و دیگر اطلاعات جلسه‌ها نیست، و بعد از اعلام نتایج از بین خواهد رفت.' +
           '\n\n'
           }
         </Markdown>
@@ -159,7 +161,7 @@ class EditProfileScreen extends Component {
             style={styles.positive}
             textStyle={styles.buttonText}
             onPress={() => {this.submitProfile()}}>
-              ذخیره شود
+              تایید
           </Button>
         </View>
 

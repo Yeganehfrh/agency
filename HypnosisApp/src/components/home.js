@@ -12,6 +12,8 @@ import {
   Linking
 } from 'react-native';
 
+import Markdown from 'react-native-easy-markdown';
+
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 
 import ProgressCircle from 'react-native-progress/Circle';
@@ -40,7 +42,9 @@ class HomeScreen extends Component {
       progress: 0,
       indeterminate: false,
       preventRTLWorkaroundRestart: false,
-      askToEditProfile: true
+      askToEditProfile: true,
+      version: 7,
+      updateMessage: ''
     };
 
   }
@@ -91,6 +95,19 @@ class HomeScreen extends Component {
     });
   }
 
+  checkUpdate(currentVersion) {
+    fetch('http://cog.onto.ir/hypnosis_updates.json')
+    .then((response) => response.json())
+    .then((json) => {
+        this.setState({updateMessage: json[currentVersion]});
+        console.warn(json[currentVersion])
+    })
+    .catch((error) => {
+      this.setState({updateMessage: ''});
+      console.error(error);
+    });
+  }
+
   componentWillMount() {
 
     var self = this;
@@ -111,7 +128,8 @@ class HomeScreen extends Component {
       }).then(ret => {
         self.setState({askToEditProfile: res.askToEditProfile})
       }).catch(err => {});
-
+      
+      self.checkUpdate(this.state.version.toString());
     }).catch(err => {
       global.storage.save({
         key: 'configs',
@@ -127,17 +145,23 @@ class HomeScreen extends Component {
 
   render() {
 
+    versionFa = this.toPersianDigits(this.state.version);
     return (
       <ScrollView style={styles.container}>
+        {this.state.updateMessage!==undefined && this.state.updateMessage.length>0 && (
+        <Markdown style={{margin:10, marginTop: 0, backgroundColor: 'red'}} markdownStyles={{block: {padding: 10},text:{fontSize: 13, color: 'white', fontFamily:'samim'},strong: {fontFamily: 'samim'},h3:{padding: 10, paddingTop: 20, fontSize: 18, color:'grey',fontFamily:'samim'}}}>
+          {this.state.updateMessage}
+        </Markdown>
+        )}
         <View style={{alignItems: 'center'}}>
           <View style={{flex:1, flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
             <Image
-              style={{width: 100, height: 100}}
+              style={{width: 75, height: 75}}
               source={require('../images/logo.png')}/>
             <Text style={[styles.title,{textAlign: 'center', paddingBottom:0, marginBottom:0,paddingLeft: 5, paddingRight: 5, marginLeft:0, marginRight: 0},styles.rtl]}>
               هیپنوتیزم شناختی
             </Text>
-            <Text style={[styles.rtl, {fontSize:10, color: 'grey'}]}>نسخهٔ ۶</Text>
+            <Text style={[styles.rtl, {fontSize:10, color: 'grey'}]}>نسخهٔ {versionFa}</Text>
           </View>
 
           <Text style={[styles.instructions,styles.rtl,{margin: 10, backgroundColor: 'white', paddingRight: 30, paddingLeft: 30, textAlign:'left'}]}>
