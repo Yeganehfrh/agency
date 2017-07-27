@@ -120,7 +120,7 @@ class QuestionsScreen extends Component {
           )
         }
 
-        {this.state.postSession && (
+        {this.state.postSession && (this.state.session.id!==101) && (
           <KeyboardAvoidingView>
             <Text style={[styles.questionText,{paddingBottom: 0}]}>در حداکثر سه دقیقه، به طور خلاصه در چند خط بگویید چه اتفاقی از زمان شروع نگاه کردن به نشانه افتاد.</Text>
             <TextInput

@@ -43,7 +43,7 @@ class HomeScreen extends Component {
       indeterminate: false,
       preventRTLWorkaroundRestart: false,
       askToEditProfile: true,
-      version: 7,
+      version: 8,
       updateMessage: ''
     };
 
@@ -185,8 +185,8 @@ class HomeScreen extends Component {
         <View style={styles.chartContainer}>
           <Text style={[styles.title,styles.rtl]}>پیشرفت شما</Text>
           <ProgressCircle 
-            color="#2ecc71"
-            thickness={20}
+            color="#c83c50"
+            thickness={30}
             direction='counter-clockwise'
             size={Dimensions.get('window').width/2}
             progress={(this.state.progress>100)?100:this.state.progress}

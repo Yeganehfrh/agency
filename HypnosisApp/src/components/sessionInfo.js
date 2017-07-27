@@ -40,6 +40,20 @@ export default class SessionInfoScreen extends Component {
     if (this.state.downloadJobId>-1)
       RNFS.stopDownload(this.state.downloadJobId)
   }
+
+  toPersianDigits(num) {
+    var res = '';
+    var pos;
+    var sNum = num.toString()
+    persianNumbers = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
+
+    for (var i=0; i < sNum.length; i++)
+      if ((pos = persianNumbers[sNum.charAt(i)] ))
+        res += pos;
+      else
+        res += sNum.charAt(i);
+    return res;
+  }
   
   downloadSessionFile(session) {
     const downloadDest = RNFS.DocumentDirectoryPath + '/' + session.audioFile;
@@ -118,7 +132,7 @@ export default class SessionInfoScreen extends Component {
           </Button>
         </View>
         {!this.state.audioIsAvailable &&
-          <Text style={[styles.instructions,styles.rtl, {color:'grey'}]}>در حال دانلود صوت... {this.state.progress} درصد</Text>
+          <Text style={[styles.instructions,styles.rtl, {color:'grey'}]}>در حال دانلود صوت... {this.toPersianDigits(this.state.progress)} درصد</Text>
         }
       </ScrollView>
     );
