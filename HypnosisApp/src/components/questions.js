@@ -98,11 +98,13 @@ class QuestionsScreen extends Component {
     return(
         <View style={styles.container} key={question.id}>
             <Text style={styles.questionText}>{question.content}</Text>
+            {question.options!==undefined && question.options.length>0 && (
             <Picker selectedValue={this.state.q[qIndex]}
               onValueChange={(value, index) => this.updateAnswers(qIndex, question.id, value)}
               itemStyle={styles.questionText}>
               {question.options.map((o,i) => this.renderOptions(o,i))}
             </Picker>
+            )}
         </View>
     );
   }
