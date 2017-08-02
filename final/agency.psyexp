@@ -29,18 +29,17 @@
   <Routines>
     <Routine name="intro_1">
       <CodeComponent name="init_serial_port">
-        <Param name="Begin Experiment" updates="constant" val="# DEBUG: On macOS, first run 'socat -d -d pty,raw,echo=0 pty,raw,echo=0' to simulate ports&amp;#10;&amp;#10;# import serial module&amp;#10;import serial&amp;#10;&amp;#10;# This is for macOS&amp;#10;serial = serial.Serial('/dev/ttys001', 57600, rtscts=True, dsrdtr=True)&amp;#10;&amp;#10;# This is for Windows. You must have a COM6 in your device manager&amp;#10;#serial = serial.Serial('COM6', 57600, rtscts=True, dsrdtr=True)&amp;#10;&amp;#10;# Write start of experiment marker&amp;#10;serial.write(chr(1))" valType="extendedCode"/>
+        <Param name="Begin Experiment" updates="constant" val="# DEBUG: On macOS, first run 'socat -d -d pty,raw,echo=0 pty,raw,echo=0' to simulate ports&amp;#10;&amp;#10;# import serial module&amp;#10;import serial&amp;#10;&amp;#10;# This is for macOS&amp;#10;#serial = serial.Serial('/dev/ttys001', 57600, rtscts=True, dsrdtr=True)&amp;#10;&amp;#10;# This is for Windows. You must have a COM6 in your device manager&amp;#10;serial = serial.Serial('COM6', 57600, rtscts=True, dsrdtr=True)&amp;#10;&amp;#10;# Write start of experiment marker&amp;#10;serial.write(chr(253))" valType="extendedCode"/>
         <Param name="name" updates="None" val="init_serial_port" valType="code"/>
-        <Param name="Begin Routine" updates="constant" val="# Write start of routine marker&amp;#10;serial.write(chr(1))" valType="extendedCode"/>
+        <Param name="Begin Routine" updates="constant" val="# Write start of routine marker&amp;#10;serial.write(chr(254))" valType="extendedCode"/>
         <Param name="End Routine" updates="constant" val="" valType="extendedCode"/>
-        <Param name="End Experiment" updates="constant" val="# Close serial port&amp;#10;serial.close()" valType="extendedCode"/>
+        <Param name="End Experiment" updates="constant" val="# Close serial port&amp;#10;serial.write(chr(255))&amp;#10;serial.close()" valType="extendedCode"/>
         <Param name="Each Frame" updates="constant" val="" valType="extendedCode"/>
       </CodeComponent>
       <ImageComponent name="intro_image_1">
         <Param name="opacity" updates="constant" val="1" valType="code"/>
         <Param name="flipVert" updates="constant" val="False" valType="bool"/>
         <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
-        <Param name="flipHoriz" updates="constant" val="False" valType="bool"/>
         <Param name="name" updates="None" val="intro_image_1" valType="code"/>
         <Param name="color" updates="constant" val="$[1,1,1]" valType="str"/>
         <Param name="stopVal" updates="constant" val="" valType="code"/>
@@ -55,6 +54,7 @@
         <Param name="ori" updates="constant" val="0" valType="code"/>
         <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
         <Param name="startVal" updates="None" val="0.0" valType="code"/>
+        <Param name="flipHoriz" updates="constant" val="False" valType="bool"/>
         <Param name="image" updates="constant" val="images/1intro_1.png" valType="str"/>
         <Param name="size" updates="constant" val="(0.8, 0.8)" valType="code"/>
       </ImageComponent>
@@ -80,7 +80,6 @@
         <Param name="opacity" updates="constant" val="1" valType="code"/>
         <Param name="flipVert" updates="constant" val="False" valType="bool"/>
         <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
-        <Param name="flipHoriz" updates="constant" val="False" valType="bool"/>
         <Param name="name" updates="None" val="intro_image_2" valType="code"/>
         <Param name="color" updates="constant" val="$[1,1,1]" valType="str"/>
         <Param name="stopVal" updates="constant" val="" valType="code"/>
@@ -95,6 +94,7 @@
         <Param name="ori" updates="constant" val="0" valType="code"/>
         <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
         <Param name="startVal" updates="None" val="0.0" valType="code"/>
+        <Param name="flipHoriz" updates="constant" val="False" valType="bool"/>
         <Param name="image" updates="constant" val="images/2intro_2.png" valType="str"/>
         <Param name="size" updates="constant" val="(0.8, 0.8)" valType="code"/>
       </ImageComponent>
@@ -120,7 +120,6 @@
         <Param name="opacity" updates="constant" val="1" valType="code"/>
         <Param name="flipVert" updates="constant" val="False" valType="bool"/>
         <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
-        <Param name="flipHoriz" updates="constant" val="False" valType="bool"/>
         <Param name="name" updates="None" val="intro_image_3" valType="code"/>
         <Param name="color" updates="constant" val="$[1,1,1]" valType="str"/>
         <Param name="stopVal" updates="constant" val="" valType="code"/>
@@ -135,6 +134,7 @@
         <Param name="ori" updates="constant" val="0" valType="code"/>
         <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
         <Param name="startVal" updates="None" val="0.0" valType="code"/>
+        <Param name="flipHoriz" updates="constant" val="False" valType="bool"/>
         <Param name="image" updates="constant" val="images/3intro_3.png" valType="str"/>
         <Param name="size" updates="constant" val="(0.8, 0.8)" valType="code"/>
       </ImageComponent>
@@ -160,7 +160,6 @@
         <Param name="opacity" updates="constant" val="1" valType="code"/>
         <Param name="flipVert" updates="constant" val="False" valType="bool"/>
         <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
-        <Param name="flipHoriz" updates="constant" val="False" valType="bool"/>
         <Param name="name" updates="None" val="start_practice_image" valType="code"/>
         <Param name="color" updates="constant" val="$[1,1,1]" valType="str"/>
         <Param name="stopVal" updates="constant" val="" valType="code"/>
@@ -175,6 +174,7 @@
         <Param name="ori" updates="constant" val="0" valType="code"/>
         <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
         <Param name="startVal" updates="None" val="0" valType="code"/>
+        <Param name="flipHoriz" updates="constant" val="False" valType="bool"/>
         <Param name="image" updates="constant" val="images/4start_practice.png" valType="str"/>
         <Param name="size" updates="constant" val="(0.8, 0.8)" valType="code"/>
       </ImageComponent>
@@ -200,9 +200,9 @@
         <Param name="Begin Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="name" updates="None" val="calc_delay_1" valType="code"/>
         <Param name="Begin Routine" updates="constant" val="delay = 0.0&amp;#10;outcome_time = 4.4 # initial value, will be changed&amp;#10;timeout = True&amp;#10;if agency_level==&quot;low&quot;:&amp;#10;  delay = 1.0&amp;#10;&amp;#10;trial_marker_sent = False&amp;#10;" valType="extendedCode"/>
-        <Param name="End Routine" updates="constant" val="" valType="extendedCode"/>
+        <Param name="End Routine" updates="constant" val="serial.write(chr(trials_loop.thisN+1))&amp;#10;" valType="extendedCode"/>
         <Param name="End Experiment" updates="constant" val="" valType="extendedCode"/>
-        <Param name="Each Frame" updates="constant" val="&amp;#10;# Send single serial trigger for the current trial (when fixation starts)&amp;#10;if fixation.status==STARTED and (not trial_marker_sent):&amp;#10;  trial_marker_sent = True&amp;#10;  serial.write(chr(trials_loop.thisN))&amp;#10;&amp;#10;# If subject pressed any key, change outcome_time according to the delay value&amp;#10;if not (respond_key.keys in ['', [], None]):&amp;#10;  outcome_time = 2.4 + respond_key.rt + delay&amp;#10;  timeout = False&amp;#10;" valType="extendedCode"/>
+        <Param name="Each Frame" updates="constant" val="&amp;#10;# Send single serial trigger for the current trial (when fixation starts)&amp;#10;if fixation.status==STARTED and (not trial_marker_sent):&amp;#10;  trial_marker_sent = True&amp;#10;  serial.write(chr(trials_loop.thisN+1))&amp;#10;&amp;#10;# If subject pressed any key, change outcome_time according to the delay value&amp;#10;if not (respond_key.keys in ['', [], None]):&amp;#10;  outcome_time = 2.4 + respond_key.rt + delay&amp;#10;  timeout = False&amp;#10;" valType="extendedCode"/>
       </CodeComponent>
       <TextComponent name="fixation">
         <Param name="opacity" updates="constant" val="1" valType="code"/>
@@ -316,7 +316,6 @@
         <Param name="opacity" updates="constant" val="1" valType="code"/>
         <Param name="flipVert" updates="constant" val="False" valType="bool"/>
         <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
-        <Param name="flipHoriz" updates="constant" val="False" valType="bool"/>
         <Param name="name" updates="None" val="outcome_image" valType="code"/>
         <Param name="color" updates="constant" val="$[1,1,1]" valType="str"/>
         <Param name="stopVal" updates="constant" val="1.6" valType="code"/>
@@ -331,6 +330,7 @@
         <Param name="ori" updates="constant" val="0" valType="code"/>
         <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
         <Param name="startVal" updates="None" val="outcome_time" valType="code"/>
+        <Param name="flipHoriz" updates="constant" val="False" valType="bool"/>
         <Param name="image" updates="constant" val="images/8next_trial.png" valType="str"/>
         <Param name="size" updates="constant" val="(0.8, 0.8)" valType="code"/>
       </ImageComponent>
@@ -458,7 +458,6 @@
         <Param name="opacity" updates="constant" val="1" valType="code"/>
         <Param name="flipVert" updates="constant" val="False" valType="bool"/>
         <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
-        <Param name="flipHoriz" updates="constant" val="False" valType="bool"/>
         <Param name="name" updates="None" val="image" valType="code"/>
         <Param name="color" updates="constant" val="$[1,1,1]" valType="str"/>
         <Param name="stopVal" updates="constant" val="" valType="code"/>
@@ -473,6 +472,7 @@
         <Param name="ori" updates="constant" val="0" valType="code"/>
         <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
         <Param name="startVal" updates="None" val="0.5" valType="code"/>
+        <Param name="flipHoriz" updates="constant" val="False" valType="bool"/>
         <Param name="image" updates="constant" val="images/8end_of_practice.png" valType="str"/>
         <Param name="size" updates="constant" val="(0.8, 0.8)" valType="code"/>
       </ImageComponent>
@@ -498,7 +498,6 @@
         <Param name="opacity" updates="constant" val="1" valType="code"/>
         <Param name="flipVert" updates="constant" val="False" valType="bool"/>
         <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
-        <Param name="flipHoriz" updates="constant" val="False" valType="bool"/>
         <Param name="name" updates="None" val="rest_image_1" valType="code"/>
         <Param name="color" updates="constant" val="$[1,1,1]" valType="str"/>
         <Param name="stopVal" updates="constant" val="" valType="code"/>
@@ -513,6 +512,7 @@
         <Param name="ori" updates="constant" val="0" valType="code"/>
         <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
         <Param name="startVal" updates="None" val="0.0" valType="code"/>
+        <Param name="flipHoriz" updates="constant" val="False" valType="bool"/>
         <Param name="image" updates="constant" val="images/9rest.png" valType="str"/>
         <Param name="size" updates="constant" val="(0.8, 0.8)" valType="code"/>
       </ImageComponent>
@@ -538,7 +538,6 @@
         <Param name="opacity" updates="constant" val="1" valType="code"/>
         <Param name="flipVert" updates="constant" val="False" valType="bool"/>
         <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
-        <Param name="flipHoriz" updates="constant" val="False" valType="bool"/>
         <Param name="name" updates="None" val="thank_you_image" valType="code"/>
         <Param name="color" updates="constant" val="$[1,1,1]" valType="str"/>
         <Param name="stopVal" updates="constant" val="" valType="code"/>
@@ -553,6 +552,7 @@
         <Param name="ori" updates="constant" val="0" valType="code"/>
         <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
         <Param name="startVal" updates="None" val="0.0" valType="code"/>
+        <Param name="flipHoriz" updates="constant" val="False" valType="bool"/>
         <Param name="image" updates="constant" val="images/10thank_you.png" valType="str"/>
         <Param name="size" updates="constant" val="(0.8, 0.8)" valType="code"/>
       </ImageComponent>
@@ -596,7 +596,6 @@
         <Param name="opacity" updates="constant" val="1" valType="code"/>
         <Param name="flipVert" updates="constant" val="False" valType="bool"/>
         <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
-        <Param name="flipHoriz" updates="constant" val="False" valType="bool"/>
         <Param name="name" updates="None" val="practice_feedback_image" valType="code"/>
         <Param name="color" updates="constant" val="$[1,1,1]" valType="str"/>
         <Param name="stopVal" updates="constant" val="2.0" valType="code"/>
@@ -611,6 +610,7 @@
         <Param name="ori" updates="constant" val="0" valType="code"/>
         <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
         <Param name="startVal" updates="None" val="0.5" valType="code"/>
+        <Param name="flipHoriz" updates="constant" val="False" valType="bool"/>
         <Param name="image" updates="constant" val="images/7practice_timeout.png" valType="str"/>
         <Param name="size" updates="constant" val="(0.8, 0.8)" valType="code"/>
       </ImageComponent>
@@ -692,7 +692,6 @@
         <Param name="opacity" updates="constant" val="1" valType="code"/>
         <Param name="flipVert" updates="constant" val="False" valType="bool"/>
         <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
-        <Param name="flipHoriz" updates="constant" val="False" valType="bool"/>
         <Param name="name" updates="None" val="rest_image_2" valType="code"/>
         <Param name="color" updates="constant" val="$[1,1,1]" valType="str"/>
         <Param name="stopVal" updates="constant" val="" valType="code"/>
@@ -707,6 +706,7 @@
         <Param name="ori" updates="constant" val="0" valType="code"/>
         <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
         <Param name="startVal" updates="None" val="0.0" valType="code"/>
+        <Param name="flipHoriz" updates="constant" val="False" valType="bool"/>
         <Param name="image" updates="constant" val="images/9rest.png" valType="str"/>
         <Param name="size" updates="constant" val="(0.8, 0.8)" valType="code"/>
       </ImageComponent>
@@ -848,7 +848,6 @@
         <Param name="opacity" updates="constant" val="1" valType="code"/>
         <Param name="flipVert" updates="constant" val="False" valType="bool"/>
         <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
-        <Param name="flipHoriz" updates="constant" val="False" valType="bool"/>
         <Param name="name" updates="None" val="outcome_image_2" valType="code"/>
         <Param name="color" updates="constant" val="$[1,1,1]" valType="str"/>
         <Param name="stopVal" updates="constant" val="2.0" valType="code"/>
@@ -863,6 +862,7 @@
         <Param name="ori" updates="constant" val="0" valType="code"/>
         <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
         <Param name="startVal" updates="None" val="outcome_time" valType="code"/>
+        <Param name="flipHoriz" updates="constant" val="False" valType="bool"/>
         <Param name="image" updates="constant" val="images/8next_trial.png" valType="str"/>
         <Param name="size" updates="constant" val="(0.8, 0.8)" valType="code"/>
       </ImageComponent>
@@ -987,9 +987,9 @@
       <Param name="isTrials" updates="None" val="True" valType="bool"/>
       <Param name="random seed" updates="None" val="" valType="code"/>
       <Param name="loopType" updates="None" val="random" valType="str"/>
-      <Param name="nReps" updates="None" val="0" valType="code"/>
+      <Param name="nReps" updates="None" val="1" valType="code"/>
       <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
-      <Param name="conditions" updates="None" val="[{'correct': u'left', 'right_color': u'magenta', 'group': 1, 'left_color': u'red', 'practice_condition': 1}, {'correct': u'left', 'right_color': u'darkviolet', 'group': 1, 'left_color': u'red', 'practice_condition': 2}, {'correct': u'left', 'right_color': u'yellow', 'group': 1, 'left_color': u'red', 'practice_condition': 3}, {'correct': u'left', 'right_color': u'saddlebrown', 'group': 1, 'left_color': u'red', 'practice_condition': 4}, {'correct': u'left', 'right_color': u'green', 'group': 1, 'left_color': u'red', 'practice_condition': 5}, {'correct': u'left,right', 'right_color': u'red', 'group': 2, 'left_color': u'red', 'practice_condition': 11}, {'correct': u'left,right', 'right_color': u'red', 'group': 2, 'left_color': u'red', 'practice_condition': 12}, {'correct': u'left,right', 'right_color': u'red', 'group': 2, 'left_color': u'red', 'practice_condition': 13}, {'correct': u'left,right', 'right_color': u'red', 'group': 2, 'left_color': u'red', 'practice_condition': 14}, {'correct': u'left,right', 'right_color': u'red', 'group': 2, 'left_color': u'red', 'practice_condition': 15}, {'correct': u'right', 'right_color': u'red', 'group': 3, 'left_color': u'magenta', 'practice_condition': 21}, {'correct': u'right', 'right_color': u'red', 'group': 3, 'left_color': u'darkviolet', 'practice_condition': 22}, {'correct': u'right', 'right_color': u'red', 'group': 3, 'left_color': u'yellow', 'practice_condition': 23}, {'correct': u'right', 'right_color': u'red', 'group': 3, 'left_color': u'saddlebrown', 'practice_condition': 24}, {'correct': u'right', 'right_color': u'red', 'group': 3, 'left_color': u'green', 'practice_condition': 25}, {'correct': u'left,right,', 'right_color': u'darkviolet', 'group': 4, 'left_color': u'magenta', 'practice_condition': 31}, {'correct': u'left,right,', 'right_color': u'green', 'group': 4, 'left_color': u'yellow', 'practice_condition': 32}, {'correct': u'left,right,', 'right_color': u'yellow', 'group': 4, 'left_color': u'saddlebrown', 'practice_condition': 33}, {'correct': u'left,right,', 'right_color': u'magenta', 'group': 4, 'left_color': u'yellow', 'practice_condition': 34}, {'correct': u'left,right,', 'right_color': u'saddlebrown', 'group': 4, 'left_color': u'green', 'practice_condition': 35}]" valType="str"/>
+      <Param name="conditions" updates="None" val="[{'right_color': u'magenta', 'practice_condition': 1, 'group': 1, 'left_color': u'red', 'correct': u'left'}, {'right_color': u'darkviolet', 'practice_condition': 2, 'group': 1, 'left_color': u'red', 'correct': u'left'}, {'right_color': u'yellow', 'practice_condition': 3, 'group': 1, 'left_color': u'red', 'correct': u'left'}, {'right_color': u'saddlebrown', 'practice_condition': 4, 'group': 1, 'left_color': u'red', 'correct': u'left'}, {'right_color': u'green', 'practice_condition': 5, 'group': 1, 'left_color': u'red', 'correct': u'left'}, {'right_color': u'red', 'practice_condition': 11, 'group': 2, 'left_color': u'red', 'correct': u'left,right'}, {'right_color': u'red', 'practice_condition': 12, 'group': 2, 'left_color': u'red', 'correct': u'left,right'}, {'right_color': u'red', 'practice_condition': 13, 'group': 2, 'left_color': u'red', 'correct': u'left,right'}, {'right_color': u'red', 'practice_condition': 14, 'group': 2, 'left_color': u'red', 'correct': u'left,right'}, {'right_color': u'red', 'practice_condition': 15, 'group': 2, 'left_color': u'red', 'correct': u'left,right'}, {'right_color': u'red', 'practice_condition': 21, 'group': 3, 'left_color': u'magenta', 'correct': u'right'}, {'right_color': u'red', 'practice_condition': 22, 'group': 3, 'left_color': u'darkviolet', 'correct': u'right'}, {'right_color': u'red', 'practice_condition': 23, 'group': 3, 'left_color': u'yellow', 'correct': u'right'}, {'right_color': u'red', 'practice_condition': 24, 'group': 3, 'left_color': u'saddlebrown', 'correct': u'right'}, {'right_color': u'red', 'practice_condition': 25, 'group': 3, 'left_color': u'green', 'correct': u'right'}, {'right_color': u'darkviolet', 'practice_condition': 31, 'group': 4, 'left_color': u'magenta', 'correct': u'left,right,'}, {'right_color': u'green', 'practice_condition': 32, 'group': 4, 'left_color': u'yellow', 'correct': u'left,right,'}, {'right_color': u'yellow', 'practice_condition': 33, 'group': 4, 'left_color': u'saddlebrown', 'correct': u'left,right,'}, {'right_color': u'magenta', 'practice_condition': 34, 'group': 4, 'left_color': u'yellow', 'correct': u'left,right,'}, {'right_color': u'saddlebrown', 'practice_condition': 35, 'group': 4, 'left_color': u'green', 'correct': u'left,right,'}]" valType="str"/>
       <Param name="Selected rows" updates="None" val="" valType="str"/>
     </LoopInitiator>
     <Routine name="practice"/>
@@ -1015,7 +1015,7 @@
       <Param name="loopType" updates="None" val="random" valType="str"/>
       <Param name="nReps" updates="None" val="1" valType="code"/>
       <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
-      <Param name="conditions" updates="None" val="[{'group': 1, 'agency_level': u'high', 'group_name': u'Explicit_R', 'condition': 1, 'color_2': u'red', 'color_1': u'green'}, {'group': 2, 'agency_level': u'high', 'group_name': u'Implicit_R', 'condition': 2, 'color_2': u'mediumblue', 'color_1': u'darkviolet'}, {'group': 3, 'agency_level': u'low', 'group_name': u'Explicit_Free', 'condition': 3, 'color_2': u'red', 'color_1': u'red'}, {'group': 4, 'agency_level': u'high', 'group_name': u'Control', 'condition': 4, 'color_2': u'white', 'color_1': u'magenta'}, {'group': 5, 'agency_level': u'high', 'group_name': u'Explicit_L', 'condition': 5, 'color_2': u'saddlebrown', 'color_1': u'red'}, {'group': 6, 'agency_level': u'high', 'group_name': u'Implicit_L', 'condition': 6, 'color_2': u'magenta', 'color_1': u'mediumblue'}, {'group': 1, 'agency_level': u'low', 'group_name': u'Explicit_R', 'condition': 7, 'color_2': u'red', 'color_1': u'yellow'}, {'group': 2, 'agency_level': u'high', 'group_name': u'Implicit_R', 'condition': 8, 'color_2': u'mediumblue', 'color_1': u'saddlebrown'}, {'group': 3, 'agency_level': u'high', 'group_name': u'Explicit_Free', 'condition': 9, 'color_2': u'red', 'color_1': u'red'}, {'group': 4, 'agency_level': u'high', 'group_name': u'Control', 'condition': 10, 'color_2': u'green', 'color_1': u'white'}, {'group': 5, 'agency_level': u'high', 'group_name': u'Explicit_L', 'condition': 11, 'color_2': u'yellow', 'color_1': u'red'}, {'group': 6, 'agency_level': u'high', 'group_name': u'Implicit_L', 'condition': 12, 'color_2': u'white', 'color_1': u'mediumblue'}, {'group': 1, 'agency_level': u'low', 'group_name': u'Explicit_R', 'condition': 13, 'color_2': u'red', 'color_1': u'magenta'}, {'group': 2, 'agency_level': u'high', 'group_name': u'Implicit_R', 'condition': 14, 'color_2': u'mediumblue', 'color_1': u'yellow'}, {'group': 3, 'agency_level': u'high', 'group_name': u'Explicit_Free', 'condition': 15, 'color_2': u'red', 'color_1': u'red'}, {'group': 4, 'agency_level': u'low', 'group_name': u'Control', 'condition': 16, 'color_2': u'saddlebrown', 'color_1': u'saddlebrown'}, {'group': 5, 'agency_level': u'high', 'group_name': u'Explicit_L', 'condition': 17, 'color_2': u'green', 'color_1': u'red'}, {'group': 6, 'agency_level': u'high', 'group_name': u'Implicit_L', 'condition': 18, 'color_2': u'magenta', 'color_1': u'mediumblue'}, {'group': 1, 'agency_level': u'high', 'group_name': u'Explicit_R', 'condition': 19, 'color_2': u'red', 'color_1': u'white'}, {'group': 2, 'agency_level': u'high', 'group_name': u'Implicit_R', 'condition': 20, 'color_2': u'mediumblue', 'color_1': u'green'}, {'group': 3, 'agency_level': u'high', 'group_name': u'Explicit_Free', 'condition': 21, 'color_2': u'red', 'color_1': u'red'}, {'group': 4, 'agency_level': u'low', 'group_name': u'Control', 'condition': 22, 'color_2': u'yellow', 'color_1': u'yellow'}, {'group': 5, 'agency_level': u'high', 'group_name': u'Explicit_L', 'condition': 23, 'color_2': u'yellow', 'color_1': u'red'}, {'group': 6, 'agency_level': u'high', 'group_name': u'Implicit_L', 'condition': 24, 'color_2': u'saddlebrown', 'color_1': u'mediumblue'}, {'group': 1, 'agency_level': u'high', 'group_name': u'Explicit_R', 'condition': 25, 'color_2': u'red', 'color_1': u'darkviolet'}, {'group': 2, 'agency_level': u'high', 'group_name': u'Implicit_R', 'condition': 26, 'color_2': u'mediumblue', 'color_1': u'saddlebrown'}, {'group': 3, 'agency_level': u'high', 'group_name': u'Explicit_Free', 'condition': 27, 'color_2': u'red', 'color_1': u'red'}, {'group': 4, 'agency_level': u'high', 'group_name': u'Control', 'condition': 28, 'color_2': u'magenta', 'color_1': u'white'}, {'group': 5, 'agency_level': u'high', 'group_name': u'Explicit_L', 'condition': 29, 'color_2': u'green', 'color_1': u'red'}, {'group': 6, 'agency_level': u'high', 'group_name': u'Implicit_L', 'condition': 30, 'color_2': u'darkviolet', 'color_1': u'mediumblue'}, {'group': 1, 'agency_level': u'high', 'group_name': u'Explicit_R', 'condition': 31, 'color_2': u'red', 'color_1': u'green'}, {'group': 2, 'agency_level': u'high', 'group_name': u'Implicit_R', 'condition': 32, 'color_2': u'mediumblue', 'color_1': u'darkviolet'}, {'group': 3, 'agency_level': u'low', 'group_name': u'Explicit_Free', 'condition': 33, 'color_2': u'red', 'color_1': u'red'}, {'group': 4, 'agency_level': u'high', 'group_name': u'Control', 'condition': 34, 'color_2': u'brown', 'color_1': u'yellow'}, {'group': 5, 'agency_level': u'high', 'group_name': u'Explicit_L', 'condition': 35, 'color_2': u'yellow', 'color_1': u'red'}, {'group': 6, 'agency_level': u'high', 'group_name': u'Implicit_L', 'condition': 36, 'color_2': u'darkviolet', 'color_1': u'mediumblue'}, {'group': 1, 'agency_level': u'high', 'group_name': u'Explicit_R', 'condition': 37, 'color_2': u'red', 'color_1': u'magenta'}, {'group': 2, 'agency_level': u'high', 'group_name': u'Implicit_R', 'condition': 38, 'color_2': u'mediumblue', 'color_1': u'brown'}, {'group': 3, 'agency_level': u'high', 'group_name': u'Explicit_Free', 'condition': 39, 'color_2': u'red', 'color_1': u'red'}, {'group': 4, 'agency_level': u'low', 'group_name': u'Control', 'condition': 40, 'color_2': u'yellow', 'color_1': u'green'}, {'group': 5, 'agency_level': u'high', 'group_name': u'Explicit_L', 'condition': 41, 'color_2': u'brown', 'color_1': u'red'}, {'group': 6, 'agency_level': u'high', 'group_name': u'Implicit_L', 'condition': 42, 'color_2': u'white', 'color_1': u'mediumblue'}, {'group': 1, 'agency_level': u'high', 'group_name': u'Explicit_R', 'condition': 43, 'color_2': u'red', 'color_1': u'darkviolet'}, {'group': 2, 'agency_level': u'high', 'group_name': u'Implicit_R', 'condition': 44, 'color_2': u'mediumblue', 'color_1': u'white'}, {'group': 3, 'agency_level': u'high', 'group_name': u'Explicit_Free', 'condition': 45, 'color_2': u'red', 'color_1': u'red'}, {'group': 4, 'agency_level': u'high', 'group_name': u'Control', 'condition': 46, 'color_2': u'yellow', 'color_1': u'brown'}, {'group': 5, 'agency_level': u'low', 'group_name': u'Explicit_L', 'condition': 47, 'color_2': u'darkviolet', 'color_1': u'red'}, {'group': 6, 'agency_level': u'high', 'group_name': u'Implicit_L', 'condition': 48, 'color_2': u'darkviolet', 'color_1': u'mediumblue'}, {'group': 1, 'agency_level': u'high', 'group_name': u'Explicit_R', 'condition': 49, 'color_2': u'red', 'color_1': u'yellow'}, {'group': 2, 'agency_level': u'high', 'group_name': u'Implicit_R', 'condition': 50, 'color_2': u'mediumblue', 'color_1': u'green'}, {'group': 3, 'agency_level': u'high', 'group_name': u'Explicit_Free', 'condition': 51, 'color_2': u'red', 'color_1': u'red'}, {'group': 4, 'agency_level': u'high', 'group_name': u'Control', 'condition': 52, 'color_2': u'magenta', 'color_1': u'darkviolet'}, {'group': 5, 'agency_level': u'high', 'group_name': u'Explicit_L', 'condition': 53, 'color_2': u'magenta', 'color_1': u'red'}, {'group': 6, 'agency_level': u'high', 'group_name': u'Implicit_L', 'condition': 54, 'color_2': u'yellow', 'color_1': u'mediumblue'}, {'group': 1, 'agency_level': u'high', 'group_name': u'Explicit_R', 'condition': 55, 'color_2': u'red', 'color_1': u'magenta'}, {'group': 2, 'agency_level': u'high', 'group_name': u'Implicit_R', 'condition': 56, 'color_2': u'mediumblue', 'color_1': u'saddlebrown'}, {'group': 3, 'agency_level': u'high', 'group_name': u'Explicit_Free', 'condition': 57, 'color_2': u'red', 'color_1': u'red'}, {'group': 4, 'agency_level': u'high', 'group_name': u'Control', 'condition': 58, 'color_2': u'yellow', 'color_1': u'magenta'}, {'group': 5, 'agency_level': u'high', 'group_name': u'Explicit_L', 'condition': 59, 'color_2': u'white', 'color_1': u'red'}, {'group': 6, 'agency_level': u'high', 'group_name': u'Implicit_L', 'condition': 60, 'color_2': u'magenta', 'color_1': u'mediumblue'}, {'group': 1, 'agency_level': u'high', 'group_name': u'Explicit_R', 'condition': 61, 'color_2': u'red', 'color_1': u'green'}, {'group': 2, 'agency_level': u'high', 'group_name': u'Implicit_R', 'condition': 62, 'color_2': u'mediumblue', 'color_1': u'yellow'}, {'group': 3, 'agency_level': u'high', 'group_name': u'Explicit_Free', 'condition': 63, 'color_2': u'red', 'color_1': u'red'}, {'group': 4, 'agency_level': u'high', 'group_name': u'Control', 'condition': 64, 'color_2': u'green', 'color_1': u'yellow'}, {'group': 5, 'agency_level': u'high', 'group_name': u'Explicit_L', 'condition': 65, 'color_2': u'yellow', 'color_1': u'red'}, {'group': 6, 'agency_level': u'high', 'group_name': u'Implicit_L', 'condition': 66, 'color_2': u'green', 'color_1': u'mediumblue'}, {'group': 1, 'agency_level': u'high', 'group_name': u'Explicit_R', 'condition': 67, 'color_2': u'red', 'color_1': u'darkviolet'}, {'group': 2, 'agency_level': u'high', 'group_name': u'Implicit_R', 'condition': 68, 'color_2': u'mediumblue', 'color_1': u'yellow'}, {'group': 3, 'agency_level': u'high', 'group_name': u'Explicit_Free', 'condition': 69, 'color_2': u'red', 'color_1': u'red'}, {'group': 4, 'agency_level': u'high', 'group_name': u'Control', 'condition': 70, 'color_2': u'saddlebrown', 'color_1': u'green'}, {'group': 5, 'agency_level': u'high', 'group_name': u'Explicit_L', 'condition': 71, 'color_2': u'white', 'color_1': u'red'}, {'group': 6, 'agency_level': u'high', 'group_name': u'Implicit_L', 'condition': 72, 'color_2': u'white', 'color_1': u'mediumblue'}, {'group': 1, 'agency_level': u'high', 'group_name': u'Explicit_R', 'condition': 73, 'color_2': u'red', 'color_1': u'green'}, {'group': 2, 'agency_level': u'high', 'group_name': u'Implicit_R', 'condition': 74, 'color_2': u'mediumblue', 'color_1': u'saddlebrown'}, {'group': 3, 'agency_level': u'high', 'group_name': u'Explicit_Free', 'condition': 75, 'color_2': u'red', 'color_1': u'red'}, {'group': 4, 'agency_level': u'high', 'group_name': u'Control', 'condition': 76, 'color_2': u'white', 'color_1': u'darkviolet'}, {'group': 5, 'agency_level': u'high', 'group_name': u'Explicit_L', 'condition': 77, 'color_2': u'magenta', 'color_1': u'red'}, {'group': 6, 'agency_level': u'high', 'group_name': u'Implicit_L', 'condition': 78, 'color_2': u'saddlebrown', 'color_1': u'mediumblue'}]" valType="str"/>
+      <Param name="conditions" updates="None" val="[{'group': 1, 'agency_level': u'high', 'group_name': u'Explicit_R', 'condition': 1, 'color_2': u'red', 'color_1': u'green'}, {'group': 2, 'agency_level': u'high', 'group_name': u'Implicit_R', 'condition': 2, 'color_2': u'mediumblue', 'color_1': u'darkviolet'}, {'group': 3, 'agency_level': u'low', 'group_name': u'Explicit_Free', 'condition': 3, 'color_2': u'red', 'color_1': u'red'}, {'group': 4, 'agency_level': u'high', 'group_name': u'Control', 'condition': 4, 'color_2': u'white', 'color_1': u'magenta'}, {'group': 5, 'agency_level': u'high', 'group_name': u'Explicit_L', 'condition': 5, 'color_2': u'saddlebrown', 'color_1': u'red'}, {'group': 6, 'agency_level': u'high', 'group_name': u'Implicit_L', 'condition': 6, 'color_2': u'magenta', 'color_1': u'mediumblue'}, {'group': 1, 'agency_level': u'low', 'group_name': u'Explicit_R', 'condition': 7, 'color_2': u'red', 'color_1': u'yellow'}, {'group': 2, 'agency_level': u'high', 'group_name': u'Implicit_R', 'condition': 8, 'color_2': u'mediumblue', 'color_1': u'saddlebrown'}, {'group': 3, 'agency_level': u'high', 'group_name': u'Explicit_Free', 'condition': 9, 'color_2': u'red', 'color_1': u'red'}, {'group': 4, 'agency_level': u'high', 'group_name': u'Control', 'condition': 10, 'color_2': u'green', 'color_1': u'white'}, {'group': 5, 'agency_level': u'high', 'group_name': u'Explicit_L', 'condition': 11, 'color_2': u'yellow', 'color_1': u'red'}, {'group': 6, 'agency_level': u'high', 'group_name': u'Implicit_L', 'condition': 12, 'color_2': u'white', 'color_1': u'mediumblue'}, {'group': 1, 'agency_level': u'low', 'group_name': u'Explicit_R', 'condition': 13, 'color_2': u'red', 'color_1': u'magenta'}, {'group': 2, 'agency_level': u'high', 'group_name': u'Implicit_R', 'condition': 14, 'color_2': u'mediumblue', 'color_1': u'yellow'}, {'group': 3, 'agency_level': u'high', 'group_name': u'Explicit_Free', 'condition': 15, 'color_2': u'red', 'color_1': u'red'}, {'group': 4, 'agency_level': u'low', 'group_name': u'Control', 'condition': 16, 'color_2': u'saddlebrown', 'color_1': u'saddlebrown'}, {'group': 5, 'agency_level': u'high', 'group_name': u'Explicit_L', 'condition': 17, 'color_2': u'green', 'color_1': u'red'}, {'group': 6, 'agency_level': u'high', 'group_name': u'Implicit_L', 'condition': 18, 'color_2': u'magenta', 'color_1': u'mediumblue'}, {'group': 1, 'agency_level': u'high', 'group_name': u'Explicit_R', 'condition': 19, 'color_2': u'red', 'color_1': u'white'}, {'group': 2, 'agency_level': u'high', 'group_name': u'Implicit_R', 'condition': 20, 'color_2': u'mediumblue', 'color_1': u'green'}, {'group': 3, 'agency_level': u'high', 'group_name': u'Explicit_Free', 'condition': 21, 'color_2': u'red', 'color_1': u'red'}, {'group': 4, 'agency_level': u'low', 'group_name': u'Control', 'condition': 22, 'color_2': u'yellow', 'color_1': u'yellow'}, {'group': 5, 'agency_level': u'high', 'group_name': u'Explicit_L', 'condition': 23, 'color_2': u'yellow', 'color_1': u'red'}, {'group': 6, 'agency_level': u'high', 'group_name': u'Implicit_L', 'condition': 24, 'color_2': u'saddlebrown', 'color_1': u'mediumblue'}, {'group': 1, 'agency_level': u'high', 'group_name': u'Explicit_R', 'condition': 25, 'color_2': u'red', 'color_1': u'darkviolet'}, {'group': 2, 'agency_level': u'high', 'group_name': u'Implicit_R', 'condition': 26, 'color_2': u'mediumblue', 'color_1': u'saddlebrown'}, {'group': 3, 'agency_level': u'high', 'group_name': u'Explicit_Free', 'condition': 27, 'color_2': u'red', 'color_1': u'red'}, {'group': 4, 'agency_level': u'high', 'group_name': u'Control', 'condition': 28, 'color_2': u'magenta', 'color_1': u'white'}, {'group': 5, 'agency_level': u'high', 'group_name': u'Explicit_L', 'condition': 29, 'color_2': u'green', 'color_1': u'red'}, {'group': 6, 'agency_level': u'high', 'group_name': u'Implicit_L', 'condition': 30, 'color_2': u'darkviolet', 'color_1': u'mediumblue'}, {'group': 1, 'agency_level': u'high', 'group_name': u'Explicit_R', 'condition': 31, 'color_2': u'red', 'color_1': u'green'}, {'group': 2, 'agency_level': u'high', 'group_name': u'Implicit_R', 'condition': 32, 'color_2': u'mediumblue', 'color_1': u'darkviolet'}, {'group': 3, 'agency_level': u'low', 'group_name': u'Explicit_Free', 'condition': 33, 'color_2': u'red', 'color_1': u'red'}, {'group': 4, 'agency_level': u'high', 'group_name': u'Control', 'condition': 34, 'color_2': u'brown', 'color_1': u'yellow'}, {'group': 5, 'agency_level': u'high', 'group_name': u'Explicit_L', 'condition': 35, 'color_2': u'yellow', 'color_1': u'red'}, {'group': 6, 'agency_level': u'high', 'group_name': u'Implicit_L', 'condition': 36, 'color_2': u'darkviolet', 'color_1': u'mediumblue'}, {'group': 1, 'agency_level': u'high', 'group_name': u'Explicit_R', 'condition': 37, 'color_2': u'red', 'color_1': u'magenta'}, {'group': 2, 'agency_level': u'high', 'group_name': u'Implicit_R', 'condition': 38, 'color_2': u'mediumblue', 'color_1': u'saddlebrown'}, {'group': 3, 'agency_level': u'high', 'group_name': u'Explicit_Free', 'condition': 39, 'color_2': u'red', 'color_1': u'red'}, {'group': 4, 'agency_level': u'low', 'group_name': u'Control', 'condition': 40, 'color_2': u'yellow', 'color_1': u'green'}, {'group': 5, 'agency_level': u'high', 'group_name': u'Explicit_L', 'condition': 41, 'color_2': u'saddlebrown', 'color_1': u'red'}, {'group': 6, 'agency_level': u'high', 'group_name': u'Implicit_L', 'condition': 42, 'color_2': u'white', 'color_1': u'mediumblue'}, {'group': 1, 'agency_level': u'high', 'group_name': u'Explicit_R', 'condition': 43, 'color_2': u'red', 'color_1': u'darkviolet'}, {'group': 2, 'agency_level': u'high', 'group_name': u'Implicit_R', 'condition': 44, 'color_2': u'mediumblue', 'color_1': u'white'}, {'group': 3, 'agency_level': u'high', 'group_name': u'Explicit_Free', 'condition': 45, 'color_2': u'red', 'color_1': u'red'}, {'group': 4, 'agency_level': u'high', 'group_name': u'Control', 'condition': 46, 'color_2': u'yellow', 'color_1': u'saddlebrown'}, {'group': 5, 'agency_level': u'low', 'group_name': u'Explicit_L', 'condition': 47, 'color_2': u'darkviolet', 'color_1': u'red'}, {'group': 6, 'agency_level': u'high', 'group_name': u'Implicit_L', 'condition': 48, 'color_2': u'darkviolet', 'color_1': u'mediumblue'}, {'group': 1, 'agency_level': u'high', 'group_name': u'Explicit_R', 'condition': 49, 'color_2': u'red', 'color_1': u'yellow'}, {'group': 2, 'agency_level': u'high', 'group_name': u'Implicit_R', 'condition': 50, 'color_2': u'mediumblue', 'color_1': u'green'}, {'group': 3, 'agency_level': u'high', 'group_name': u'Explicit_Free', 'condition': 51, 'color_2': u'red', 'color_1': u'red'}, {'group': 4, 'agency_level': u'high', 'group_name': u'Control', 'condition': 52, 'color_2': u'magenta', 'color_1': u'darkviolet'}, {'group': 5, 'agency_level': u'high', 'group_name': u'Explicit_L', 'condition': 53, 'color_2': u'magenta', 'color_1': u'red'}, {'group': 6, 'agency_level': u'high', 'group_name': u'Implicit_L', 'condition': 54, 'color_2': u'yellow', 'color_1': u'mediumblue'}, {'group': 1, 'agency_level': u'high', 'group_name': u'Explicit_R', 'condition': 55, 'color_2': u'red', 'color_1': u'magenta'}, {'group': 2, 'agency_level': u'high', 'group_name': u'Implicit_R', 'condition': 56, 'color_2': u'mediumblue', 'color_1': u'saddlebrown'}, {'group': 3, 'agency_level': u'high', 'group_name': u'Explicit_Free', 'condition': 57, 'color_2': u'red', 'color_1': u'red'}, {'group': 4, 'agency_level': u'high', 'group_name': u'Control', 'condition': 58, 'color_2': u'yellow', 'color_1': u'magenta'}, {'group': 5, 'agency_level': u'high', 'group_name': u'Explicit_L', 'condition': 59, 'color_2': u'white', 'color_1': u'red'}, {'group': 6, 'agency_level': u'high', 'group_name': u'Implicit_L', 'condition': 60, 'color_2': u'magenta', 'color_1': u'mediumblue'}, {'group': 1, 'agency_level': u'high', 'group_name': u'Explicit_R', 'condition': 61, 'color_2': u'red', 'color_1': u'green'}, {'group': 2, 'agency_level': u'high', 'group_name': u'Implicit_R', 'condition': 62, 'color_2': u'mediumblue', 'color_1': u'yellow'}, {'group': 3, 'agency_level': u'high', 'group_name': u'Explicit_Free', 'condition': 63, 'color_2': u'red', 'color_1': u'red'}, {'group': 4, 'agency_level': u'high', 'group_name': u'Control', 'condition': 64, 'color_2': u'green', 'color_1': u'yellow'}, {'group': 5, 'agency_level': u'high', 'group_name': u'Explicit_L', 'condition': 65, 'color_2': u'yellow', 'color_1': u'red'}, {'group': 6, 'agency_level': u'high', 'group_name': u'Implicit_L', 'condition': 66, 'color_2': u'green', 'color_1': u'mediumblue'}, {'group': 1, 'agency_level': u'high', 'group_name': u'Explicit_R', 'condition': 67, 'color_2': u'red', 'color_1': u'darkviolet'}, {'group': 2, 'agency_level': u'high', 'group_name': u'Implicit_R', 'condition': 68, 'color_2': u'mediumblue', 'color_1': u'yellow'}, {'group': 3, 'agency_level': u'high', 'group_name': u'Explicit_Free', 'condition': 69, 'color_2': u'red', 'color_1': u'red'}, {'group': 4, 'agency_level': u'high', 'group_name': u'Control', 'condition': 70, 'color_2': u'saddlebrown', 'color_1': u'green'}, {'group': 5, 'agency_level': u'high', 'group_name': u'Explicit_L', 'condition': 71, 'color_2': u'white', 'color_1': u'red'}, {'group': 6, 'agency_level': u'high', 'group_name': u'Implicit_L', 'condition': 72, 'color_2': u'white', 'color_1': u'mediumblue'}, {'group': 1, 'agency_level': u'high', 'group_name': u'Explicit_R', 'condition': 73, 'color_2': u'red', 'color_1': u'green'}, {'group': 2, 'agency_level': u'high', 'group_name': u'Implicit_R', 'condition': 74, 'color_2': u'mediumblue', 'color_1': u'saddlebrown'}, {'group': 3, 'agency_level': u'high', 'group_name': u'Explicit_Free', 'condition': 75, 'color_2': u'red', 'color_1': u'red'}, {'group': 4, 'agency_level': u'high', 'group_name': u'Control', 'condition': 76, 'color_2': u'white', 'color_1': u'darkviolet'}, {'group': 5, 'agency_level': u'high', 'group_name': u'Explicit_L', 'condition': 77, 'color_2': u'magenta', 'color_1': u'red'}, {'group': 6, 'agency_level': u'high', 'group_name': u'Implicit_L', 'condition': 78, 'color_2': u'saddlebrown', 'color_1': u'mediumblue'}]" valType="str"/>
       <Param name="Selected rows" updates="None" val="" valType="str"/>
     </LoopInitiator>
     <Routine name="trials"/>
