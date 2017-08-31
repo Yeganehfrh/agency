@@ -43,7 +43,7 @@ class HomeScreen extends Component {
       indeterminate: false,
       preventRTLWorkaroundRestart: false,
       askToEditProfile: true,
-      version: 8,
+      version: 9,
       updateMessage: ''
     };
 
