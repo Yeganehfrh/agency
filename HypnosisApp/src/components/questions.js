@@ -59,8 +59,8 @@ class QuestionsScreen extends Component {
   }
 
   updateAnswers = (qIndex, qId, value) => {
-    console.warn("updating ", qIndex, qId, value);
     var {answers, q} = this.state;
+    console.warn("updating ", qIndex, qId, value, "from ", q[qIndex]);    
     answers[qIndex] = {question: qId, value: value}
     q[qIndex] = value
     this.setState({answers:answers, q: q});
@@ -70,14 +70,14 @@ class QuestionsScreen extends Component {
     var answers = [{question: 99, value: ''}];
     if (this.state.postSession) {
       var qs = this.props.navigation.state.params.session.postSurvey.questions;
-      qs.map((o, i) => answers.push({question: o.id, value: 1}))
+      qs.map((o, i) => answers.push({question: o.id, value: 0}))
       this.setState({
         answers: answers,
         survey: this.props.navigation.state.params.session.postSurvey,
         questions: qs});
     } else {
       var qs = this.props.navigation.state.params.session.preSurvey.questions;
-      qs.map((o, i) => answers.push({question: o.id, value: 1}))
+      qs.map((o, i) => answers.push({question: o.id, value: 0}))
       this.setState({
         answers: answers,
         survey: this.props.navigation.state.params.session.preSurvey,
@@ -87,7 +87,7 @@ class QuestionsScreen extends Component {
 
   renderOptions = (opt, index) => {
     return(
-        <Picker.Item  label={opt.label} value={opt.key} key={opt.key} />
+        <Picker.Item label={opt.label} value={opt.key} key={opt.key} />
     )
   }
 
@@ -99,7 +99,7 @@ class QuestionsScreen extends Component {
         <View style={styles.container} key={question.id}>
             <Text style={styles.questionText}>{question.content}</Text>
             {question.options!==undefined && question.options.length>0 && (
-            <Picker selectedValue={this.state.q[qIndex]}
+            <Picker selectedValue={(this.state.q[qIndex]==0)?1:this.state.q[qIndex]} // This is crazy, but sets default value to zero!
               onValueChange={(value, index) => this.updateAnswers(qIndex, question.id, value)}
               itemStyle={styles.questionText}>
               {question.options.map((o,i) => this.renderOptions(o,i))}
