@@ -1,13 +1,17 @@
-sink("~/workspace/agency/final/tellegen/tlgn.csv")
+#sink("~/workspace/agency/final/tellegen/tlgn.csv")
 
 library(jsonlite)
 library(nortest)
 library(gtools)
 
-allData = fromJSON("~/workspace/agency/final/tellegen/tlgn.json")
+allData = jsonlite::fromJSON("~/workspace/agency/final/tellegen/tlgn.json")
 
 totals <- c()
 numOfSubjects <- length(allData$content$answers)
+
+print(numOfSubjects)
+
+ages = c()
 
 for (ix in 1:length(allData$content$answers)) {
   total = 0.0
@@ -29,6 +33,7 @@ for (ix in 1:length(allData$content$answers)) {
   age = allData$content$answers[ix][[1]][3]$value[3]
   contact = allData$content$answers[ix][[1]][3]$value[8]
   
+  ages = c(ages, age)
   for (iq in 1:length(qsa)) {
     total = total + as.numeric(qsa[[iq]])
   }
@@ -45,11 +50,12 @@ for (ix in 1:length(allData$content$answers)) {
   }
   
 }
+#sink()
 
-#totals = sort(totals)
+totals = sort(totals)
 percentiles = ecdf(totals)(totals)*100
 ad.test(totals)
-kmeans(totals, 3)
+kmeans(totals, 4)
 length(totals [totals>71])
-sink()
+
 print(paste('Done! n=',length(allData$content$answers)))
